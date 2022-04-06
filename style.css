@@ -1,0 +1,61 @@
+:root{
+    color: black;
+    font-family: 'Rubik', sans-serif;
+    font-weight: normal;
+
+    --color-dark: #2c2c2c;
+    --color-light: #e6e6e6;
+    --color-primary: #27CFD4;
+    --color-accent: #D42D27;
+
+    --global-margin: 2.5vh;
+}
+
+body {
+    background: var(--color-dark);
+    color: var(--color-light);
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    margin: 0;
+}
+
+.header{
+    flex: 0 1 auto;
+    font-size: 4.5vh;
+    font-weight: 600;
+    margin: var(--global-margin) auto 0 auto;
+}
+
+.column-container{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.options-panel, .maps-panel{
+    background: var(--color-light);
+    border-radius: 30px;
+    margin: var(--global-margin);
+    border: 4px solid;
+    color: var(--color-dark);
+    padding: 24px;
+}
+
+.options-panel{
+    flex: 60%;
+    border-color: var(--color-primary);
+}
+
+.maps-panel{
+    flex: 40%;
+    margin-left: 0;
+    border-color: var(--color-accent);
+}
+
+.footer {
+    text-align: center;
+    font-size: 2vh;
+    margin: var(--global-margin);
+    margin-top: 0;
+}
