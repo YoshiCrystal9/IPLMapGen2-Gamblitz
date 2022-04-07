@@ -5,34 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobileStyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
     <title>IPL Map Generator</title>
 </head>
 <body>
-    <div class="header">Maps.Iplabs.Ink</div>
+    <div class="header">maps.iplabs.ink</div>
     <div class="column-container">
         <div class="options-panel">
 
             <div class="menu-header">Edit Current Map Pool</div>
-            <button class="map-picker button">
+            <button class="map-picker button" id="tw-picker">
                 <div class="title">Select Turf War Maps</div>
                 <div class="detail">0 Maps selected  ▶</div>
             </button>
-            <button class="map-picker button">
+            <button class="map-picker button" id="sz-picker">
                 <div class="title">Select Splat Zones Maps</div>
                 <div class="detail">0 Maps selected  ▶</div>
             </button>
-            <button class="map-picker button">
+            <button class="map-picker button" id="tc-picker">
                 <div class="title">Select Tower Control Maps</div>
                 <div class="detail">0 Maps selected  ▶</div>
             </button>
-            <button class="map-picker button">
+            <button class="map-picker button" id="rm-picker">
                 <div class="title">Select Rainmaker Maps</div>
                 <div class="detail">0 Maps selected  ▶</div>
             </button>
-            <button class="map-picker button">
+            <button class="map-picker button" id="cb-picker">
                 <div class="title">Select Clam Blitz Maps</div>
                 <div class="detail">0 Maps selected  ▶</div>
             </button>
@@ -50,17 +51,45 @@
             <div class="menu-header">Edit Round Info</div>
             <div class="round-editor">
                 <div class="title">Add Round</div>
-                <div class="detail">Name</div>
-                <input type="text"></input>
-                <div class="detail">Games</div>
-                <input type="number" min="1" max="15" value=1 step="2"></input>
+                <wbr>
+                <label for="round-name" class="detail">Name
+                    <input type="text" id="round-name"></input>
+                </label>
+                <wbr>
+                <label for="round-games" class="detail">Games
+                    <input type="number" min="1" max="15" value=1 step="2" id="round-games"></input>
+                </label>
+                <wbr>
                 <button class="button">Add  ▶</button>
             </div>
         </div>
         <div class="maps-panel">
-
+            <div class="maps-instruction">
+                Add maps to the map pool, then add round info, and finally click generate to make a map list.
+            </div>
         </div>
     </div>
+
+    <div class="modal-container" id="modal-container">
+        <div class="modal-content" id="tw-picker-modal">
+            <h1>Hello world</h1>
+            <button class="button" id="tw-picker-close">Exit</button>
+        </div>
+        <div class="modal-content" id="sz-picker-modal">
+            <button class="button" id="sz-picker-close">Exit</button>
+        </div>
+        <div class="modal-content" id="tc-picker-modal">
+            <button class="button" id="tc-picker-close">Exit</button>
+        </div>
+        <div class="modal-content" id="rm-picker-modal">
+            <button class="button" id="rm-picker-close">Exit</button>
+        </div>
+        <div class="modal-content" id="cb-picker-modal">
+            <button class="button" id="cb-picker-close">Exit</button>
+        </div>
+    </div>
+
     <div class="footer">Created by .jpg specifically for Inkling Performance Labs. Got feedback? Let me know at .jpg#8000 on Discord.</div>
 </body>
+<script src="init.js"></script>
 </html>

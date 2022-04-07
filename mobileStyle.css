@@ -1,0 +1,95 @@
+@media only screen and (max-width: 1200px) {
+  
+    :root{
+        --global-margin: 1.5vh;
+        font-size: 20px;
+    }
+
+    body{
+        height: auto;
+    }
+
+    .header{
+        flex: none;
+        margin: var(--global-margin) auto 0 auto;
+    }
+    .header::before{
+        content: "";
+    }
+    .header::after{
+        content: "";
+    }
+
+    .column-container{
+        display: inline;
+        overflow: auto;
+    }
+
+    .options-panel::before, .maps-panel::before{
+        text-align: center;
+        border-radius: .4em;
+        padding: 6px;
+        font-weight: 600;
+        font-size: 1.2em;
+    }
+
+    .options-panel::before{
+        content: "Settings";
+        color: var(--color-bg-light);
+        background: var(--color-bg-dark);
+    }
+
+    .maps-panel{
+        margin-left: var(--global-margin);
+    }
+    .maps-panel::before{
+        content: "Map List";
+        color: var(--color-accent-light);
+        background: var(--color-accent-dark);
+    }
+
+    .button{
+        margin: 6px;
+        justify-content: space-between;
+    }
+    .button:hover{
+        letter-spacing: normal;
+    }
+
+    .maps-instruction::before{
+        content: "↑";
+        display: block;
+        font-size: 2em;
+    }
+    .maps-instruction::after{
+        content: "";
+    }
+
+    .footer{
+        flex: none;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    
+    :root{
+        font-size: 18px;
+    }
+    
+    ::-webkit-scrollbar{
+        width: 8px;
+    }
+
+    .button {
+        border: 1px solid var(--color-bg-dark);
+        border-radius: 12px;
+        padding: 8px;
+        margin: 4px;
+    }
+
+    .options-panel {
+        padding: 8px;
+    }
+
+}
