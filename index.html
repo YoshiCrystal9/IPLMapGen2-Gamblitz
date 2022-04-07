@@ -11,8 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet"> -->
-    <title>IPL Map Generator</title>
+    <title>maps.iplabs.ink</title>
 </head>
 <body>
     <div class="header">maps.iplabs.ink</div>
@@ -21,23 +20,23 @@
 
             <div class="menu-header">Edit Current Map Pool</div>
             <button class="map-picker button" id="tw-picker">
-                <div class="title">Select Turf War Maps</div>
+                <div class="title">Turf War Maps</div>
                 <div class="detail" id="tw-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="sz-picker">
-                <div class="title">Select Splat Zones Maps</div>
+                <div class="title">Splat Zones Maps</div>
                 <div class="detail" id="sz-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="tc-picker">
-                <div class="title">Select Tower Control Maps</div>
+                <div class="title">Tower Control Maps</div>
                 <div class="detail" id="tc-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="rm-picker">
-                <div class="title">Select Rainmaker Maps</div>
+                <div class="title">Rainmaker Maps</div>
                 <div class="detail" id="rm-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="cb-picker">
-                <div class="title">Select Clam Blitz Maps</div>
+                <div class="title">Clam Blitz Maps</div>
                 <div class="detail" id="cb-picker-detail">0 Maps selected  ▶</div>
             </button>
 
@@ -52,18 +51,20 @@
             </button>
 
             <div class="menu-header">Edit Round Info</div>
-            <div class="round-editor">
+            <div class="round-adder">
                 <div class="title">Add Round</div>
                 <wbr>
                 <label for="round-name" class="detail">Name
-                    <input type="text" id="round-name"></input>
+                    <input type="text" id="round-name" maxlength="32"></input>
                 </label>
                 <wbr>
                 <label for="round-games" class="detail">Games
                     <input type="number" min="1" max="15" value=1 step="2" id="round-games"></input>
                 </label>
                 <wbr>
-                <button class="button">Add  ▶</button>
+                <button class="button" id="add-round-button">Add  ▶</button>
+            </div>
+            <div class="round-editor" id="round-editor">
             </div>
         </div>
         <div class="maps-panel">

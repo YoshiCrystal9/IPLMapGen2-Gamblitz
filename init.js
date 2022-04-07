@@ -48,7 +48,6 @@ for (var i = 0; i < allMaps.length; i++){
     }
 }
 
-
 function adjustSelectedCount(mode){
     var count = 0;
     for (var i = 0; i < allMaps.length; i++){
@@ -60,3 +59,43 @@ function adjustSelectedCount(mode){
     const plural = count == 1 ? "" : "s";
     document.getElementById(`${mode}-picker-detail`).innerText = `${count} Map${plural} selected  ▶`;
 }
+
+
+//attach round adder stuff
+const addRoundButton = document.getElementById("add-round-button");
+const roundNameInput = document.getElementById("round-name");
+const roundGamesInput = document.getElementById("round-games");
+
+const roundEditor = document.getElementById("round-editor");
+
+addRoundButton.addEventListener("click", function(){
+    if (roundNameInput.value == ""){
+        return;
+    }
+    if (roundGamesInput.value == ""){
+        return;
+    }
+
+    const addedRound = document.createElement("div");
+    addedRound.setAttribute("class", "added-round");
+
+    const roundTitle = document.createElement("div");
+    roundTitle.setAttribute("class", "title");
+    roundTitle.innerText = roundNameInput.value;
+    addedRound.appendChild(roundTitle);
+    
+    const roundGames = document.createElement("div");
+    roundGames.setAttribute("class", "games");
+    roundGames.innerText = roundGamesInput.value;
+    addedRound.appendChild(roundGames);
+
+    const removeButton = document.createElement("button");
+    removeButton.setAttribute("class", "remove button");
+    removeButton.innerText = "Remove  ▶";
+    removeButton.addEventListener("click", function(){
+        removeButton.parentElement.remove();
+    });
+    addedRound.appendChild(removeButton);
+
+    roundEditor.appendChild(addedRound);
+});
