@@ -22,23 +22,23 @@
             <div class="menu-header">Edit Current Map Pool</div>
             <button class="map-picker button" id="tw-picker">
                 <div class="title">Select Turf War Maps</div>
-                <div class="detail">0 Maps selected  ▶</div>
+                <div class="detail" id="tw-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="sz-picker">
                 <div class="title">Select Splat Zones Maps</div>
-                <div class="detail">0 Maps selected  ▶</div>
+                <div class="detail" id="sz-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="tc-picker">
                 <div class="title">Select Tower Control Maps</div>
-                <div class="detail">0 Maps selected  ▶</div>
+                <div class="detail" id="tc-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="rm-picker">
                 <div class="title">Select Rainmaker Maps</div>
-                <div class="detail">0 Maps selected  ▶</div>
+                <div class="detail" id="rm-picker-detail">0 Maps selected  ▶</div>
             </button>
             <button class="map-picker button" id="cb-picker">
                 <div class="title">Select Clam Blitz Maps</div>
-                <div class="detail">0 Maps selected  ▶</div>
+                <div class="detail" id="cb-picker-detail">0 Maps selected  ▶</div>
             </button>
 
             <div class="menu-header">Save & Load Map Pool</div>
@@ -75,20 +75,19 @@
 
     <div class="modal-container" id="modal-container">
         <div class="modal-content" id="tw-picker-modal">
-            <h1>Hello world</h1>
-            <button class="button" id="tw-picker-close">Exit</button>
+            <button class="button exit" id="tw-picker-close">✖ Exit</button>
         </div>
         <div class="modal-content" id="sz-picker-modal">
-            <button class="button" id="sz-picker-close">Exit</button>
+            <button class="button exit" id="sz-picker-close">✖ Exit</button>
         </div>
         <div class="modal-content" id="tc-picker-modal">
-            <button class="button" id="tc-picker-close">Exit</button>
+            <button class="button exit" id="tc-picker-close">✖ Exit</button>
         </div>
         <div class="modal-content" id="rm-picker-modal">
-            <button class="button" id="rm-picker-close">Exit</button>
+            <button class="button exit" id="rm-picker-close">✖ Exit</button>
         </div>
         <div class="modal-content" id="cb-picker-modal">
-            <button class="button" id="cb-picker-close">Exit</button>
+            <button class="button exit" id="cb-picker-close">✖ Exit</button>
         </div>
     </div>
 

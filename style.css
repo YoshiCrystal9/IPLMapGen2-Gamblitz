@@ -15,7 +15,6 @@
 
 ::-webkit-scrollbar{
     width: 12px;
-    ;
 }
 ::-webkit-scrollbar-track{
     background: #00000000;
@@ -161,6 +160,7 @@ input:focus{
     margin: 24px 18px 12px 18px;
     align-items: center;
     white-space: nowrap;
+    letter-spacing: .1em;
 }
 .menu-header:after{
     content: '';
@@ -230,14 +230,17 @@ input:focus{
     display: none;
     position: relative;
     flex-direction: column;
-    justify-content: center;
     border: solid 5px var(--color-primary);
     border-radius: 30px;
-    padding: 50px;
+    padding: 25px;
     background: var(--color-bg-light);
     animation: zoom .25s 1;
-    max-width: 60vw;
-    max-height: 80vh;
+    max-width: 85vh;
+    max-height: 85vh;
+    overflow: auto;
+}
+.modal-content::-webkit-scrollbar-thumb{
+    background: var(--color-bg-dark);
 }
 
 @keyframes fadeIn {
@@ -256,7 +259,43 @@ input:focus{
     font-weight: 600;
 }
 
+.modal-content label {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    margin: 4px;
+    border-radius: 12px;
+    transition-duration: .1s;
+    font-weight: 600;
+    font-size: 1.2em;
+    cursor: pointer;
+    user-select: none;
+}
+.modal-content label:hover{
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
+    transform: scale(1.02);
+}
+.modal-content label:active{
+    transform: scale(1.00);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.26);
+}
 
+.modal-content .map-name{
+    margin-right: 2em;
+}
+
+.modal-content input{
+    width: 1em;
+    height: 1em;
+    margin-left: auto;
+}
+
+.modal-content .exit{
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-bottom: 24px;
+}
 
 .maps-instruction{
     text-align: center;
