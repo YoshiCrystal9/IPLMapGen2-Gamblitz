@@ -60,6 +60,7 @@ input:focus{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    transition-duration: .5s;
 }
 .header::before{
     content: "Settings";
@@ -90,7 +91,7 @@ input:focus{
     color: var(--color-bg-dark);
     padding: 24px;
     overflow-y: scroll;
-
+    overflow-x: hidden;
 }
 
 .options-panel{
@@ -98,6 +99,7 @@ input:focus{
     border-color: var(--color-primary);
     background: var(--color-bg-light);
     user-select: none;
+    transition-duration: .5s;
 }
 .options-panel::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -105,7 +107,7 @@ input:focus{
 
 .maps-panel{
     flex: 10%;
-    transition-duration: 1s;
+    transition-duration: .5s;
     margin-left: 0;
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
@@ -216,7 +218,7 @@ input:focus{
     border-left: 3px solid var(--color-bg-dark);
     border-radius: 8px;
     width: auto;
-    transition-duration: .5s;
+    transition-duration: 1s;
 }
 .round-editor::before{
     padding: 8px 4px;
@@ -226,6 +228,7 @@ input:focus{
 .added-round{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: baseline;
     position: relative;
     animation: addedRound .5s 1;
@@ -268,6 +271,7 @@ input:focus{
     left: 0;
     top: 0;
     animation: fadeIn .25s 1;
+    transition-duration: .25s;
 }
 
 .modal-content{
@@ -283,6 +287,7 @@ input:focus{
     max-width: 85vh;
     max-height: 85vh;
     overflow: auto;
+    transition-duration: .5s;
 }
 .modal-content::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -311,7 +316,7 @@ input:focus{
     margin: 4px;
     border-radius: 12px;
     transition-duration: .1s;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1.2em;
     cursor: pointer;
     user-select: none;
@@ -339,7 +344,30 @@ input:focus{
 .modal-content .exit{
     font-weight: 700;
     font-size: 1.2em;
+    margin-bottom: 6px;
+}
+
+.modal-content > .picker-select-shortcuts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 24px;
+}
+
+.picker-select-shortcuts .button{
+    margin: 4px 6px;
+    font-weight: 700;
+}
+.picker-select-shortcuts .button:hover{
+    background: white;
+}
+
+.picker-select-shortcuts .select-all{
+    background: var(--color-primary);
+}
+
+.picker-select-shortcuts .deselect-all{
+    background: var(--color-accent-light);
 }
 
 .maps-instruction{
@@ -361,4 +389,5 @@ input:focus{
     font-size: .75em;
     margin: var(--global-margin);
     margin-top: 0;
+    transition-duration: .5s;
 }

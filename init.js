@@ -44,7 +44,11 @@ for (var i = 0; i < allMaps.length; i++){
         mapLabel.appendChild(mapInput);
 
         document.getElementById(`${modes[j]}-picker-modal`).appendChild(mapLabel);
-        
+
+
+        //make "select all" & "deselect all" buttons work for each mode
+        document.getElementById(`${modes[j]}-select-all`).setAttribute("onclick", `massSelect("${modes[j]}", true)`);
+        document.getElementById(`${modes[j]}-deselect-all`).setAttribute("onclick", `massSelect("${modes[j]}", false)`);
     }
 }
 
@@ -58,6 +62,14 @@ function adjustSelectedCount(mode){
     }
     const plural = count == 1 ? "" : "s";
     document.getElementById(`${mode}-picker-detail`).innerText = `${count} Map${plural} selected  ▶`;
+}
+
+function massSelect(mode, isEnabling){
+    for (var i = 0; i < allMaps.length; i++){
+        const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
+        checkBox.checked = isEnabling;
+    }
+    adjustSelectedCount(mode);
 }
 
 
