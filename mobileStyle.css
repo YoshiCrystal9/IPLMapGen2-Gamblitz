@@ -1,7 +1,7 @@
 @media only screen and (max-width: 1200px) {
   
     :root{
-        font-size: 18px;
+        font-size: calc(16px + .5vw);
     }
 
     body{
@@ -53,6 +53,11 @@
     }
     .button:hover{
         letter-spacing: normal;
+        transform: scale(1.02);
+    }
+    .button:active{
+        letter-spacing: normal;
+        transform: scale(.99);
     }
 
     .maps-instruction::before{
@@ -64,6 +69,10 @@
         content: "";
     }
 
+    .round-adder{
+        flex-direction: column;
+        align-items: flex-start;
+    }
     .round-adder > .title{
         margin-right: auto;
     }
