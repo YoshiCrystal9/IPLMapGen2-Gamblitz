@@ -10,7 +10,7 @@
     --color-accent-dark: #9c4232;
     --color-accent-light: #e0bcb6;
 
-    --global-margin: 2.5vh;
+    --global-margin: calc(1vw + .563vh);
 }
 
 ::-webkit-scrollbar{
