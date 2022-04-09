@@ -51,6 +51,10 @@ input:focus{
     outline: none;
 }
 
+.data {
+    display: none;
+}
+
 .header{
     flex: 0 1 auto;
     font-size: 1.5em;
@@ -85,7 +89,7 @@ input:focus{
 .options-panel, .maps-panel{
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: calc(var(--global-margin) * 1.65);
     margin: var(--global-margin);
     border: 4px solid;
     color: var(--color-bg-dark);
@@ -251,9 +255,18 @@ input:focus{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     position: relative;
     animation: addedRound .5s 1;
+}
+.added-round::before{
+    background: var(--color-bg-dark);
+    content: '';
+    height: 3px;
+    width: .5em;
+    margin-right: .2em;
+    margin-left: -.7em;
+    border-radius: 3px;
 }
 
 @keyframes addedRound {
@@ -265,7 +278,7 @@ input:focus{
     font-size: 1.3em;
     font-weight: 600;
     padding: 8px 4px;
-    margin-right: .7em;
+    margin-right: .6em;
 }
 
 .added-round > .games{
@@ -273,7 +286,14 @@ input:focus{
 }
 .added-round > .games::after{
     content: " games";
-    margin-right: 1em;
+    margin-right: .6em;
+}
+
+.added-round > .counterpick{
+    padding: 8px 4px;
+    font-size: .7em;
+    font-style: italic;
+    margin-right: .6em;
 }
 
 .added-round > .button{
@@ -463,6 +483,7 @@ input:focus{
 
 .picker-select-shortcuts .deselect-all{
     background: var(--color-accent-light);
+    color: var(--color-accent-dark);
 }
 
 .footer {

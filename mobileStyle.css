@@ -111,9 +111,18 @@
         padding: 8px;
         margin: 4px;
     }
+    .button:hover{
+        border-color: white;
+    }
 
     .options-panel, .maps-panel {
         padding: 8px;
+        margin: calc(var(--global-margin) * 4);
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
     }
 
     .map-drop-menu {

@@ -55,15 +55,15 @@
                 <div class="title">Add Round</div>
                 <wbr>
                 <label for="round-name" class="detail">Name
-                    <input type="text" id="round-name" maxlength="32"></input>
+                    <input value="Test" type="text" id="round-name" maxlength="32"></input>
                 </label>
                 <wbr>
                 <label for="round-games" class="detail">Games
-                    <input type="number" min="1" max="15" value=1 step="2" id="round-games"></input>
+                    <input type="number" min="1" max="15" value=7 step="2" id="round-games"></input>
                 </label>
                 <wbr>
-                <label for="counterpick-check" class="detail">Counterpick
-                    <input id="counterpick-check" type="checkbox">
+                <label for="round-counterpick-check" class="detail">Counterpick
+                    <input id="round-counterpick-check" type="checkbox">
                 </label>
                 <wbr>
                 <button class="button" id="add-round-button">Add  ▶</button>
@@ -79,68 +79,15 @@
                 <div class="detail">▶</div>
             </button>
         </div>
-        <div class="maps-panel">
+
+        
+        <div class="maps-panel" id="maps-panel">
             <div class="maps-instruction" style="display: none;">
                 Add maps to the map pool.<br>
                 Add round info.<br>
                 Click generate.    
             </div>
-            <div class="round-container">
-                <div class="menu-header">Round 1</div>
-                <div class="game-container">1
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">2
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">3
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">4
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">5
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-            </div>
-            <div class="round-container">
-                <div class="menu-header">Round 1</div>
-                <div class="game-container">1
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">2
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">3
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">4
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">5
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-            </div>
+
             <div class="round-container">
                 <div class="menu-header">Round 1</div>
                 <div class="game-container">1
@@ -213,4 +160,5 @@
     <div class="footer">Created by .jpg specifically for Inkling Performance Labs. Got feedback? Let me know at .jpg#8000 on Discord.</div>
 </body>
 <script src="init.js"></script>
+<script src="generate.js"></script>
 </html>

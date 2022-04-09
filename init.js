@@ -77,6 +77,7 @@ function massSelect(mode, isEnabling){
 const addRoundButton = document.getElementById("add-round-button");
 const roundNameInput = document.getElementById("round-name");
 const roundGamesInput = document.getElementById("round-games");
+const roundIsCounterpick = document.getElementById("round-counterpick-check");
 
 const roundEditor = document.getElementById("round-editor");
 
@@ -93,13 +94,23 @@ addRoundButton.addEventListener("click", function(){
 
     const roundTitle = document.createElement("div");
     roundTitle.setAttribute("class", "title");
+    roundTitle.id = "round-title";
     roundTitle.innerText = roundNameInput.value;
     addedRound.appendChild(roundTitle);
     
     const roundGames = document.createElement("div");
     roundGames.setAttribute("class", "games");
+    roundGames.id = "round-games";
     roundGames.innerText = roundGamesInput.value;
     addedRound.appendChild(roundGames);
+
+    if (roundIsCounterpick.checked){
+        const roundCounterpick = document.createElement("div");
+        roundCounterpick.setAttribute("class", "counterpick");
+        roundCounterpick.id = "round-counterpick";
+        roundCounterpick.innerText = "Counterpick";
+        addedRound.appendChild(roundCounterpick);
+    }
 
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove button");
