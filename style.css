@@ -302,9 +302,9 @@ input:focus{
 
 .generate-error-message{
     font-size: .8em;
-    font-style: italic;
     padding: 6px 12px 6px 12px;
-    margin: 4px 6px
+    margin: 4px 6px;
+    animation: errorFlash 1.5s infinite;
 }
 .generate-error-message::before{
     content: "Error:";
@@ -315,6 +315,12 @@ input:focus{
     border-radius: 6px;
     font-weight: 600;
     font-style: normal;
+}
+
+@keyframes errorFlash {
+    0% { color: var(--color-bg-dark); }
+    50% { color: var(--color-accent-dark); }
+    100% { color: var(--color-bg-dark); }
 }
 
 .generate {

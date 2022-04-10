@@ -128,22 +128,21 @@ addRoundButton.addEventListener("click", function(){
     updateGenerateButtonStatus();
 });
 
+const modeHasMaps = function(mode){
+    for (var i = 0; i < allMaps.length; i++){
+        const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
+        if (checkBox.checked){
+            return true;
+        }
+    }
+    return false;
+}
 
 //make generate buttons respond to status
 updateGenerateButtonStatus();
 function updateGenerateButtonStatus(){    
     var mapsOk = false;
     var roundsOk = false;
-
-    const modeHasMaps = function(mode){
-        for (var i = 0; i < allMaps.length; i++){
-            const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
-            if (checkBox.checked){
-                return true;
-            }
-        }
-        return false;
-    }
 
     const modes = ["tw","sz","tc","rm","cb"];
     for (var i = 0; i < modes.length; i++){

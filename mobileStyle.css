@@ -88,6 +88,10 @@
         margin-left: auto;
     }
 
+    .round-container > .game-container {
+        flex: 1;
+    }
+
     .footer{
         flex: none;
     }
@@ -98,7 +102,7 @@
     
     :root{
         --global-margin: 8px;
-        font-size: 18px;
+        font-size: 20px;
     }
     
     ::-webkit-scrollbar{
@@ -125,8 +129,15 @@
         border-right: none;
     }
 
+    .round-container > .game-container {
+        flex-wrap: wrap;
+    }
+
     .map-drop-menu {
         border-width: 1px;
+        margin: 2px;
+        width: 90%;
+        margin-left: auto;
     }
 
     .modal-container {

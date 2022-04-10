@@ -44,8 +44,8 @@ function importRounds(){
         for (var j = 0; j < numRounds; j++){
             const newMap = getTemplateMap();
             if (j == 0 || !roundIsCounterpick){
-                newMap.map = "Unknown Map";
-                newMap.mode = "Unknown Mode";
+                newMap.map = "";
+                newMap.mode = "";
             }
             else {
                 newMap.map = "Unknown Map";
@@ -62,6 +62,7 @@ function addMapElements(){
     for (var i = 0; i < currentRounds.length; i++){
         const roundContainer = document.createElement("div");
         roundContainer.setAttribute("class", "round-container");
+        roundContainer.setAttribute("round-index", i);
 
         const menuHeader = document.createElement("div");
         menuHeader.setAttribute("class", "menu-header");
@@ -71,12 +72,22 @@ function addMapElements(){
         for (var j = 0; j < currentRounds[i].maps.length; j++){
             const gameContainer = document.createElement("div");
             gameContainer.setAttribute("class", "game-container");
+            gameContainer.setAttribute("game-index", j);
             gameContainer.innerText = j + 1;
             gameContainer.style.animationDelay = `${Math.min(j * 0.1,2)}s`;
 
             const modeDropMenu = document.createElement("select");
             modeDropMenu.setAttribute("class", "map-drop-menu");
-            const modes = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz", "Unknown Mode"];
+
+            const baseModes = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
+            const modes = [];
+            for (var k = 0; k < baseModes.length; k++){
+                if (modeHasMaps(getShortHandMode(baseModes[k]))){
+                    modes.push(baseModes[k]);
+                }
+            }
+            modes.push("Unknown Mode");
+
             for (var k = 0; k < modes.length; k++){
                 const option = document.createElement("option");
                 option.setAttribute("value", modes[k]);
@@ -84,8 +95,8 @@ function addMapElements(){
                 modeDropMenu.appendChild(option);
             }
             modeDropMenu.id = "mode-drop-menu";
-
             modeDropMenu.value = currentRounds[i].maps[j].mode;
+            modeDropMenu.addEventListener("change", modeDropMenuOnChange(modeDropMenu));
 
             gameContainer.appendChild(modeDropMenu);
 
@@ -112,21 +123,13 @@ function addMapElements(){
 }
 
 function getMapPoolSelectors(mode){
-    const getShortHandMode = function(mode){
-        switch(mode){
-            case "Turf War": return "tw";
-            case "Splat Zones": return "sz";
-            case "Tower Control": return "tc";
-            case "Rainmaker": return "rm";
-            case "Clam Blitz": return "cb";
-            case "Unknown Mode": return null;
-        }
-    }
+    console.log(mode);
     const shortHandMode = getShortHandMode(mode);
+    console.log(shortHandMode);
 
     const mapPool = [];
 
-    if (shortHandMode == null){
+    if (shortHandMode == undefined){
         const selector = document.createElement("option");
         selector.value = "Unknown Map";
         selector.innerText = "Unknown Map";
@@ -151,16 +154,17 @@ function getMapPoolSelectors(mode){
     return mapPool;
 }
 
-function poolHasMaps(mode){
-    const getShortHandMode = function(mode){
-        switch(mode){
-            case "Turf War": return "tw";
-            case "Splat Zones": return "sz";
-            case "Tower Control": return "tc";
-            case "Rainmaker": return "rm";
-            case "Clam Blitz": return "cb";
-        }
+const getShortHandMode = function(mode){
+    switch(mode){
+        case "Turf War": return "tw";
+        case "Splat Zones": return "sz";
+        case "Tower Control": return "tc";
+        case "Rainmaker": return "rm";
+        case "Clam Blitz": return "cb";
     }
+}
+
+function poolHasMaps(mode){
     const shortHandMode = getShortHandMode(mode);
 
     for (var i = 0; i < allMaps.length; i++){
@@ -172,10 +176,34 @@ function poolHasMaps(mode){
     return false;
 }
 
-function updateStageDropdown(mode){
-    const mapPoolSelectors = getMapPoolSelectors(mode);
+function modeDropMenuOnChange(modeMenu){
+    return function(){
+        const mode = modeMenu.value;
+        const gameContainer = modeMenu.parentElement;
+        const mapDropMenu = gameContainer.querySelector("#map-drop-menu");
+        const originalValue = mapDropMenu.value;
 
+        while (mapDropMenu.firstChild){
+            mapDropMenu.removeChild(mapDropMenu.firstChild);
+        }
+
+        const selectors = getMapPoolSelectors(mode);
+        for (var i = 0; i < selectors.length; i++){
+            mapDropMenu.appendChild(selectors[i]);
+        } 
+
+        mapDropMenu.value = "Unknown Map";
+
+        //check if the original value is still in the selectors
+        for (var i = 0; i < selectors.length; i++){
+            if (selectors[i].value == originalValue){
+                mapDropMenu.value = originalValue;
+                break;
+            }
+        }
+    }
 }
+
 
 function generateEmptyRounds(){
     clearMapsPanel();
@@ -198,15 +226,24 @@ function generateModes(){
         return;
     }
 
-    const mapsPanel = document.getElementById("maps-panel");
-    const mapSelectors = mapsPanel.getElementsByClassName("map-drop-menu");
     var modesIndex = Math.floor(Math.random() * modes.length);
 
-    for (var i = 0; i < mapSelectors.length; i++){
-        if (mapSelectors[i].id == "mode-drop-menu"){
-            mapSelectors[i].value = modes[modesIndex];
-            modesIndex = (modesIndex + 1) % modes.length;
-        }
-    }
+    const mapsPanel = document.getElementById("maps-panel");
+    const gameContainers = mapsPanel.getElementsByClassName("game-container");
+    for (var i = 0; i < gameContainers.length; i++){
+        const modeDropMenu = gameContainers[i].querySelector("#mode-drop-menu");
 
+        if (modeDropMenu.value == "Unknown Mode"){
+            continue;
+        }
+
+        modeDropMenu.value = modes[modesIndex];
+        modesIndex = (modesIndex + 1) % modes.length;
+
+        const event = new Event("change");
+        modeDropMenu.dispatchEvent(event);
+
+        const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
+        mapDropMenu.value = "Unknown Map";
+    }
 }
