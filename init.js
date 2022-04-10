@@ -62,6 +62,8 @@ function adjustSelectedCount(mode){
     }
     const plural = count == 1 ? "" : "s";
     document.getElementById(`${mode}-picker-detail`).innerText = `${count} Map${plural} selected  ▶`;
+
+    updateGenerateButtonStatus();
 }
 
 function massSelect(mode, isEnabling){
@@ -117,8 +119,64 @@ addRoundButton.addEventListener("click", function(){
     removeButton.innerText = "Remove  ▶";
     removeButton.addEventListener("click", function(){
         removeButton.parentElement.remove();
+        updateGenerateButtonStatus();
     });
     addedRound.appendChild(removeButton);
 
     roundEditor.appendChild(addedRound);
+
+    updateGenerateButtonStatus();
 });
+
+
+//make generate buttons respond to status
+updateGenerateButtonStatus();
+function updateGenerateButtonStatus(){    
+    var mapsOk = false;
+    var roundsOk = false;
+
+    const modeHasMaps = function(mode){
+        for (var i = 0; i < allMaps.length; i++){
+            const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
+            if (checkBox.checked){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const modes = ["tw","sz","tc","rm","cb"];
+    for (var i = 0; i < modes.length; i++){
+        if (modeHasMaps(modes[i])){
+            mapsOk = true;
+            break;
+        }
+    }
+
+    const rounds = document.getElementsByClassName("added-round");
+    roundsOk = rounds.length > 0;
+
+    const allOk = mapsOk && roundsOk;
+
+    const generateButtons = document.getElementsByClassName("generate");
+    for (var i = 0; i < generateButtons.length; i++){
+        generateButtons[i].disabled = !allOk;
+    }
+
+    const errorMessage = document.getElementById("generate-error-message");
+    if (!allOk){
+        if (!mapsOk && !roundsOk){
+            errorMessage.innerText = "You must select maps and add at least one round.";
+        }
+        else if (!roundsOk){
+            errorMessage.innerText = "You must add at least one round.";
+        }
+        else if (!mapsOk){
+            errorMessage.innerText = "You must select maps.";
+        }
+        errorMessage.style.display = "block";
+    }
+    else{
+        errorMessage.style.display = "none";
+    }
+}

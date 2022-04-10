@@ -72,50 +72,25 @@
             </div>
             
             <div class="menu-header">Generate</div>
+            <div class="generate-error-message" id="generate-error-message" style="display: none;"></div>
             <button class="generate button">Generate All
-                <div class="detail">▶</div>
+                <div class="detail">Maps and modes  ▶</div>
             </button>
-            <button class="generate button">Generate Rounds Only
-                <div class="detail">▶</div>
+            <button class="generate button" onclick="generateModes()">Generate Modes Only
+                <div class="detail">Chooses modes only  ▶</div>
+            </button>
+            <button class="generate button" onclick="generateEmptyRounds()">Generate Empty Rounds
+                <div class="detail">No maps or modes selected  ▶</div>
             </button>
         </div>
 
         
         <div class="maps-panel" id="maps-panel">
-            <div class="maps-instruction" style="display: none;">
+            <div class="maps-instruction" id="maps-instruction">
                 Add maps to the map pool.<br>
                 Add round info.<br>
-                Click generate.    
-            </div>
-
-            <div class="round-container">
-                <div class="menu-header">Round 1</div>
-                <div class="game-container">1
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">2
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">3
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">4
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-                <div class="game-container">5
-                    <select name="maps" class="map-drop-menu">
-                        <option>The Reef</option>
-                    </select>
-                </div>
-            </div>
+                Choose a generate option.    
+            </div> 
         </div>
     </div>
 
