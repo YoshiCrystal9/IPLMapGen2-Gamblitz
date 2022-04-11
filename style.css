@@ -54,6 +54,14 @@ input:focus{
     outline: none;
 }
 
+.right-bias {
+    margin-left: .5em;
+}
+
+.left-bias {
+    margin-right: .5em;
+}
+
 .data {
     display: none;
 }
@@ -516,7 +524,7 @@ input:focus{
     margin-right: 2em;
 }
 
-.modal-content input{
+.modal-content input[type=checkbox]{
     width: 1em;
     height: 1em;
     margin-left: auto;
@@ -574,6 +582,46 @@ input:focus{
     font-weight: 400;
     margin-bottom: 12px;
     user-select: none;
+}
+
+.modal-content > .detail{
+    font-size: .7em;
+    font-weight: 400;
+    margin-top: 1em;
+}
+
+.save-name{
+    margin: 2px;
+    margin-top: 1em;
+    padding: 8px;
+    border: 2px solid var(--color-bg-dark);
+}
+
+.load-container{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.load-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid var(--color-bg-dark);
+    margin-top: 8px;
+    padding-bottom: 8px;
+}
+
+.load-wrapper > .button {
+    margin: 0;
+}
+
+.load-name{
+    font-weight: 600;
+    margin-right: auto;
+    padding-right: 1.5em;
+    font-size: 1.4em;
+    margin-left: 18px;
 }
 
 .picker-select-shortcuts .button{

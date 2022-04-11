@@ -203,3 +203,104 @@ function updateGenerateButtonStatus(){
         errorMessage.style.display = "none";
     }
 }
+
+
+
+//make save and load buttons function
+const saveModal = document.getElementById("save-modal");
+const saveModalClose = document.getElementById("save-close");
+saveModalClose.addEventListener("click", function(){
+    saveModal.style.display = "none";
+    modalContainer.style.display = "none";
+});
+
+const loadModal = document.getElementById("load-modal");
+const loadModalClose = document.getElementById("load-close");
+loadModalClose.addEventListener("click", function(){
+    loadModal.style.display = "none";
+    modalContainer.style.display = "none";
+});
+
+function saveOnClick(){
+    saveModal.style.display = "flex";
+    modalContainer.style.display = "flex";
+}
+
+function saveDialogOnClick(){
+    const saveName = document.getElementById("save-name").value;
+    if (saveName == ""){
+        return;
+    }
+
+    const mapSelectors = document.getElementsByClassName("map-selector");
+    const maps = [];
+    for (var i = 0; i < mapSelectors.length; i++){
+        if (mapSelectors[i].checked){
+            maps.push(mapSelectors[i].id);
+        }
+    }
+
+    localStorage.setItem(`maps.iplabs.ink-${saveName}`, JSON.stringify(maps));
+
+    saveModalClose.click();
+}
+
+function loadOnClick(){
+    loadModal.style.display = "flex";
+    modalContainer.style.display = "flex";
+
+    const storage = Object.keys(localStorage);
+    const loadContainer = document.getElementById("load-container");
+    loadContainer.innerHTML = "";
+
+    for (var i = 0; i < storage.length; i++){
+        if (storage[i].startsWith("maps.iplabs.ink-")){
+
+            const loadWrapper = document.createElement("div");
+            loadWrapper.setAttribute("class", "load-wrapper");
+
+            const loadName = document.createElement("div");
+            loadName.setAttribute("class", "load-name");
+            loadName.innerText = storage[i].slice("maps.iplabs.ink-".length);
+
+            const loadButton = document.createElement("button");
+            loadButton.setAttribute("class", "button load-button");
+            loadButton.innerHTML = '<i class="left-bias fa-solid fa-floppy-disk"></i>Load';
+
+            loadButton.setAttribute("attached-to", storage[i]);
+            loadButton.addEventListener("click", function(){
+                const mapSelectors = document.getElementsByClassName("map-selector");
+                for (var i = 0; i < mapSelectors.length; i++){
+                    mapSelectors[i].checked = false;
+                }
+
+                const maps = JSON.parse(localStorage.getItem(this.getAttribute("attached-to")));
+                for (var j = 0; j < maps.length; j++){
+                    const checkBox = document.getElementById(maps[j]);
+                    checkBox.checked = true;
+                }
+
+                const modes = ["tw","sz","tc","rm","cb"];
+                for (var j = 0; j < modes.length; j++){
+                    adjustSelectedCount(modes[j]);
+                }
+
+                loadModalClose.click();
+            });
+
+            const loadDeleteButton = document.createElement("button");
+            loadDeleteButton.setAttribute("class", "button load-delete");
+            loadDeleteButton.setAttribute("attached-to", storage[i]);
+            loadDeleteButton.innerHTML = '<i class="left-bias fa-solid fa-trash-alt"></i>Delete';
+            loadDeleteButton.addEventListener("click", function(){
+                localStorage.removeItem(this.getAttribute("attached-to"));
+                loadContainer.removeChild(loadWrapper);
+            });
+
+            loadWrapper.appendChild(loadName);
+            loadWrapper.appendChild(loadButton);
+            loadWrapper.appendChild(loadDeleteButton);
+            loadContainer.appendChild(loadWrapper);
+        }
+    }
+}
