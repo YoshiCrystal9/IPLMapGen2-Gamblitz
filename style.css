@@ -4,6 +4,8 @@
     font-weight: normal;
     font-size: calc(16px + .3vw);
 
+    --high-contrast: false;
+
     --color-bg-dark: #254459;
     --color-bg-light: #b6f3da;
     --color-primary: #2df8a4;
@@ -372,9 +374,14 @@ input:focus{
     font-size: 1.4em;
     font-weight: 600;
     position: relative;
-    animation: addedRound .5s 1;
+    animation: gameAdded .5s 1;
     animation-fill-mode: forwards;
     opacity: 0%;
+}
+
+@keyframes gameAdded {
+    from { right: 150px; opacity: 0%; }
+    to   { right: 0px; opacity: 100%; }
 }
 
 .map-drop-menu {
@@ -401,11 +408,34 @@ input:focus{
 .map-drop-menu:focus{
     border-color: #00000000;
     background-color: white;
-    transform: scale(1.06);
     box-shadow: 0px 6px 32px rgba(0, 0, 0, 0.45);
+    transform: scale(1.02);
 }
-.map-drop-menu:active{
-    transform: scale(1);
+.map-drop-menu:active {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.export-buttons-container{
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    animation: fadeIn .5s 1;
+}
+
+.export {
+    color: var(--color-accent-light);
+    background-color: var(--color-accent-dark);
+    margin-right: 6px;
+}
+.export:hover{
+    color: var(--color-accent-dark);
+    letter-spacing: normal;
+    transform: scale(1.03);
+}
+.export:active{
+    transform: scale(.99);
 }
 
 .modal-container{

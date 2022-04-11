@@ -14,10 +14,11 @@ function getTemplateMap() {
 }
 
 
-function clearMapsPanel(){
+function clearGenerateContainer(){
     document.getElementById("maps-instruction").style.display = "none";
+    document.getElementById("export-buttons-container").style.display = "flex";
 
-    const mapsPanel = document.getElementById("maps-panel");
+    const mapsPanel = document.getElementById("generate-container");
     
     for (var i = 0; i < mapsPanel.children.length; i++){
         const child = mapsPanel.children[i];
@@ -103,6 +104,7 @@ function addMapElements(){
             const mapDropMenu = document.createElement("select");
             mapDropMenu.setAttribute("class", "map-drop-menu");
             mapDropMenu.id ="map-drop-menu";
+            mapDropMenu.addEventListener("change", mapDropMenuOnChange(mapDropMenu));
 
             const selectors = getMapPoolSelectors(currentRounds[i].maps[j].mode);
             for (var k = 0; k < selectors.length; k++){
@@ -118,14 +120,12 @@ function addMapElements(){
             roundContainer.appendChild(gameContainer);
         }
 
-        document.getElementById("maps-panel").appendChild(roundContainer);
+        document.getElementById("generate-container").appendChild(roundContainer);
     }
 }
 
 function getMapPoolSelectors(mode){
-    console.log(mode);
     const shortHandMode = getShortHandMode(mode);
-    console.log(shortHandMode);
 
     const mapPool = [];
 
@@ -201,18 +201,47 @@ function modeDropMenuOnChange(modeMenu){
                 break;
             }
         }
+
+        //don't forget about currentRounds!!
+        const roundContainer = gameContainer.parentElement;
+        const roundIndex = parseInt(roundContainer.getAttribute("round-index"));
+        const gameIndex = parseInt(gameContainer.getAttribute("game-index"));
+        currentRounds[roundIndex].maps[gameIndex].mode = mode;
+        currentRounds[roundIndex].maps[gameIndex].map = mapDropMenu.value;
+    }
+}
+
+function mapDropMenuOnChange(mapMenu){
+    return function(){
+        const map = mapMenu.value;
+        const gameContainer = mapMenu.parentElement;
+        const roundContainer = gameContainer.parentElement;
+        const roundIndex = parseInt(roundContainer.getAttribute("round-index"));
+        const gameIndex = parseInt(gameContainer.getAttribute("game-index"));
+        currentRounds[roundIndex].maps[gameIndex].map = map;
     }
 }
 
 
 function generateEmptyRounds(){
-    clearMapsPanel();
+    clearGenerateContainer();
     importRounds();
     addMapElements();
+
+    const generateContainer = document.getElementById("generate-container");
+    const gameContainers = generateContainer.getElementsByClassName("game-container");
+    for (var i = 0; i < gameContainers.length; i++){
+        const modeDropMenu = gameContainers[i].querySelector("#mode-drop-menu");
+        const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
+        modeDropMenu.value = "Unknown Mode";
+        mapDropMenu.value = "Unknown Map";
+    }
 }
 
 function generateModes(){
-    generateEmptyRounds();
+    clearGenerateContainer();
+    importRounds();
+    addMapElements();
 
     const modesTemp = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
     const modes = [];
@@ -228,8 +257,8 @@ function generateModes(){
 
     var modesIndex = Math.floor(Math.random() * modes.length);
 
-    const mapsPanel = document.getElementById("maps-panel");
-    const gameContainers = mapsPanel.getElementsByClassName("game-container");
+    const generateContainer = document.getElementById("generate-container");
+    const gameContainers = generateContainer.getElementsByClassName("game-container");
     for (var i = 0; i < gameContainers.length; i++){
         const modeDropMenu = gameContainers[i].querySelector("#mode-drop-menu");
 
@@ -245,5 +274,6 @@ function generateModes(){
 
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
         mapDropMenu.value = "Unknown Map";
+        mapDropMenu.dispatchEvent(event);
     }
 }
