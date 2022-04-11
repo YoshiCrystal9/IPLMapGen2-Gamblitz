@@ -19,6 +19,16 @@ for (var i = 0; i < stageButtons.length; i++){
     }
 }
 
+window.addEventListener("click", function(event){
+    if (event.target == modalContainer){
+        modalContainer.style.display = "none";
+        const modals = document.getElementsByClassName("modal-content");
+        for (var i = 0; i < modals.length; i++){
+            modals[i].style.display = "none";
+        }
+    }
+});
+
 
 const exportButtonDiscord = document.getElementById("export-button-discord");
 const exportDiscordClose = document.getElementById("discord-export-close");
@@ -253,11 +263,22 @@ function loadOnClick(){
     const loadContainer = document.getElementById("load-container");
     loadContainer.innerHTML = "";
 
+    if (storage.length == 0){
+        const noSaves = document.createElement("div");
+        noSaves.innerText = "No saves found.";
+        loadContainer.appendChild(noSaves);
+    }
+
+
     for (var i = 0; i < storage.length; i++){
         if (storage[i].startsWith("maps.iplabs.ink-")){
 
             const loadWrapper = document.createElement("div");
             loadWrapper.setAttribute("class", "load-wrapper");
+
+            if (i == storage.length - 1){
+                loadWrapper.style.border = "none";
+            }
 
             const loadName = document.createElement("div");
             loadName.setAttribute("class", "load-name");

@@ -624,6 +624,12 @@ input:focus{
     margin-left: 18px;
 }
 
+.load-button:hover, .load-delete:hover{
+    letter-spacing: normal;
+    transform: scale(1.03);
+}
+
+
 .picker-select-shortcuts .button{
     margin: 4px 6px;
     font-weight: 700;
