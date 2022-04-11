@@ -222,6 +222,22 @@ function mapDropMenuOnChange(mapMenu){
     }
 }
 
+function getTotalMapsInPool(){
+    var totalMaps = 0;
+    for (var i = 0; i < allMaps.length; i++){
+        const twCheckBox = document.getElementById(`tw-${allMaps[i]}-map-selector`);
+        const szCheckBox = document.getElementById(`sz-${allMaps[i]}-map-selector`);
+        const tcCheckBox = document.getElementById(`tc-${allMaps[i]}-map-selector`);
+        const rmCheckBox = document.getElementById(`rm-${allMaps[i]}-map-selector`);
+        const cbCheckBox = document.getElementById(`cb-${allMaps[i]}-map-selector`);
+
+        if (twCheckBox.checked || szCheckBox.checked || tcCheckBox.checked || rmCheckBox.checked || cbCheckBox.checked){
+            totalMaps++;
+        }
+    }
+    return totalMaps;
+}
+
 
 function generateEmptyRounds(){
     clearGenerateContainer();
@@ -276,6 +292,37 @@ function generateModes(){
         mapDropMenu.value = "Unknown Map";
         mapDropMenu.dispatchEvent(event);
     }
+}
+
+function generateMaps(){
+    generateModes();
+
+    const generateContainer = document.getElementById("generate-container");
+    const gameContainers = generateContainer.getElementsByClassName("game-container");
+
+    var recentMaps = [];
+    const recentCap = Math.min(Math.ceil(getTotalMapsInPool() / 3), allMaps.length);
+    
+    for (var i = 0; i < gameContainers.length; i++){
+        const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
+        
+        //choose a random selection on mapDropMenu that isn't in recentMaps
+        var mapIndex = Math.floor(Math.random() * mapDropMenu.length);
+        while (recentMaps.includes(mapDropMenu.options[mapIndex].value) || mapDropMenu.options[mapIndex].value == "Unknown Map"){
+            mapIndex = Math.floor(Math.random() * mapDropMenu.length);
+        }
+        mapDropMenu.value = mapDropMenu.options[mapIndex].value;
+
+        const event = new Event("change");
+        mapDropMenu.dispatchEvent(event);
+
+        recentMaps.push(mapDropMenu.value);
+
+        if (recentMaps.length > recentCap){
+            recentMaps.shift();
+        }
+    }
+
 }
 
 function exportToDiscord(){
