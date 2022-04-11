@@ -301,7 +301,7 @@ function generateMaps(){
     const gameContainers = generateContainer.getElementsByClassName("game-container");
 
     var recentMaps = [];
-    const recentCap = Math.min(Math.ceil(getTotalMapsInPool() / 3), allMaps.length);
+    const recentCap = Math.min(Math.floor(getTotalMapsInPool() / 3), allMaps.length);
     
     for (var i = 0; i < gameContainers.length; i++){
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
