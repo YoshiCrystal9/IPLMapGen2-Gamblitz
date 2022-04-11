@@ -277,3 +277,26 @@ function generateModes(){
         mapDropMenu.dispatchEvent(event);
     }
 }
+
+function exportToDiscord(){
+    var stringBuilder = "";
+    var rows = 0;
+    for (var i = 0; i < currentRounds.length; i++){
+        stringBuilder += `\`${currentRounds[i].name}\`\n`;
+        rows++;
+        for (var j = 0; j < currentRounds[i].maps.length; j++){
+            if (currentRounds[i].maps[j].mode == "Unknown Mode" && currentRounds[i].maps[j].map == "Unknown Map"){
+                stringBuilder += `${j+1}: Counterpick\n`;
+            } else {
+                stringBuilder += `${j+1}: ${currentRounds[i].maps[j].mode} on ${currentRounds[i].maps[j].map}\n`;
+            }
+            rows++;
+        }
+        stringBuilder += "\n";
+        rows++;
+    }
+    
+    const textArea = document.getElementById("discord-export-textarea");
+    textArea.rows = rows+2;
+    textArea.value = stringBuilder;
+}

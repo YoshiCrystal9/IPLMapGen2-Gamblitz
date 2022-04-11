@@ -20,6 +20,23 @@ for (var i = 0; i < stageButtons.length; i++){
 }
 
 
+const exportButtonDiscord = document.getElementById("export-button-discord");
+const exportDiscordClose = document.getElementById("discord-export-close");
+const exportDiscordModal = document.getElementById("discord-export-modal");
+
+exportButtonDiscord.onclick = function(){
+    exportToDiscord();
+    modalContainer.style.display = "flex";
+    exportDiscordModal.style.display = "flex";
+}
+
+exportDiscordClose.onclick = function(){
+    modalContainer.style.display = "none";
+    exportDiscordModal.style.display = "none";
+}
+
+
+
 //load map options into page
 const allMaps = ["The Reef", "Musselforge Fitness", "Starfish Mainstage", "Humpback Pump Track", "Inkblot Art Academy", "Sturgeon Shipyard", "Moray Towers", "Port Mackerel", "Manta Maria", "Kelp Dome", "Snapper Canal", "Blackbelly Skatepark", "Makomart", "Walleye Warehouse", "Shellendorf Institute", "Arowana Mall", "Goby Arena", "Piranha Pit", "Camp Triggerfish", "Wahoo World", "New Albacore Hotel", "Ancho-V Games", "Skipper Pavilion"];
 
@@ -126,6 +143,13 @@ addRoundButton.addEventListener("click", function(){
     roundEditor.appendChild(addedRound);
 
     updateGenerateButtonStatus();
+
+    //attempt to increment last character in name
+    const lastChar = roundNameInput.value.slice(-1);
+    if (!isNaN(lastChar)){
+        const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
+        roundNameInput.value = newName;
+    }
 });
 
 const modeHasMaps = function(mode){

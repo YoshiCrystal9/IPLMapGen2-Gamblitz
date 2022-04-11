@@ -40,6 +40,7 @@ button {
     font-family: 'Roboto Mono', monospace;
     font-size: 1em;
     cursor: pointer;
+    user-select: none;
 }
 
 input{
@@ -527,11 +528,52 @@ input:focus{
     margin-bottom: 6px;
 }
 
+#discord-export-modal {
+    text-align: center;
+}
+
 .modal-content > .picker-select-shortcuts{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 24px;
+}
+
+.modal-content > .discord-export-title{
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+.modal-content > .discord-export-textarea{
+    width: 85%;
+    height: 100%;
+    border: none;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: .8em;
+    font-weight: 400;
+    background: var(--color-bg-dark);
+    color: var(--color-bg-light);
+    padding: 20px;
+    resize: none;
+    overflow: auto;
+    border-radius: 16px;
+}
+.modal-content > .discord-export-textarea:focus-visible{
+    outline: none;
+}
+.modal-content > .discord-export-textarea::selection{
+    background: var(--color-primary);
+    color: var(--color-bg-dark);
+}
+
+.modal-content > .discord-export-subtitle{
+    font-size: .9em;
+    font-weight: 400;
+    margin-bottom: 12px;
+    user-select: none;
 }
 
 .picker-select-shortcuts .button{
