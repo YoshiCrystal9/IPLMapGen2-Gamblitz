@@ -303,8 +303,11 @@ function generateMaps(){
     var recentMaps = [];
     const recentCap = Math.min(Math.floor(getTotalMapsInPool() / 3), allMaps.length);
     
-    for (var i = 0; i < gameContainers.length; i++){
+    for (var i = 0; i < gameContainers.length; i++){        
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
+        if (mapDropMenu.value == "Unknown Map" && mapDropMenu.parentElement.querySelector("#mode-drop-menu").value == "Unknown Mode"){
+            continue;
+        }
         
         //choose a random selection on mapDropMenu that isn't in recentMaps
         var mapIndex = Math.floor(Math.random() * mapDropMenu.length);
@@ -346,4 +349,14 @@ function exportToDiscord(){
     const textArea = document.getElementById("discord-export-textarea");
     textArea.rows = rows+2;
     textArea.value = stringBuilder;
+}
+
+function exportToJSONFile(){
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentRounds, null, 4));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", "map_list.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
 }
