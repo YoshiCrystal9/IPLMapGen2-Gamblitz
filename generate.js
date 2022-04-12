@@ -251,6 +251,9 @@ function generateEmptyRounds(){
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
         modeDropMenu.value = "Unknown Mode";
         mapDropMenu.value = "Unknown Map";
+
+        const event = new Event("change");
+        modeDropMenu.dispatchEvent(event);
     }
 }
 
