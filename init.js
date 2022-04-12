@@ -88,7 +88,7 @@ function adjustSelectedCount(mode){
         }
     }
     const plural = count == 1 ? "" : "s";
-    document.getElementById(`${mode}-picker-detail`).innerText = `${count} Map${plural} selected  ▶`;
+    document.getElementById(`${mode}-picker-detail`).innerHTML = `${count} Map${plural} selected <i class="right-bias fa-solid fa-circle-chevron-right">`;
 
     updateGenerateButtonStatus();
 }
@@ -143,7 +143,7 @@ addRoundButton.addEventListener("click", function(){
 
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove button");
-    removeButton.innerText = "Remove  ▶";
+    removeButton.innerHTML = '<i class="left-bias fa-solid fa-trash-can"></i> Remove';
     removeButton.addEventListener("click", function(){
         removeButton.parentElement.remove();
         updateGenerateButtonStatus();

@@ -129,6 +129,10 @@
         border-right: none;
     }
 
+    .save-load > .title {
+        width: calc(100% - 2em);
+    }
+
     .round-container > .game-container {
         flex-wrap: wrap;
     }

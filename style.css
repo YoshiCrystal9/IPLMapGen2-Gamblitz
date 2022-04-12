@@ -136,6 +136,7 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
     border-radius: 20px;
     transition-duration: .2s;
     padding: 12px;
@@ -334,15 +335,15 @@ input:focus{
     100% { color: var(--color-bg-dark); }
 }
 
-.generate {
+.generate > .title {
     font-weight: 700;
     font-size: 1.5em;
+    margin-right: 20px;
 }
 
 .generate > .detail {
     font-weight: 400;
-    font-size: .6em;
-    margin-left: 1em;
+    font-size: .8em;
 }
 
 .generate:disabled{
@@ -613,7 +614,7 @@ input:focus{
 }
 
 .load-wrapper > .button {
-    margin: 0;
+    margin: 2px;
 }
 
 .load-name{
