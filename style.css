@@ -68,14 +68,14 @@ input:focus{
 
 .header{
     flex: 0 1 auto;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 600;
     margin: var(--global-margin);
     margin-bottom: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    transition-duration: .5s;
+    transition-duration: .2s;
     user-select: none;
 }
 .header::before{
@@ -95,20 +95,14 @@ input:focus{
     width: auto;
     height: 1em;
     transition-duration: .5s;
+    margin-right: .5em;
 }
 
 .logo-wrapper{
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     align-items: center;
     justify-content: center;
-}
-
-.logo-text{
-    font-size: .5em;
-    transition-duration: .5s;
-    word-break: normal;
-    display: inherit;
 }
 
 .column-container{

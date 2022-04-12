@@ -54,7 +54,6 @@ for (var i = 0; i < allMaps.length; i++){
     const modes = ["tw","sz","tc","rm","cb"];
 
     for (var j = 0; j < modes.length; j++){
-
         const mapInputId = `${modes[j]}-${allMaps[i]}-map-selector`;
 
         const mapLabel = document.createElement("label");
