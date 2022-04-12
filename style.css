@@ -12,7 +12,7 @@
     --color-accent-dark: #9c4232;
     --color-accent-light: #e0bcb6;
 
-    --global-margin: calc(1vw + .563vh);
+    --global-margin: calc(.7vw + .35vh);
 }
 
 ::-webkit-scrollbar{
@@ -76,6 +76,7 @@ input:focus{
     justify-content: space-around;
     align-items: center;
     transition-duration: .5s;
+    user-select: none;
 }
 .header::before{
     content: "Settings";
@@ -88,6 +89,26 @@ input:focus{
     margin-right: var(--global-margin);
     font-size: .8em;
     color: var(--color-accent-light);
+}
+
+.header img, .header svg{
+    width: auto;
+    height: 1em;
+    transition-duration: .5s;
+}
+
+.logo-wrapper{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text{
+    font-size: .5em;
+    transition-duration: .5s;
+    word-break: normal;
+    display: inherit;
 }
 
 .column-container{
@@ -387,6 +408,7 @@ input:focus{
     animation: gameAdded .5s 1;
     animation-fill-mode: forwards;
     opacity: 0%;
+    user-select: none;
 }
 
 @keyframes gameAdded {
@@ -654,4 +676,5 @@ input:focus{
     margin: var(--global-margin);
     margin-top: 0;
     transition-duration: .5s;
+    user-select: none;
 }
