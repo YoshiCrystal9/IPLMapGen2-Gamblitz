@@ -11,11 +11,14 @@ for (var i = 0; i < stageButtons.length; i++){
     stageButtons[i].onclick = function(){
         modalContainer.style.display = "flex";
         modalContent.style.display = "flex";
+        modalContainer.classList.add("green");
     }
 
     modalClose.onclick = function(){
         modalContainer.style.display = "none";
         modalContent.style.display = "none";
+        modalContainer.classList.remove("green");
+        modalContainer.classList.remove("red");
     }
 }
 
@@ -38,11 +41,14 @@ exportButtonDiscord.onclick = function(){
     exportToDiscord();
     modalContainer.style.display = "flex";
     exportDiscordModal.style.display = "flex";
+    modalContainer.classList.add("red");
 }
 
 exportDiscordClose.onclick = function(){
     modalContainer.style.display = "none";
     exportDiscordModal.style.display = "none";
+    modalContainer.classList.remove("green");
+    modalContainer.classList.remove("red");
 }
 
 const exportButtonURL = document.getElementById("export-button-url");
@@ -52,6 +58,7 @@ const exportURLModal = document.getElementById("url-export-modal");
 exportButtonURL.onclick = function(){
     modalContainer.style.display = "flex";
     exportURLModal.style.display = "flex";
+    modalContainer.classList.add("red");
 
     const text = document.getElementById("url-export-textarea");
 
@@ -62,6 +69,8 @@ exportButtonURL.onclick = function(){
 exportURLClose.onclick = function(){
     modalContainer.style.display = "none";
     exportURLModal.style.display = "none";
+    modalContainer.classList.remove("green");
+    modalContainer.classList.remove("red");
 }
 
 

@@ -145,8 +145,12 @@
         margin-left: auto;
     }
 
-    .modal-container {
+    .modal-container.green {
         background: var(--color-bg-light);
+    }
+
+    .modal-container.red{
+        background: var(--color-accent-light);
     }
 
     .modal-content{
