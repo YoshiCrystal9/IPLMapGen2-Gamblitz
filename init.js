@@ -361,16 +361,29 @@ function encodeMapPool(){
     const modes = ["tw", "sz", "tc", "rm", "cb"];
     var pools = [];
     for (var i = 0; i < modes.length; i++){
-        pools.push({
-            m:modes[i],
-            p:""
-        });
+        const thisPool = {
+            m: modes[i],
+            p: "1"
+        };
+
+        var hasMaps = false;
+
         for (var j = 0; j < allMaps.length; j++){
             //if map is checked
-            pools[i].p += document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked ? "1" : "0";
+            const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked
+            thisPool.p += checked ? "1" : "0";
+            hasMaps = checked;
         }
-        //remove all 0s from end of pool
-        pools[i].p = pools[i].p.replace(/0*$/, "");
+
+        if (!hasMaps){
+            continue
+        }
+
+        thisPool.p = thisPool.p.match(/.{4}/g).reduce(function(acc, i) {
+            return acc + parseInt(i, 2).toString(16);
+        }, '');
+
+        pools.push(thisPool);
     }
 
     var stringBuilder = "";
@@ -428,11 +441,20 @@ function encodeRounds(){
 //tw:11111111111111111111111;sz:;tc:11111111111111111111111;rm:;cb:;
 function decodeMapPool(pools){ 
     pools = pools.split(";");
+
     for (var i = 0; i < pools.length; i++){
         var thisPool = pools[i].split(":");
-        for (var j = 0; j < thisPool[1].length; j++){
-            document.getElementById(thisPool[0] + "-" + allMaps[j] + "-map-selector").checked = thisPool[1][j] == "1";
+
+        const decodedHex = thisPool[1].split('').reduce(function(acc, i) {
+            return acc + ('000' + parseInt(i, 16).toString(2)).substr(-4, 4);
+        }, '')
+
+        console.log(decodedHex);
+
+        for (var j = 1; j < decodedHex.length; j++){
+            document.getElementById(thisPool[0] + "-" + allMaps[j-1] + "-map-selector").checked = decodedHex[j] == "1";
         }
+
         adjustSelectedCount(thisPool[0]);
     }
 }
