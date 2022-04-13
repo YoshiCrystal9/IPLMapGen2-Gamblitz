@@ -225,7 +225,7 @@ function mapDropMenuOnChange(mapMenu){
 }
 
 function getRecentMapsCap(){
-    var totalMaps = 0;
+    var totalMaps = -3;
     var twMaps = 0;
     var szMaps = 0;
     var tcMaps = 0;

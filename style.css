@@ -570,7 +570,7 @@ input:focus{
 .modal-content .exit{
     font-weight: 700;
     font-size: 1.2em;
-    margin-bottom: 6px;
+    margin-bottom: 1em;
 }
 
 .modal-content > .picker-select-shortcuts{
@@ -584,6 +584,8 @@ input:focus{
     font-size: 1.2em;
     font-weight: 600;
     margin-bottom: 6px;
+    margin-left: auto;
+    margin-right: auto;
     user-select: none;
 }
 
@@ -609,11 +611,16 @@ input:focus{
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
 }
+.modal-content > .text-export-textarea::-webkit-scrollbar-thumb{
+    background: white;
+}
 
 .modal-content > .text-export-subtitle{
     font-size: .9em;
     font-weight: 400;
     margin-bottom: 12px;
+    margin-left: auto;
+    margin-right: auto;
     user-select: none;
 }
 
