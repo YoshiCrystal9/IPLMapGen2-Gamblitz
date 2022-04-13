@@ -372,7 +372,7 @@ function encodeMapPool(){
             //if map is checked
             const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked
             thisPool.p += checked ? "1" : "0";
-            hasMaps = checked;
+            hasMaps = checked ? checked : hasMaps;
         }
 
         if (!hasMaps){
