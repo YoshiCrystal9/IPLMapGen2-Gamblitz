@@ -481,14 +481,12 @@ input:focus{
 }
 
 .modal-content{
-    color: var(--color-bg-dark);
     display: none;
     position: relative;
     flex-direction: column;
-    border: solid 5px var(--color-primary);
+    border: solid 5px;
     border-radius: 30px;
     padding: 25px;
-    background: var(--color-bg-light);
     animation: zoom .25s 1;
     max-width: 85vh;
     max-height: 85vh;
@@ -497,6 +495,24 @@ input:focus{
 }
 .modal-content::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
+}
+
+.modal-content.green{
+    color: var(--color-bg-dark);
+    background-color: var(--color-bg-light);
+    border-color: var(--color-primary);
+}
+.modal-content.green::-webkit-scrollbar-thumb{
+    background: var(--color-bg-dark);
+}
+
+.modal-content.red {
+    color: var(--color-accent-dark);
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-dark);
+}
+.modal-content.red::-webkit-scrollbar-thumb{
+    background: var(--color-accent-dark);
 }
 
 @keyframes fadeIn {
@@ -513,6 +529,10 @@ input:focus{
     margin-right: 0;
     justify-content: center;
     font-weight: 600;
+}
+
+.red > .button{
+    color:var(--color-accent-dark);
 }
 
 .modal-content label {
@@ -553,10 +573,6 @@ input:focus{
     margin-bottom: 6px;
 }
 
-#discord-export-modal {
-    text-align: center;
-}
-
 .modal-content > .picker-select-shortcuts{
     display: flex;
     flex-direction: row;
@@ -579,8 +595,8 @@ input:focus{
     margin-left: auto;
     font-size: .8em;
     font-weight: 400;
-    background: var(--color-bg-dark);
-    color: var(--color-bg-light);
+    background: var(--color-accent-dark);
+    color: var(--color-accent-light);
     padding: 20px;
     resize: none;
     overflow: auto;
@@ -590,8 +606,8 @@ input:focus{
     outline: none;
 }
 .modal-content > .text-export-textarea::selection{
-    background: var(--color-primary);
-    color: var(--color-bg-dark);
+    background: var(--color-accent-light);
+    color: var(--color-accent-dark);
 }
 
 .modal-content > .text-export-subtitle{
