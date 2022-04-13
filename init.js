@@ -54,7 +54,7 @@ exportButtonURL.onclick = function(){
     exportURLModal.style.display = "flex";
 
     const text = document.getElementById("url-export-textarea");
-    text.value = window.location.hostname + "/?pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+    text.value = window.location.href + "?pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
 }
 
 exportURLClose.onclick = function(){
@@ -251,7 +251,7 @@ function saveOnClick(){
     modalContainer.style.display = "flex";
 
     const saveUrl = document.getElementById("save-url");
-    saveUrl.value = window.location.hostname + "/?pool=" + encodeMapPool();
+    saveUrl.value = window.location.href + "?pool=" + encodeMapPool();
 }
 
 function saveDialogOnClick(){
