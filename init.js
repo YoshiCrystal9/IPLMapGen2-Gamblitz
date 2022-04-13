@@ -415,9 +415,16 @@ function encodeRounds(){
                 case "Tower Control": encodedMode = "2"; break;
                 case "Rainmaker": encodedMode = "3"; break;
                 case "Clam Blitz": encodedMode = "4"; break;
+                case "Unknown Mode": encodedMode = "5"; break;
             }
 
-            encodedRound.maps += encodedMode + "-" + allMaps.indexOf(currentRounds[i].maps[j].map);
+            const mapIndex = allMaps.indexOf(currentRounds[i].maps[j].map);
+            if (mapIndex == -1){
+                encodedRound.maps += encodedMode + "-" + "un";
+            }
+            else{
+                encodedRound.maps += encodedMode + "-" + mapIndex;
+            }
             
             if (j != currentRounds[i].maps.length - 1){
                 encodedRound.maps += ",";
@@ -476,7 +483,6 @@ function decodeRounds(rounds){
 
             const split = mapModes[j].split("-");
             var mode = split[0];
-            const map = allMaps[parseInt(split[1])];
 
             switch(mode){
                 case "0": mode = "Turf War"; break;
@@ -484,12 +490,21 @@ function decodeRounds(rounds){
                 case "2": mode = "Tower Control"; break;
                 case "3": mode = "Rainmaker"; break;
                 case "4": mode = "Clam Blitz"; break;
+                case "5": mode = "Unknown Mode"; break;
             }
 
-            round.maps.push({
-                map:map,
-                mode:mode
-            });
+            if (split[1] == "un"){
+                round.maps.push({
+                    map: "Unknown Map",
+                    mode: mode
+                });
+            } else {
+                const map = allMaps[parseInt(split[1])];
+                round.maps.push({
+                    map:map,
+                    mode:mode
+                });
+            }
 
         }
         currentRounds.push(round);
