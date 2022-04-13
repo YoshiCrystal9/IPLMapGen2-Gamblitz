@@ -69,7 +69,7 @@ input:focus{
 .header{
     flex: 0 1 auto;
     font-size: 1.2em;
-    font-weight: 600;
+    font-weight: 700;
     margin: var(--global-margin);
     margin-bottom: 0;
     display: flex;
@@ -445,7 +445,7 @@ input:focus{
     display: none;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     margin-top: 2em;
     animation: fadeIn .5s 1;
 }
@@ -564,14 +564,14 @@ input:focus{
     margin-bottom: 24px;
 }
 
-.modal-content > .discord-export-title{
+.modal-content > .text-export-title{
     font-size: 1.2em;
     font-weight: 600;
     margin-bottom: 6px;
     user-select: none;
 }
 
-.modal-content > .discord-export-textarea{
+.modal-content > .text-export-textarea{
     width: 85%;
     height: 100%;
     border: none;
@@ -586,15 +586,15 @@ input:focus{
     overflow: auto;
     border-radius: 16px;
 }
-.modal-content > .discord-export-textarea:focus-visible{
+.modal-content > .text-export-textarea:focus-visible{
     outline: none;
 }
-.modal-content > .discord-export-textarea::selection{
+.modal-content > .text-export-textarea::selection{
     background: var(--color-primary);
     color: var(--color-bg-dark);
 }
 
-.modal-content > .discord-export-subtitle{
+.modal-content > .text-export-subtitle{
     font-size: .9em;
     font-weight: 400;
     margin-bottom: 12px;
@@ -612,6 +612,7 @@ input:focus{
     margin-top: 1em;
     padding: 8px;
     border: 2px solid var(--color-bg-dark);
+    color: var(--color-bg-dark);
 }
 
 .load-container{

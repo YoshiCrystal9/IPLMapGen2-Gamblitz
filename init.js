@@ -45,6 +45,22 @@ exportDiscordClose.onclick = function(){
     exportDiscordModal.style.display = "none";
 }
 
+const exportButtonURL = document.getElementById("export-button-url");
+const exportURLClose = document.getElementById("url-export-close");
+const exportURLModal = document.getElementById("url-export-modal");
+
+exportButtonURL.onclick = function(){
+    modalContainer.style.display = "flex";
+    exportURLModal.style.display = "flex";
+
+    const text = document.getElementById("url-export-textarea");
+    text.value = window.location.hostname + "/?pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+}
+
+exportURLClose.onclick = function(){
+    modalContainer.style.display = "none";
+    exportURLModal.style.display = "none";
+}
 
 
 //load map options into page
@@ -233,6 +249,9 @@ loadModalClose.addEventListener("click", function(){
 function saveOnClick(){
     saveModal.style.display = "flex";
     modalContainer.style.display = "flex";
+
+    const saveUrl = document.getElementById("save-url");
+    saveUrl.value = window.location.hostname + "/?pool=" + encodeMapPool();
 }
 
 function saveDialogOnClick(){
@@ -325,3 +344,134 @@ function loadOnClick(){
     }
 }
 
+
+function encodeMapPool(){
+    const modes = ["tw", "sz", "tc", "rm", "cb"];
+    var pools = [];
+    for (var i = 0; i < modes.length; i++){
+        pools.push({
+            m:modes[i],
+            p:""
+        });
+        for (var j = 0; j < allMaps.length; j++){
+            //if map is checked
+            pools[i].p += document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked ? "1" : "0";
+        }
+        //remove all 0s from end of pool
+        pools[i].p = pools[i].p.replace(/0*$/, "");
+    }
+
+    var stringBuilder = "";
+    for (var i = 0; i < pools.length; i++){
+        if (pools[i].p == ""){
+            continue;
+        }
+        stringBuilder += pools[i].m + ":" + pools[i].p;
+        if (i != pools.length - 1){
+            stringBuilder += ";";
+        }
+    }
+
+    return stringBuilder;
+}
+
+function encodeRounds(){
+    var encodedRounds = [];
+    for (var i = 0; i < currentRounds.length; i++){
+        var encodedRound = {
+            name:currentRounds[i].name,
+            maps:""
+        };
+        for (var j = 0; j < currentRounds[i].maps.length; j++){
+            var encodedMode = currentRounds[i].maps[j].mode;
+            switch (encodedMode){
+                case "Turf War": encodedMode = "0"; break;
+                case "Splat Zones": encodedMode = "1"; break;
+                case "Tower Control": encodedMode = "2"; break;
+                case "Rainmaker": encodedMode = "3"; break;
+                case "Clam Blitz": encodedMode = "4"; break;
+            }
+
+            encodedRound.maps += encodedMode + "-" + allMaps.indexOf(currentRounds[i].maps[j].map);
+            
+            if (j != currentRounds[i].maps.length - 1){
+                encodedRound.maps += ",";
+            }
+        }
+        encodedRounds.push(encodedRound);
+    }
+    
+    var stringBuilder = "";
+    for (var i = 0; i < encodedRounds.length; i++){
+        stringBuilder += encodedRounds[i].name.replace(" ", "_") + ":" + encodedRounds[i].maps;
+        if (i != encodedRounds.length - 1){
+            stringBuilder += ";";
+        }
+    }
+
+    return stringBuilder;
+}
+
+
+//tw:11111111111111111111111;sz:;tc:11111111111111111111111;rm:;cb:;
+function decodeMapPool(pools){ 
+    pools = pools.split(";");
+    for (var i = 0; i < pools.length; i++){
+        var thisPool = pools[i].split(":");
+        for (var j = 0; j < thisPool[1].length; j++){
+            document.getElementById(thisPool[0] + "-" + allMaps[j] + "-map-selector").checked = thisPool[1][j] == "1";
+        }
+        adjustSelectedCount(thisPool[0]);
+    }
+}
+
+
+// Round_1:4-14,0-19,1-3;Round_2:2-21,3-8,4-2,0-11,1-22;Round_3:2-17,3-0,4-12,0-10,1-16,2-18,3-1;
+function decodeRounds(rounds){
+    var rounds = rounds.split(";");
+    for (var i = 0; i < rounds.length; i++){
+        const roundSplit = rounds[i].split(":");
+        var round = {
+            name:roundSplit[0].replace("_", " "),
+            maps:[]
+        };
+
+        console.log(roundSplit[1]);
+        const mapModes = roundSplit[1].split(",");
+        for (var j = 0; j < mapModes.length; j++){
+
+            const split = mapModes[j].split("-");
+            var mode = split[0];
+            const map = allMaps[parseInt(split[1])];
+
+            switch(mode){
+                case "0": mode = "Turf War"; break;
+                case "1": mode = "Splat Zones"; break;
+                case "2": mode = "Tower Control"; break;
+                case "3": mode = "Rainmaker"; break;
+                case "4": mode = "Clam Blitz"; break;
+            }
+
+            round.maps.push({
+                map:map,
+                mode:mode
+            });
+
+        }
+        currentRounds.push(round);
+        console.log(round);
+
+        const roundNameInput = document.getElementById("round-name");
+        const roundGamesInput = document.getElementById("round-games");
+        const roundIsCounterpick = document.getElementById("round-counterpick-check");
+        const addRoundButton = document.getElementById("add-round-button");
+
+        roundNameInput.value = round.name;
+        roundGamesInput.value = round.maps.length;
+        roundIsCounterpick.checked = false;
+        addRoundButton.click();
+    }
+
+    clearGenerateContainer();
+    addMapElements();
+}

@@ -114,6 +114,7 @@
             <div class="generate-container" id="generate-container"></div>
             <div class="export-buttons-container" id="export-buttons-container">
                 <button class="export button" id="export-button-discord"><i class="left-bias fa-brands fa-discord"></i>Discord Message</button>
+                <button class="export button" id="export-button-url"><i class="left-bias fa-solid fa-code"></i></i>Share URL</button>
                 <button class="export button" id="export-button-json" onclick="exportToJSONFile()"><i class="left-bias fa-solid fa-file-code"></i>Export JSON</button>
             </div>
         </div>
@@ -161,6 +162,9 @@
             <input type="text" class="save-name" id="save-name" placeholder="Name" maxlength="32">
             <button class="button" id="save-button" onclick="saveDialogOnClick()"><i class="left-bias fa-solid fa-floppy-disk"></i> Save</button>
             <div class="detail">Map pools are saved within this browser's local storage.</div>
+            <div style="margin: 8px;"></div>
+            <div class="detail">You may also keep this map pool with this URL.</div>
+            <input type="text" style="font-size: .7em;" class="save-name" id="save-url" value="" readonly>
         </div>
 
         <div class="modal-content" id="load-modal">
@@ -176,9 +180,16 @@
 
         <div class="modal-content" id="discord-export-modal">
             <button class="button exit" id="discord-export-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
-            <div class="discord-export-title">Discord Message</div>
-            <div class="discord-export-subtitle">Copy and paste this message into your Discord channel.</div>
-            <textarea class="discord-export-textarea" id="discord-export-textarea" readonly></textarea>
+            <div class="text-export-title">Discord Message</div>
+            <div class="text-export-subtitle">Copy and paste this message into your Discord channel.</div>
+            <textarea class="text-export-textarea" id="discord-export-textarea" readonly></textarea>
+        </div>
+
+        <div class="modal-content" id="url-export-modal">
+            <button class="button exit" id="url-export-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="text-export-title">Share via URL</div>
+            <div class="text-export-subtitle">Copy and paste this URL into a browser.</div>
+            <input type="text" class="text-export-textarea" id="url-export-textarea" readonly>
         </div>
         
     </div>
