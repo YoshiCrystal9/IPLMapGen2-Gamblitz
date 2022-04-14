@@ -25,6 +25,8 @@ for (var i = 0; i < stageButtons.length; i++){
 window.addEventListener("click", function(event){
     if (event.target == modalContainer){
         modalContainer.style.display = "none";
+        modalContainer.classList.remove("green");
+        modalContainer.classList.remove("red");
         const modals = document.getElementsByClassName("modal-content");
         for (var i = 0; i < modals.length; i++){
             modals[i].style.display = "none";
@@ -248,6 +250,8 @@ const saveModalClose = document.getElementById("save-close");
 saveModalClose.addEventListener("click", function(){
     saveModal.style.display = "none";
     modalContainer.style.display = "none";
+    modalContainer.classList.remove("green");
+    modalContainer.classList.remove("red");
 });
 
 const loadModal = document.getElementById("load-modal");
@@ -255,11 +259,14 @@ const loadModalClose = document.getElementById("load-close");
 loadModalClose.addEventListener("click", function(){
     loadModal.style.display = "none";
     modalContainer.style.display = "none";
+    modalContainer.classList.remove("green");
+    modalContainer.classList.remove("red");
 });
 
 function saveOnClick(){
     saveModal.style.display = "flex";
     modalContainer.style.display = "flex";
+    modalContainer.classList.add("green");
 
     const saveUrl = document.getElementById("save-url");
     const url = window.location.href.split("?")[0];
@@ -288,6 +295,7 @@ function saveDialogOnClick(){
 function loadOnClick(){
     loadModal.style.display = "flex";
     modalContainer.style.display = "flex";
+    modalContainer.classList.add("green");
 
     const storage = Object.keys(localStorage);
     const loadContainer = document.getElementById("load-container");
