@@ -140,7 +140,7 @@
     .map-drop-menu {
         border-width: 1px;
         margin: 2px;
-        width: 90%;
+        width: calc(100% - 2.1em);
         margin-right: 0;
         margin-left: auto;
     }

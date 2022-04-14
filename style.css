@@ -413,6 +413,7 @@ input:focus{
 .map-drop-menu {
     margin-left: 24px;
     padding: 4px;
+    width: -webkit-fill-available;
     height: 1.8em;
     background: #00000000;
     font-family: 'Roboto Mono', monospace;
