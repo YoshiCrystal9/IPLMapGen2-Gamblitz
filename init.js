@@ -435,7 +435,7 @@ function encodeRounds(){
     
     var stringBuilder = "";
     for (var i = 0; i < encodedRounds.length; i++){
-        stringBuilder += encodedRounds[i].name.replace(" ", "_") + ":" + encodedRounds[i].maps;
+        stringBuilder += encodedRounds[i].name.replaceAll(" ", "_") + ":" + encodedRounds[i].maps;
         if (i != encodedRounds.length - 1){
             stringBuilder += ";";
         }
@@ -473,7 +473,7 @@ function decodeRounds(rounds){
     for (var i = 0; i < rounds.length; i++){
         const roundSplit = rounds[i].split(":");
         var round = {
-            name:roundSplit[0].replace("_", " "),
+            name:roundSplit[0].replaceAll("_", " "),
             maps:[]
         };
 
