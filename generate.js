@@ -399,4 +399,5 @@ if (urlPool != null){
 const urlRounds = urlParams.get("rounds");
 if (urlRounds != null){
     decodeRounds(urlRounds);
+    document.getElementById("maps-panel").scrollIntoView({behavior: "smooth"});
 }
