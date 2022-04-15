@@ -77,6 +77,8 @@ input:focus{
     align-items: center;
     transition-duration: .2s;
     user-select: none;
+    position: relative;
+    animation: first_fromTop 1s forwards;
 }
 .header::before{
     content: "Settings";
@@ -122,6 +124,9 @@ input:focus{
     padding: 24px;
     overflow-y: scroll;
     overflow-x: hidden;
+    position: relative;
+    animation: first_scaleIn 1s forwards;
+
 }
 
 .options-panel{
@@ -712,4 +717,41 @@ input:focus{
     margin-top: 0;
     transition-duration: .5s;
     user-select: none;
+    position: relative;
+    animation: first_fromBottom 1s forwards;
+}
+
+
+/* first open animations*/
+@keyframes first_scaleIn {
+    from {
+        transform: scale(0.75);
+        opacity: 0%;
+    }
+    to {
+        transform: scale(1);
+        opacity: 100%;
+    }
+}
+
+@keyframes first_fromTop {
+    from {
+        opacity: 0%;
+        bottom: 60px;
+    }
+    to {
+        opacity: 100%;
+        bottom: 0px;
+    }
+}
+
+@keyframes first_fromBottom {
+    from {
+        opacity: 0%;
+        top: 60px;
+    }
+    to {
+        opacity: 100%;
+        top: 0px;
+    }
 }
