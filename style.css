@@ -13,6 +13,7 @@
     --color-accent-light: #e0bcb6;
 
     --global-margin: calc(.7vw + .35vh);
+    --transition-duration: .15s;
 }
 
 ::-webkit-scrollbar{
@@ -75,7 +76,7 @@ input:focus{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    transition-duration: .2s;
+    transition-duration: var(--transition-duration);
     user-select: none;
     position: relative;
     animation: first_fromTop 1s forwards;
@@ -96,7 +97,7 @@ input:focus{
 .header img, .header svg{
     width: auto;
     height: 1em;
-    transition-duration: .5s;
+    transition-duration: var(--transition-duration);
     margin-right: .5em;
 }
 
@@ -134,7 +135,7 @@ input:focus{
     border-color: var(--color-primary);
     background: var(--color-bg-light);
     user-select: none;
-    transition-duration: .5s;
+    transition-duration: var(--transition-duration);
 }
 .options-panel::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -142,7 +143,7 @@ input:focus{
 
 .maps-panel{
     flex: none;
-    transition-duration: .5s;
+    transition-duration: var(--transition-duration);
     margin-left: 0;
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
@@ -158,7 +159,7 @@ input:focus{
     align-items: center;
     flex-wrap: wrap;
     border-radius: 20px;
-    transition-duration: .2s;
+    transition-duration: var(--transition-duration);
     padding: 12px;
     margin: 4px 6px;
     margin-right: auto;
@@ -242,7 +243,7 @@ input:focus{
     vertical-align: middle;
     min-width: 5em;
     margin-right: 12px;
-    transition-duration: .2s;
+    transition-duration: var(--transition-duration);
     border-color: var(--color-bg-dark);
     color: var(--color-bg-dark);
     padding: 4px;
@@ -276,7 +277,7 @@ input:focus{
     border-left: 3px solid var(--color-bg-dark);
     border-radius: 8px;
     width: auto;
-    transition-duration: 1s;
+    transition-duration: var(--transition-duration);
 }
 .round-editor::before{
     padding: 8px 4px;
@@ -428,7 +429,7 @@ input:focus{
     border-width: 0px;
     font-size: .8em;
     font-weight: 400;
-    transition-duration: .2s;
+    transition-duration: var(--transition-duration);
 }
 .map-drop-menu:hover{
     background: white;
@@ -483,7 +484,7 @@ input:focus{
     left: 0;
     top: 0;
     animation: fadeIn .25s 1;
-    transition-duration: .25s;
+    transition-duration: var(--transition-duration);
 }
 
 .modal-content{
@@ -497,7 +498,7 @@ input:focus{
     max-width: 85vh;
     max-height: 85vh;
     overflow: auto;
-    transition-duration: .5s;
+    transition-duration: var(--transition-duration);
 }
 .modal-content::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -547,7 +548,7 @@ input:focus{
     padding: 12px;
     margin: 4px;
     border-radius: 12px;
-    transition-duration: .1s;
+    transition-duration: var(--transition-duration);
     font-weight: 400;
     font-size: 1.2em;
     cursor: pointer;
@@ -715,7 +716,7 @@ input:focus{
     font-size: .75em;
     margin: var(--global-margin);
     margin-top: 0;
-    transition-duration: .5s;
+    transition-duration: var(--transition-duration);
     user-select: none;
     position: relative;
     animation: first_fromBottom 1s forwards;
