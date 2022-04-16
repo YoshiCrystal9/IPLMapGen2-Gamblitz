@@ -38,6 +38,7 @@ window.addEventListener("click", function(event){
 const exportButtonDiscord = document.getElementById("export-button-discord");
 const exportDiscordClose = document.getElementById("discord-export-close");
 const exportDiscordModal = document.getElementById("discord-export-modal");
+const exportDiscordCopy = document.getElementById("discord-export-copy");
 
 exportButtonDiscord.onclick = function(){
     exportToDiscord();
@@ -53,9 +54,22 @@ exportDiscordClose.onclick = function(){
     modalContainer.classList.remove("red");
 }
 
+exportDiscordCopy.onclick = function(){
+    const text = document.getElementById("discord-export-textarea");
+    navigator.clipboard.writeText(text.value).then(function() {
+        exportDiscordCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-check fa-bounce"></i>Copied';
+        setTimeout(function(){
+            exportDiscordCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-list"></i>Copy';
+        }, 2000);
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+}
+
 const exportButtonURL = document.getElementById("export-button-url");
 const exportURLClose = document.getElementById("url-export-close");
 const exportURLModal = document.getElementById("url-export-modal");
+const exportURLCopy = document.getElementById("url-export-copy");
 
 exportButtonURL.onclick = function(){
     modalContainer.style.display = "flex";
@@ -73,6 +87,18 @@ exportURLClose.onclick = function(){
     exportURLModal.style.display = "none";
     modalContainer.classList.remove("green");
     modalContainer.classList.remove("red");
+}
+
+exportURLCopy.onclick = function(){
+    const text = document.getElementById("url-export-textarea");
+    navigator.clipboard.writeText(text.value).then(function() {
+        exportURLCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-check fa-bounce"></i>Copied';
+        setTimeout(function(){
+            exportURLCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-list"></i>Copy';
+        }, 2000);
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
 }
 
 
@@ -344,7 +370,13 @@ function loadOnClick(){
                     adjustSelectedCount(modes[j]);
                 }
 
-                loadModalClose.click();
+                const oldInner = loadButton.innerHTML;
+                loadButton.innerHTML = '<i class="left-bias fa-solid fa-bounce fa-check"></i>Loaded'
+                
+                setTimeout(function(){
+                    loadModalClose.click();
+                    loadButton.innerHTML = oldInner;
+                }, 1000);
             });
 
             const loadDeleteButton = document.createElement("button");
@@ -531,4 +563,22 @@ function decodeRounds(rounds){
 
     clearGenerateContainer();
     addMapElements();
+}
+
+
+
+
+
+
+
+//thank you for checking out the code. Here is your reward.
+function doABarrelRoll(){
+    const body = document.getElementsByTagName("body")[0];
+    body.style.transitionDuration = "2s";
+    body.style.overflow = "hidden";
+    body.style.transform = "rotate(360deg)";
+    setTimeout(function(){
+        body.style.transitionDuration = "0s";
+        body.style.transform = "rotate(0deg)";
+    }, 2000);
 }

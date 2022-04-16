@@ -36,7 +36,7 @@
     <div class="column-container">
         <div class="options-panel">
 
-            <div class="menu-header"><i class="left-bias fa-solid fa-pen-to-square"></i>Edit Current Map Pool</div>
+            <div class="menu-header"><i class="left-bias fa-regular fa-pen-to-square"></i>Edit Current Map Pool</div>
             <button class="map-picker button" id="tw-picker">
                 <div class="title">Turf War Maps</div>
                 <div class="detail" id="tw-picker-detail">0 Maps selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
@@ -58,7 +58,7 @@
                 <div class="detail" id="cb-picker-detail">0 Maps selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
 
-            <div class="menu-header"><i class="left-bias fa-solid fa-floppy-disk"></i>Save & Load Map Pool</div>
+            <div class="menu-header"><i class="left-bias fa-regular fa-floppy-disk"></i>Save & Load Map Pool</div>
             <button class="save-load button" id="save-button" onclick="saveOnClick()">
                 <div class="title">Save Current Map Pool</div>
                 <div class="detail"><i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
@@ -89,7 +89,7 @@
             <div class="round-editor" id="round-editor">
             </div>
             
-            <div class="menu-header"><i class="left-bias fa-solid fa-rocket"></i>Generate</div>
+            <div class="menu-header"><i class="left-bias fa-solid fa-gears"></i>Generate</div>
             <div class="generate-error-message" id="generate-error-message" style="display: none;"></div>
             <button class="generate button" onclick="generateMaps()">
                 <div class="title">Generate All</div>
@@ -184,6 +184,7 @@
             <div class="text-export-title">Discord Message</div>
             <div class="text-export-subtitle">Copy and paste this message into your Discord channel.</div>
             <textarea class="text-export-textarea" id="discord-export-textarea" readonly></textarea>
+            <button class="button" id="discord-export-copy"><i class="left-bias fa-solid fa-clipboard-list"></i>Copy</button>
         </div>
 
         <div class="modal-content red" id="url-export-modal">
@@ -191,6 +192,7 @@
             <div class="text-export-title">Share via URL</div>
             <div class="text-export-subtitle">Copy and paste this URL into a browser.</div>
             <textarea type="text" class="text-export-textarea" id="url-export-textarea" rows="12" readonly></textarea>
+            <button class="button" id="url-export-copy"><i class="left-bias fa-solid fa-clipboard-list"></i>Copy</button>
         </div>
         
     </div>
