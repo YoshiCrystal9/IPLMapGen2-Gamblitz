@@ -94,7 +94,7 @@ input:focus{
     color: var(--color-accent-light);
 }
 
-.header img, .header svg{
+.header img, .header i{
     width: auto;
     height: 1em;
     transition-duration: var(--transition-duration);
@@ -219,35 +219,36 @@ input:focus{
     background: var(--color-bg-dark);
 }
 
+.add-round-header{
+    margin: 18px;
+    margin-bottom: 0;
+    font-size: .7em;
+    letter-spacing: .1em;
+}
+
 .round-adder{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: 12px;
-    margin: 6px;
+    margin: 18px;
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
-.round-adder > .title {
-    font-size: 1.6em;
-    font-weight: 600;
-    margin-right: 20px;
-}
-.round-adder > .detail {
+.round-adder > .detail{
     font-size: .8em;
-    font-weight: 400;
-    margin-right: 8px;
-    margin-left: 16px;
-    display: inline-block;
-
+    display: flex;
+    margin-left: 4px;
 }
 .round-adder input {
-    vertical-align: middle;
-    min-width: 5em;
-    margin-right: 12px;
     transition-duration: var(--transition-duration);
     border-color: var(--color-bg-dark);
     color: var(--color-bg-dark);
     padding: 4px;
-    margin: 2px;
+    margin-right: 4px;
+}
+.round-adder input[type=text]{
+    vertical-align: middle;
+    width: 16em;
 }
 .round-adder input:focus{
     border-color: #00000000;
@@ -258,7 +259,7 @@ input:focus{
     margin: 0px;
 }
 .round-adder input[type=number]{
-    width: 1em;
+    width: 4em;
     text-align: center;
 }
 .round-adder input[type=checkbox]{
@@ -270,18 +271,16 @@ input:focus{
     padding: 4px;
     margin: 2px;
 }
+.round-adder button {
+    margin: 0;
+    margin-left: 4px;
+    padding: 12px;
+}
 
 .round-editor {
-    padding: 12px;
-    margin: 6px 18px;
-    border-left: 3px solid var(--color-bg-dark);
-    border-radius: 8px;
+    padding-left: 12px;
     width: auto;
     transition-duration: var(--transition-duration);
-}
-.round-editor::before{
-    padding: 8px 4px;
-    content: "Added Rounds";
 }
 
 .added-round{
@@ -292,19 +291,10 @@ input:focus{
     position: relative;
     animation: addedRound .5s 1;
 }
-.added-round::before{
-    background: var(--color-bg-dark);
-    content: '';
-    height: 3px;
-    width: .5em;
-    margin-right: .2em;
-    margin-left: -.7em;
-    border-radius: 3px;
-}
 
 @keyframes addedRound {
     from{ left: 60px; opacity: 0%; }
-    to { left: 0px; opacity: 100%;}
+    to { left: 0px; opacity: 100%; }
 }
 
 .added-round > .title{
@@ -316,10 +306,6 @@ input:focus{
 
 .added-round > .games{
     padding: 8px 4px;
-}
-.added-round > .games::after{
-    content: " games";
-    margin-right: .6em;
 }
 
 .added-round > .counterpick{
@@ -333,21 +319,27 @@ input:focus{
     margin: 0;
 }
 
-.generate-error-message{
+.error-message{
     font-size: .8em;
     padding: 6px 12px 6px 12px;
     margin: 4px 6px;
     animation: errorFlash 1.5s infinite;
 }
-.generate-error-message::before{
-    content: "Error:";
+.error-message::before{
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f071";
+
     padding: 4px;
+    font-size: 1.1em;
     margin-right: .4em;
     color: var(--color-accent-dark);
-    background: var(--color-accent-light);
-    border-radius: 6px;
-    font-weight: 600;
-    font-style: normal;
 }
 
 @keyframes errorFlash {

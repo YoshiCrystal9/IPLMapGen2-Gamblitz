@@ -278,6 +278,8 @@ function generateEmptyRounds(){
         const event = new Event("change");
         modeDropMenu.dispatchEvent(event);
     }
+
+    scrollToMapList();
 }
 
 function generateModes(){
@@ -318,6 +320,8 @@ function generateModes(){
         mapDropMenu.value = "Unknown Map";
         mapDropMenu.dispatchEvent(event);
     }
+
+    scrollToMapList();
 }
 
 function generateMaps(){
@@ -400,6 +404,6 @@ const urlRounds = urlParams.get("rounds");
 if (urlRounds != null){
     decodeRounds(urlRounds);
     setTimeout(() => {
-        document.getElementById("maps-panel").scrollIntoView({behavior: "smooth"});
+        scrollToMapList();
     }, 1050);
 }
