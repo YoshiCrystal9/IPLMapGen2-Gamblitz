@@ -197,7 +197,7 @@ addRoundButton.addEventListener("click", function(){
 
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove button");
-    removeButton.innerHTML = '<i class="left-bias fa-solid fa-trash-can"></i> Remove';
+    removeButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     removeButton.addEventListener("click", function(){
         removeButton.parentElement.remove();
         updateGenerateButtonStatus();
@@ -563,6 +563,10 @@ function decodeRounds(rounds){
 
     clearGenerateContainer();
     addMapElements();
+}
+
+function scrollToMapList(){
+    document.getElementById("maps-panel").scrollIntoView({behavior: "smooth"});
 }
 
 

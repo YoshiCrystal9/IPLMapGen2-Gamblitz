@@ -69,24 +69,18 @@
             </button>
 
             <div class="menu-header"><i class="left-bias fa-solid fa-bars-staggered"></i>Edit Round Info</div>
+            <div class="round-editor" id="round-editor">
+            </div>
+            <div class="add-round-header">Add Round</div>
             <div class="round-adder">
-                <div class="title">Add Round</div>
-                <wbr>
-                <label for="round-name" class="detail">Name
-                    <input  type="text" id="round-name" maxlength="32"></input>
-                </label>
-                <wbr>
-                <label for="round-games" class="detail">Games
-                    <input type="number" min="1" max="15" value=3 step="2" id="round-games"></input>
-                </label>
+                <input type="text" id="round-name" maxlength="32" placeholder="Name"></input>
+                <input type="number" min="1" max="15" step="2" id="round-games" placeholder="Games"></input>
                 <wbr>
                 <label for="round-counterpick-check" class="detail">Counterpick
                     <input id="round-counterpick-check" type="checkbox">
                 </label>
                 <wbr>
                 <button class="button" id="add-round-button">Add <i class="right-bias fa-solid fa-circle-chevron-right"></i></button>
-            </div>
-            <div class="round-editor" id="round-editor">
             </div>
             
             <div class="menu-header"><i class="left-bias fa-solid fa-gears"></i>Generate</div>
