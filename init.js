@@ -161,16 +161,21 @@ const addRoundButton = document.getElementById("add-round-button");
 const roundNameInput = document.getElementById("round-name");
 const roundGamesInput = document.getElementById("round-games");
 const roundIsCounterpick = document.getElementById("round-counterpick-check");
+const roundError = document.getElementById("round-error-message");
 
 const roundEditor = document.getElementById("round-editor");
 
 addRoundButton.addEventListener("click", function(){
     if (roundNameInput.value == ""){
+        changeRoundError("Please enter a name for the round.");
         return;
     }
     if (roundGamesInput.value == ""){
+        changeRoundError("Please enter the number of games in the round.");
         return;
     }
+
+    changeRoundError();
 
     const addedRound = document.createElement("div");
     addedRound.setAttribute("class", "added-round");
@@ -184,7 +189,7 @@ addRoundButton.addEventListener("click", function(){
     const roundGames = document.createElement("div");
     roundGames.setAttribute("class", "games");
     roundGames.id = "round-games";
-    roundGames.innerText = roundGamesInput.value;
+    roundGames.innerText = roundGamesInput.value + " game" + (roundGamesInput.value == 1 ? "" : "s");
     addedRound.appendChild(roundGames);
 
     if (roundIsCounterpick.checked){
@@ -194,6 +199,26 @@ addRoundButton.addEventListener("click", function(){
         roundCounterpick.innerText = "Counterpick";
         addedRound.appendChild(roundCounterpick);
     }
+
+    const upButton = document.createElement("button");
+    upButton.setAttribute("class", "button first");
+    upButton.innerHTML = '<i class="fa-solid fa-angle-up"></i>';
+    upButton.addEventListener("click", function(){
+        const parent = this.parentElement;
+        if(parent.previousElementSibling)
+            parent.parentNode.insertBefore(parent, parent.previousElementSibling);
+    });
+    addedRound.appendChild(upButton);
+
+    const downButton = document.createElement("button");
+    downButton.setAttribute("class", "button");
+    downButton.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
+    downButton.addEventListener("click", function(){
+        const parent = this.parentElement;
+        if(parent.nextElementSibling)
+            parent.parentNode.insertBefore(parent.nextElementSibling, parent);
+    });
+    addedRound.appendChild(downButton);
 
     const removeButton = document.createElement("button");
     removeButton.setAttribute("class", "remove button");
@@ -214,6 +239,10 @@ addRoundButton.addEventListener("click", function(){
         const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
         roundNameInput.value = newName;
     }
+    else {
+        roundNameInput.value = "";
+        roundNameInput.focus();
+    }
 });
 
 const modeHasMaps = function(mode){
@@ -225,6 +254,32 @@ const modeHasMaps = function(mode){
     }
     return false;
 }
+
+function changeRoundError(message){
+    if (message == undefined)
+        message = "";
+
+    roundError.innerText = message;
+
+    if (message == ""){
+        roundError.style.display = "none";
+    }
+    else{
+        roundError.style.display = "block";
+    }
+}
+
+roundNameInput.addEventListener("change", function(){
+    //check if round name exists
+    const roundName = roundNameInput.value;
+    const rounds = document.getElementsByClassName("added-round");
+    for (var i = 0; i < rounds.length; i++){
+        if (rounds[i].querySelector("#round-title").innerText == roundName){
+            changeRoundError("It's recommended to use a unique name for each round.");
+            return;
+        }
+    }
+});
 
 //make generate buttons respond to status
 updateGenerateButtonStatus();
