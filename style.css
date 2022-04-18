@@ -94,7 +94,7 @@ input:focus{
     color: var(--color-accent-light);
 }
 
-.header img, .header svg{
+.header img, .header i{
     width: auto;
     height: 1em;
     transition-duration: var(--transition-duration);
