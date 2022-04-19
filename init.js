@@ -177,22 +177,39 @@ addRoundButton.addEventListener("click", function(){
 
     changeRoundError();
 
+    addRound(roundNameInput.value, roundGamesInput.value, roundIsCounterpick.checked);
+    
+
+    //attempt to increment last character in name
+    const lastChar = roundNameInput.value.slice(-1);
+    if (!isNaN(lastChar)){
+        const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
+        roundNameInput.value = newName;
+    }
+    else {
+        roundNameInput.value = "";
+        roundNameInput.focus();
+    }
+});
+
+
+function addRound(name, games, isCounterpick){
     const addedRound = document.createElement("div");
     addedRound.setAttribute("class", "added-round");
 
     const roundTitle = document.createElement("div");
     roundTitle.setAttribute("class", "title");
     roundTitle.id = "round-title";
-    roundTitle.innerText = roundNameInput.value;
+    roundTitle.innerText = name;
     addedRound.appendChild(roundTitle);
     
     const roundGames = document.createElement("div");
     roundGames.setAttribute("class", "games");
     roundGames.id = "round-games";
-    roundGames.innerText = roundGamesInput.value + " game" + (roundGamesInput.value == 1 ? "" : "s");
+    roundGames.innerText = games + " game" + (games == 1 ? "" : "s");
     addedRound.appendChild(roundGames);
 
-    if (roundIsCounterpick.checked){
+    if (isCounterpick){
         const roundCounterpick = document.createElement("div");
         roundCounterpick.setAttribute("class", "counterpick");
         roundCounterpick.id = "round-counterpick";
@@ -232,18 +249,7 @@ addRoundButton.addEventListener("click", function(){
     roundEditor.appendChild(addedRound);
 
     updateGenerateButtonStatus();
-
-    //attempt to increment last character in name
-    const lastChar = roundNameInput.value.slice(-1);
-    if (!isNaN(lastChar)){
-        const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
-        roundNameInput.value = newName;
-    }
-    else {
-        roundNameInput.value = "";
-        roundNameInput.focus();
-    }
-});
+}
 
 const modeHasMaps = function(mode){
     for (var i = 0; i < allMaps.length; i++){
@@ -605,15 +611,15 @@ function decodeRounds(rounds){
         currentRounds.push(round);
         console.log(round);
 
-        const roundNameInput = document.getElementById("round-name");
-        const roundGamesInput = document.getElementById("round-games");
-        const roundIsCounterpick = document.getElementById("round-counterpick-check");
-        const addRoundButton = document.getElementById("add-round-button");
+        //if all but the first map is unknown mode, then its true
+        var isUnknown = true;
+        for (var j = 1; j < round.maps.length; j++){
+            if (round.maps[j].mode != "Unknown Mode"){
+                isUnknown = false;
+            }
+        }
 
-        roundNameInput.value = round.name;
-        roundGamesInput.value = round.maps.length;
-        roundIsCounterpick.checked = false;
-        addRoundButton.click();
+        addRound(round.name, round.maps.length, isUnknown);
     }
 
     clearGenerateContainer();

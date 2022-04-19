@@ -225,12 +225,12 @@ function mapDropMenuOnChange(mapMenu){
 }
 
 function getRecentMapsCap(){
-    var totalMaps = -3;
     var twMaps = 0;
     var szMaps = 0;
     var tcMaps = 0;
     var rmMaps = 0;
     var cbMaps = 0;
+    var lowest = allMaps.length;
 
     for (var i = 0; i < allMaps.length; i++){
         const twCheckBox = document.getElementById(`tw-${allMaps[i]}-map-selector`);
@@ -240,7 +240,6 @@ function getRecentMapsCap(){
         const cbCheckBox = document.getElementById(`cb-${allMaps[i]}-map-selector`);
 
         if (twCheckBox.checked || szCheckBox.checked || tcCheckBox.checked || rmCheckBox.checked || cbCheckBox.checked){
-            totalMaps++;
             if (twCheckBox.checked){
                 twMaps++;
             }
@@ -258,7 +257,26 @@ function getRecentMapsCap(){
             }
         }
     }
-    return Math.min(totalMaps, Math.min(twMaps, Math.min(szMaps, Math.min(tcMaps, Math.min(rmMaps, cbMaps)))));
+    
+    if (twMaps > 0){
+        lowest = Math.min(lowest, twMaps);
+    }
+    if (szMaps > 0){
+        lowest = Math.min(lowest, szMaps);
+    }
+    if (tcMaps > 0){
+        lowest = Math.min(lowest, tcMaps);
+    }
+    if (rmMaps > 0){
+        lowest = Math.min(lowest, rmMaps);
+    }
+    if (cbMaps > 0){
+        lowest = Math.min(lowest, cbMaps);
+    }
+
+    lowest = Math.max(0, lowest-3);
+    console.log(lowest);
+    return lowest;
 }
 
 
