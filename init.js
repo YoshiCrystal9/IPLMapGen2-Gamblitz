@@ -174,6 +174,11 @@ addRoundButton.addEventListener("click", function(){
         changeRoundError("Please enter the number of games in the round.");
         return;
     }
+    //if roundnameinput isn't alphanumeric, return
+    if (!/^[\w\-\s]+$/.test(roundNameInput.value)){
+        changeRoundError("Please enter an alphanumeric round name.");
+        return;
+    }
 
     changeRoundError();
 
