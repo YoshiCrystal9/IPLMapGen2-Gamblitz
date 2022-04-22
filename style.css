@@ -533,6 +533,9 @@ input:focus{
     font-weight: 600;
 }
 
+.red > .modal-header > .button{
+    color:var(--color-accent-dark);
+}
 .red > .button{
     color:var(--color-accent-dark);
 }
@@ -569,26 +572,11 @@ input:focus{
     margin-left: auto;
 }
 
-.modal-content .exit{
-    font-weight: 700;
-    font-size: 1.2em;
-    margin-bottom: 1em;
-}
-
 .modal-content > .picker-select-shortcuts{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 24px;
-}
-
-.modal-content > .text-export-title{
-    font-size: 1.2em;
-    font-weight: 600;
-    margin-bottom: 6px;
-    margin-left: auto;
-    margin-right: auto;
-    user-select: none;
+    margin-bottom: 8px;
 }
 
 .modal-content > .text-export-textarea{
@@ -632,9 +620,43 @@ input:focus{
     margin-top: 1em;
 }
 
+.modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 1.4em;
+    font-weight: 700;
+    padding: 12px;
+    margin-bottom: 24px;
+    border-bottom: solid 1px;
+}
+.modal-header > .exit {
+    margin: 0;
+    padding: .5em;
+}
+.modal-header > .exit:hover{
+    transform: scale(1.04);
+    letter-spacing: normal;
+}
+
+.red > .modal-header{
+    border-color: var(--color-accent-dark);
+}
+.green > .modal-header{
+    border-color: var(--color-bg-dark);
+}
+.red > .exit{
+    color: var(--color-accent-dark);
+}
+.green > .exit{
+    color: var(--color-bg-dark);
+}
+
+
 .save-name{
     margin: 2px;
-    margin-top: 1em;
+    margin-top: .2em;
     padding: 8px;
     border: 2px solid var(--color-bg-dark);
     color: var(--color-bg-dark);

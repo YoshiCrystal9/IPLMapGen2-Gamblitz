@@ -147,6 +147,10 @@
         background: var(--color-accent-light);
     }
 
+    .modal-header{
+        align-items: center;
+    }
+
     .modal-content{
         max-width: 95vw;
         max-height: 85vh;

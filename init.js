@@ -562,8 +562,6 @@ function decodeMapPool(pools){
             return acc + ('000' + parseInt(i, 16).toString(2)).substr(-4, 4);
         }, '')
 
-        console.log(decodedHex);
-
         for (var j = 1; j < decodedHex.length; j++){
             document.getElementById(thisPool[0] + "-" + allMaps[j-1] + "-map-selector").checked = decodedHex[j] == "1";
         }
@@ -582,8 +580,6 @@ function decodeRounds(rounds){
             name:roundSplit[0].replaceAll("_", " "),
             maps:[]
         };
-
-        console.log(roundSplit[1]);
         const mapModes = roundSplit[1].split(",");
         for (var j = 0; j < mapModes.length; j++){
 
@@ -614,7 +610,6 @@ function decodeRounds(rounds){
 
         }
         currentRounds.push(round);
-        console.log(round);
 
         //if all but the first map is unknown mode, then its true
         var isUnknown = true;

@@ -56,7 +56,6 @@ function importRounds(){
         }
         currentRounds.push(newRound);
     }
-    console.log(currentRounds);
 }
 
 function addMapElements(){
@@ -275,7 +274,6 @@ function getRecentMapsCap(){
     }
 
     lowest = Math.max(0, lowest-3);
-    console.log(lowest);
     return lowest;
 }
 

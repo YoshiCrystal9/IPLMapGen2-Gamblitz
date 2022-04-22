@@ -118,35 +118,50 @@
 
     <div class="modal-container" id="modal-container">
         <div class="modal-content green" id="tw-picker-modal">
-            <button class="button exit" id="tw-picker-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Turf War Maps</div>
+                <button class="button exit" id="tw-picker-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="picker-select-shortcuts">
                 <button class="button select-all" id="tw-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tw-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
         </div>
         <div class="modal-content green" id="sz-picker-modal">
-            <button class="button exit" id="sz-picker-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Splat Zones Maps</div>
+                <button class="button exit" id="sz-picker-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="picker-select-shortcuts">
                 <button class="button select-all" id="sz-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="sz-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
         </div>
         <div class="modal-content green" id="tc-picker-modal">
-            <button class="button exit" id="tc-picker-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Tower Control Maps</div>
+                <button class="button exit" id="tc-picker-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="picker-select-shortcuts">
                 <button class="button select-all" id="tc-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tc-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
         </div>
         <div class="modal-content green" id="rm-picker-modal">
-            <button class="button exit" id="rm-picker-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Rainmaker Maps</div>
+                <button class="button exit" id="rm-picker-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="picker-select-shortcuts">
                 <button class="button select-all" id="rm-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="rm-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
         </div>
         <div class="modal-content green" id="cb-picker-modal">
-            <button class="button exit" id="cb-picker-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Clam Blitz Maps</div>
+                <button class="button exit" id="cb-picker-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="picker-select-shortcuts">
                 <button class="button select-all" id="cb-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="cb-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
@@ -154,17 +169,23 @@
         </div>
 
         <div class="modal-content green" id="save-modal">
-            <button class="button exit" id="save-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Save Map Pool</div>
+                <button class="button exit" id="save-close"><i class="left-bias fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <div class="detail">Save locally</div>
             <input type="text" class="save-name" id="save-name" placeholder="Name" maxlength="32">
             <button class="button" id="save-button" onclick="saveDialogOnClick()"><i class="left-bias fa-solid fa-floppy-disk"></i> Save</button>
-            <div class="detail">Map pools are saved within this browser's local storage.</div>
             <div style="margin: 8px;"></div>
-            <div class="detail">You may also keep this map pool with this URL.</div>
+            <div class="detail">Save via URL</div>
             <input type="text" style="font-size: .7em;" class="save-name" id="save-url" value="" readonly>
         </div>
 
         <div class="modal-content green" id="load-modal">
-            <button class="button exit" id="load-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
+            <div class="modal-header">
+                <div class="modal-title">Load Map Pool</div>
+                <button class="button exit" id="load-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="load-container" id="load-container">
                 <div class="load-wrapper">
                     <div class="load-name">Name</div>
@@ -175,16 +196,20 @@
         </div>
 
         <div class="modal-content red" id="discord-export-modal">
-            <button class="button exit" id="discord-export-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
-            <div class="text-export-title">Discord Message</div>
+            <div class="modal-header">
+                <div class="modal-title">Discord Message</div>
+                <button class="button exit" id="discord-export-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="text-export-subtitle">Copy and paste this message into your Discord channel.</div>
             <textarea class="text-export-textarea" id="discord-export-textarea" readonly></textarea>
             <button class="button" id="discord-export-copy"><i class="left-bias fa-solid fa-clipboard-list"></i>Copy</button>
         </div>
 
         <div class="modal-content red" id="url-export-modal">
-            <button class="button exit" id="url-export-close"><i class="left-bias fa-solid fa-circle-xmark"></i> Exit</button>
-            <div class="text-export-title">Share via URL</div>
+            <div class="modal-header">
+                <div class="modal-title">Share via URL</div>
+                <button class="button exit" id="url-export-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
             <div class="text-export-subtitle">Copy and paste this URL into a browser.</div>
             <textarea type="text" class="text-export-textarea" id="url-export-textarea" rows="12" readonly></textarea>
             <button class="button" id="url-export-copy"><i class="left-bias fa-solid fa-clipboard-list"></i>Copy</button>
