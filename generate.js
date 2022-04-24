@@ -374,6 +374,74 @@ function generateMaps(){
 
 }
 
+function getStats(){
+    const modes = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
+    const statsContainer = document.getElementById("stats-container");
+
+    statsContainer.innerHTML = "";
+
+    for (var i = 0; i < modes.length; i++){
+        const shortHandMode = getShortHandMode(modes[i]);
+
+        var maps = [];
+        for (var j = 0; j < allMaps.length; j++){
+            const checkBox = document.getElementById(`${shortHandMode}-${allMaps[j]}-map-selector`);
+            if (checkBox.checked){
+                maps.push({
+                    name: allMaps[j],
+                    count: 0
+                });
+            }
+        }
+
+        if (maps.length == 0){
+            continue;
+        }
+
+        for (var j = 0; j < currentRounds.length; j++){
+            for (var k = 0; k < currentRounds[j].maps.length; k++){
+                for (var l = 0; l < maps.length; l++){
+                    if (currentRounds[j].maps[k].map == maps[l].name){
+                        maps[l].count++;
+                    }
+                }
+            }
+        }
+
+        maps.sort(function(a, b){
+            return b.count - a.count;
+        });
+
+        console.log(maps);
+
+        const modeContainer = document.createElement("div");
+        modeContainer.className = "mode-container";
+        modeContainer.innerHTML = `<div class="mode-container-title">${modes[i]}</div>`;
+
+        for (var j = 0; j < maps.length; j++){
+            const mapContainer = document.createElement("div");
+            mapContainer.className = "map-container";
+
+            const mapName = document.createElement("div");
+            mapName.className = "map-name";
+            mapName.innerHTML = maps[j].name;
+
+            const mapCount = document.createElement("div");
+            mapCount.className = "map-count";
+            mapCount.innerText = maps[j].count;
+            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 20px)`;
+            console.log((maps[0].count / maps[j].count) * 100);
+
+            mapContainer.appendChild(mapName);
+            mapContainer.appendChild(mapCount);
+
+            modeContainer.appendChild(mapContainer);
+        }
+
+        statsContainer.appendChild(modeContainer);
+    }
+}
+
 function exportToDiscord(){
     var stringBuilder = "";
     var rows = 0;

@@ -35,6 +35,25 @@ window.addEventListener("click", function(event){
 });
 
 
+const mapStatsButton = document.getElementById("stats-button");
+const mapStatsClose = document.getElementById("stats-close");
+const mapStatsModal = document.getElementById("stats-modal");
+
+mapStatsButton.onclick = function(){
+    getStats();
+    modalContainer.style.display = "flex";
+    mapStatsModal.style.display = "flex";
+    modalContainer.classList.add("red");
+}
+
+mapStatsClose.onclick = function(){
+    modalContainer.style.display = "none";
+    mapStatsModal.style.display = "none";
+    modalContainer.classList.remove("red");
+    modalContainer.classList.remove("green");
+}
+
+
 const exportButtonDiscord = document.getElementById("export-button-discord");
 const exportDiscordClose = document.getElementById("discord-export-close");
 const exportDiscordModal = document.getElementById("discord-export-modal");
