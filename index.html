@@ -237,11 +237,24 @@
             <textarea type="text" class="text-export-textarea" id="url-export-textarea" rows="12" readonly></textarea>
             <button class="button" id="url-export-copy"><i class="left-bias fa-solid fa-clipboard-list"></i>Copy</button>
         </div>
+
+        <div class="modal-content green" id="about-modal">
+            <div class="modal-header">
+                <div class="modal-title">About</div>
+                <button class="button exit" id="about-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <div class="about-container">
+                <img src="IPL_maps.png">
+                <p><b>MAPS.IPLABS.INK</b> was created by .jpg. Find me on twitter <a href="https://twitter.com/PlayLowInk">@PlayLowInk</a> or on discord at .jpg#8000. Feel free to suggest ideas on how to improve this app!</p>
+                <p>This tool was create specifically for use by Inkling Performance Labs, but anyone is welcome to use it.</p>
+                <p>Visit <a href="http://iplabs.ink/">Inkling Performance Labs</a> for more information about us. We run high quality Splatoon events to help grow the competitive scene.</p>
+            </div>
+        </div>
         
     </div>
 
     <div class="footer">
-        Created by .jpg specifically for Inkling Performance Labs. Got feedback? Let me know at .jpg#8000 on Discord.
+        <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="about-button">About</a>
     </div>
 </body>
 <script src="init.js"></script>

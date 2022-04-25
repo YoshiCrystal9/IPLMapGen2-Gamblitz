@@ -829,6 +829,23 @@ input:focus{
     animation: first_fromBottom 1s forwards;
 }
 
+.about-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-container p {
+    margin: .5em;
+}
+
+.about-container img{
+    border-radius: 20%;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /* first open animations*/
 @keyframes first_scaleIn {

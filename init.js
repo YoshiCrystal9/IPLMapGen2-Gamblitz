@@ -175,6 +175,23 @@ exportURLCopy.onclick = function(){
 }
 
 
+const aboutButton = document.getElementById("about-button");
+const aboutModal = document.getElementById("about-modal");
+const aboutClose = document.getElementById("about-close");
+
+aboutButton.onclick = function(){
+    modalContainer.style.display = "flex";
+    aboutModal.style.display = "flex";
+    modalContainer.classList.add("green");
+}
+
+aboutClose.onclick = function(){
+    modalContainer.style.display = "none";
+    aboutModal.style.display = "none";
+    modalContainer.classList.remove("green");
+}
+
+
 //load map options into page
 const allMaps = ["The Reef", "Musselforge Fitness", "Starfish Mainstage", "Humpback Pump Track", "Inkblot Art Academy", "Sturgeon Shipyard", "Moray Towers", "Port Mackerel", "Manta Maria", "Kelp Dome", "Snapper Canal", "Blackbelly Skatepark", "Makomart", "Walleye Warehouse", "Shellendorf Institute", "Arowana Mall", "Goby Arena", "Piranha Pit", "Camp Triggerfish", "Wahoo World", "New Albacore Hotel", "Ancho-V Games", "Skipper Pavilion"];
 
