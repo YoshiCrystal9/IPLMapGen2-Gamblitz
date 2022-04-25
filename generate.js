@@ -398,11 +398,16 @@ function getStats(){
             continue;
         }
 
+        document.getElementById(`stats-button-${shortHandMode}`).style.display = "flex";
+
         for (var j = 0; j < currentRounds.length; j++){
             for (var k = 0; k < currentRounds[j].maps.length; k++){
                 for (var l = 0; l < maps.length; l++){
-                    if (currentRounds[j].maps[k].map == maps[l].name){
-                        maps[l].count++;
+                    const statOption = document.getElementById(`stats-option-${j}`);
+                    if (currentRounds[j].maps[k].map == maps[l].name 
+                        && statOption.checked 
+                        && currentRounds[j].maps[k].mode == modes[i]){
+                            maps[l].count++;
                     }
                 }
             }
@@ -412,10 +417,10 @@ function getStats(){
             return b.count - a.count;
         });
 
-        console.log(maps);
-
         const modeContainer = document.createElement("div");
         modeContainer.className = "mode-container";
+        modeContainer.id = `mode-container-${shortHandMode}`;
+        modeContainer.style.display = "none";
         modeContainer.innerHTML = `<div class="mode-container-title">${modes[i]}</div>`;
 
         for (var j = 0; j < maps.length; j++){
@@ -430,12 +435,18 @@ function getStats(){
             mapCount.className = "map-count";
             mapCount.innerText = maps[j].count;
             mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 20px)`;
-            console.log((maps[0].count / maps[j].count) * 100);
 
             mapContainer.appendChild(mapName);
             mapContainer.appendChild(mapCount);
 
             modeContainer.appendChild(mapContainer);
+        }
+
+        const statButton = document.getElementById(`stats-button-${shortHandMode}`);
+        statButton.onclick = function(){
+            statsHideAll();
+            modeContainer.style.display = "block";
+            statButton.classList.add("active");
         }
 
         statsContainer.appendChild(modeContainer);
