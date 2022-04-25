@@ -108,10 +108,11 @@
                 Choose a generate option.    
             </div> 
             <div class="generate-container" id="generate-container"></div>
-            <div class="export-buttons-container" id="export-buttons-container">
-                <button class="export button" id="export-button-discord"><i class="left-bias fa-brands fa-discord"></i>Discord Message</button>
-                <button class="export button" id="export-button-url"><i class="left-bias fa-solid fa-code"></i></i>Share URL</button>
-                <button class="export button" id="export-button-json" onclick="exportToJSONFile()"><i class="left-bias fa-solid fa-file-code"></i>Export JSON</button>
+            <div class="maps-footer-buttons-container" id="export-buttons-container">
+                <button class="maps-footer button" id="stats-button"><i class="left-bias fa-solid fa-chart-bar"></i>Stats</button>
+                <button class="maps-footer button" id="export-button-discord"><i class="left-bias fa-brands fa-discord"></i>Discord Message</button>
+                <button class="maps-footer button" id="export-button-url"><i class="left-bias fa-solid fa-code"></i></i>Share URL</button>
+                <button class="maps-footer button" id="export-button-json" onclick="exportToJSONFile()"><i class="left-bias fa-solid fa-file-code"></i>Export JSON</button>
             </div>
         </div>
     </div>
@@ -192,6 +193,28 @@
                     <button class="button load-button"><i class="left-bias fa-solid fa-floppy-disk"></i>Load</button>
                     <button class="button load-delete"><i class="left-bias fa-solid fa-trash"></i>Delete</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="modal-content red" id="stats-modal">
+            <div class="modal-header">
+                <div class="modal-title">Map List Stats</div>
+                <button class="button exit" id="stats-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <div class="stats-nav" id="stats-nav">
+                <button class="button" id="stats-button-options">Options</button>
+                <button class="button" id="stats-button-tw">Turf War</button>
+                <button class="button" id="stats-button-sz">Splat Zones</button>
+                <button class="button" id="stats-button-tc">Tower Control</button>
+                <button class="button" id="stats-button-rm">Rainmaker</button>
+                <button class="button" id="stats-button-cb">Clam Blitz</button>
+            </div>
+            <div class="stats-options" id="stats-options">
+            </div>
+            <div class="stats-container" id="stats-container">
+            </div>
+            <div class="stats-footer">
+                Removing maps from the current map pool after generating will cause them to not appear here.
             </div>
         </div>
 

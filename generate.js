@@ -374,6 +374,85 @@ function generateMaps(){
 
 }
 
+function getStats(){
+    const modes = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
+    const statsContainer = document.getElementById("stats-container");
+
+    statsContainer.innerHTML = "";
+
+    for (var i = 0; i < modes.length; i++){
+        const shortHandMode = getShortHandMode(modes[i]);
+
+        var maps = [];
+        for (var j = 0; j < allMaps.length; j++){
+            const checkBox = document.getElementById(`${shortHandMode}-${allMaps[j]}-map-selector`);
+            if (checkBox.checked){
+                maps.push({
+                    name: allMaps[j],
+                    count: 0
+                });
+            }
+        }
+
+        if (maps.length == 0){
+            continue;
+        }
+
+        document.getElementById(`stats-button-${shortHandMode}`).style.display = "flex";
+
+        for (var j = 0; j < currentRounds.length; j++){
+            for (var k = 0; k < currentRounds[j].maps.length; k++){
+                for (var l = 0; l < maps.length; l++){
+                    const statOption = document.getElementById(`stats-option-${j}`);
+                    if (currentRounds[j].maps[k].map == maps[l].name 
+                        && statOption.checked 
+                        && currentRounds[j].maps[k].mode == modes[i]){
+                            maps[l].count++;
+                    }
+                }
+            }
+        }
+
+        maps.sort(function(a, b){
+            return b.count - a.count;
+        });
+
+        const modeContainer = document.createElement("div");
+        modeContainer.className = "mode-container";
+        modeContainer.id = `mode-container-${shortHandMode}`;
+        modeContainer.style.display = "none";
+        modeContainer.innerHTML = `<div class="mode-container-title">${modes[i]}</div>`;
+
+        for (var j = 0; j < maps.length; j++){
+            const mapContainer = document.createElement("div");
+            mapContainer.className = "map-container";
+
+            const mapName = document.createElement("div");
+            mapName.className = "map-name";
+            mapName.innerHTML = maps[j].name;
+
+            const mapCount = document.createElement("div");
+            mapCount.className = "map-count";
+            mapCount.innerText = maps[j].count;
+            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 20px)`;
+
+            mapContainer.appendChild(mapName);
+            mapContainer.appendChild(mapCount);
+
+            modeContainer.appendChild(mapContainer);
+        }
+
+        const statButton = document.getElementById(`stats-button-${shortHandMode}`);
+        statButton.onclick = function(){
+            statsHideAll();
+            modeContainer.style.display = "block";
+            statButton.classList.add("active");
+        }
+
+        statsContainer.appendChild(modeContainer);
+    }
+}
+
 function exportToDiscord(){
     var stringBuilder = "";
     var rows = 0;

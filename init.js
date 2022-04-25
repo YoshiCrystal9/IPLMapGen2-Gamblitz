@@ -35,6 +35,79 @@ window.addEventListener("click", function(event){
 });
 
 
+const statsOptionsButton = document.getElementById("stats-button-options");
+statsOptionsButton.onclick = function(){
+    statsHideAll();
+    const statsOptions = document.getElementById("stats-options");
+    statsOptions.style.display = "block";
+    statsOptionsButton.classList.add("active");
+}
+
+const mapStatsButton = document.getElementById("stats-button");
+const mapStatsClose = document.getElementById("stats-close");
+const mapStatsModal = document.getElementById("stats-modal");
+
+mapStatsButton.onclick = function(){
+    const statOptions = document.getElementById("stats-options");
+    statOptions.innerHTML = "";
+
+    for (var i = 0; i < currentRounds.length; i++){
+        const label = document.createElement("label");
+        label.classList.add("stats-option");
+        
+        const name = document.createElement("div");
+        name.classList.add("stats-option-name");
+        name.innerHTML = currentRounds[i].name;
+        label.appendChild(name);
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = `stats-option-${i}`;
+        checkbox.checked = true;
+        checkbox.addEventListener("change", function(){
+            getStats();
+        });
+        label.appendChild(checkbox);
+        
+        statOptions.appendChild(label);
+    }
+
+    const statsNav = document.getElementById("stats-nav");
+    for (var i = 1; i < statsNav.children.length; i++){
+        statsNav.children[i].style.display = "none";
+    }
+
+    modalContainer.style.display = "flex";
+    mapStatsModal.style.display = "flex";
+    modalContainer.classList.add("red");
+
+    getStats();
+
+    statsOptionsButton.click();
+}
+
+mapStatsClose.onclick = function(){
+    modalContainer.style.display = "none";
+    mapStatsModal.style.display = "none";
+    modalContainer.classList.remove("red");
+    modalContainer.classList.remove("green");
+}
+
+function statsHideAll(){
+    const statsOptions = document.getElementById("stats-options");
+    statsOptions.style.display = "none";
+
+    const statsContainer = document.getElementById("stats-container");
+    for (var i = 0; i < statsContainer.children.length; i++){
+        statsContainer.children[i].style.display = "none";
+    }
+
+    const statsNav = document.getElementById("stats-nav");
+    for (var i = 0; i < statsNav.children.length; i++){
+        statsNav.children[i].classList.remove("active");
+    }
+}
+
 const exportButtonDiscord = document.getElementById("export-button-discord");
 const exportDiscordClose = document.getElementById("discord-export-close");
 const exportDiscordModal = document.getElementById("discord-export-modal");

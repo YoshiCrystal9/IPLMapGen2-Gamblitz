@@ -443,26 +443,27 @@ input:focus{
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.45);
 }
 
-.export-buttons-container{
+.maps-footer-buttons-container{
     display: none;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
     margin-top: 2em;
     animation: fadeIn .5s 1;
 }
 
-.export {
-    color: var(--color-accent-light);
-    background-color: var(--color-accent-dark);
+.maps-footer {
+    color: var(--color-accent-dark);
+    background-color: #00000000;
     margin-right: 6px;
+    font-size: 1.3em;
+    font-weight: 600;
 }
-.export:hover{
+.maps-footer:hover{
     color: var(--color-accent-dark);
     letter-spacing: normal;
     transform: scale(1.03);
 }
-.export:active{
+.maps-footer:active{
     transform: scale(.99);
 }
 
@@ -543,6 +544,7 @@ input:focus{
 .modal-content label {
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 12px;
     margin: 4px;
     border-radius: 12px;
@@ -653,6 +655,94 @@ input:focus{
     color: var(--color-bg-dark);
 }
 
+.modal-title{
+    margin-right: 2em;
+}
+
+
+.mode-container-title{
+    font-size: 1.4em;
+    margin-bottom: .6em;
+    font-weight: 600;
+}
+
+.stats-nav{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stats-nav > .button{
+    color: var(--color-accent-light);
+    background: var(--color-accent-dark);
+    text-align: center;
+    border: 2px solid #00000000;
+    margin: 4px;
+}
+.stats-nav > .button:hover{
+    color: var(--color-accent-dark);
+    background: white;
+    letter-spacing: normal;
+    transform: scale(1.03);
+}
+.stats-nav > .button:active{
+    transform: scale(.98);
+}
+.stats-nav > .button.active{
+    font-weight: 700;
+    color: var(--color-accent-dark);
+    background: var(--color-accent-light);
+    border: 2px solid var(--color-accent-dark);
+    letter-spacing: normal;
+}
+
+.stats-options > .stats-option{
+    padding: 6px 18px 6px 18px;
+}
+
+.stats-option > .stats-option-name{
+    font-size: .8em;
+}
+
+.map-container > .map-name {
+    font-size: .9em;
+    font-weight: 400;
+    letter-spacing: .12em;
+    margin-bottom: .2em;
+}
+
+.stats-footer {
+    margin-top: 4em;
+    font-size: .6em;
+    font-style: italic;
+}
+
+.map-container > .map-count {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    min-width: 1em;
+    background: var(--color-accent-dark);
+    color: var(--color-accent-light);
+    height: 1.2em;
+    padding: 4px;
+    padding-right: 16px;
+    border-radius: 12px;
+    margin-bottom: .5em;
+    font-weight: 700;
+    animation: wipeIn .5s 1;
+}
+
+@keyframes wipeIn {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
 
 .save-name{
     margin: 2px;
