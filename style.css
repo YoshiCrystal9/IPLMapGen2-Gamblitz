@@ -691,6 +691,7 @@ input:focus{
     transform: scale(.98);
 }
 .stats-nav > .button.active{
+    font-weight: 700;
     color: var(--color-accent-dark);
     background: var(--color-accent-light);
     border: 2px solid var(--color-accent-dark);
@@ -710,6 +711,12 @@ input:focus{
     font-weight: 400;
     letter-spacing: .12em;
     margin-bottom: .2em;
+}
+
+.stats-footer {
+    margin-top: 4em;
+    font-size: .6em;
+    font-style: italic;
 }
 
 .map-container > .map-count {
