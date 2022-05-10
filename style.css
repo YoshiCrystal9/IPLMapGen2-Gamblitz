@@ -186,25 +186,32 @@ input:focus{
     font-weight: 400;
 }
 
+.map-visual-table{
+    border-spacing: 8px;
+    font-size: 1.2em;
+}
+
 .map-visual-table th{
     background: var(--color-bg-dark);
     color: var(--color-primary);
-    border-radius: 8px;
-    padding: 6px;
-    margin: 12px;
+    border-radius: 16px;
+    padding: 8px;
+    font-weight: 700;
+    font-size: .9em;
 }
 
 .map-visual-table td{
-    padding: 6px 16px 6px 16px;
+    padding: 0 16px 0 16px;
+    font-weight: 600;
 }
 
-.map-visual-table tr{
-    border-bottom: 2px solid var(--color-bg-dark);
+.map-visual-table tr:nth-child(even){
+    background: #0000000e;
 }
 
 .circle{
-    width: 1em;
-    height: 1em;
+    width: .85em;
+    height: .85em;
     border-radius: 50%;
     margin: 2px;
     background: var(--color-bg-dark);
