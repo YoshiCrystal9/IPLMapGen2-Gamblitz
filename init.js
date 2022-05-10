@@ -103,7 +103,9 @@ function createMapVisual(){
         }
     }
 
-
+    if (table.childNodes.length <= 1){
+        table.innerHTML = "No maps selected.";
+    }
 }
 
 
