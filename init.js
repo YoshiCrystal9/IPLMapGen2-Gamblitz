@@ -35,6 +35,23 @@ window.addEventListener("click", function(event){
 });
 
 
+const mapVisualButton = document.getElementById("map-visual-button");
+const mapVisualModal = document.getElementById("map-visual-modal");
+
+mapVisualButton.onclick = function(){
+    modalContainer.style.display = "flex";
+    modalContainer.classList.add("green");
+    mapVisualModal.style.display = "flex";
+}
+
+const mapVisualClose = document.getElementById("map-visual-close");
+mapVisualClose.onclick = function(){
+    modalContainer.style.display = "none";
+    modalContainer.classList.remove("green");
+    mapVisualModal.style.display = "none";
+}
+
+
 const statsOptionsButton = document.getElementById("stats-button-options");
 statsOptionsButton.onclick = function(){
     statsHideAll();
