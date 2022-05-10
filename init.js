@@ -35,6 +35,80 @@ window.addEventListener("click", function(event){
 });
 
 
+const mapVisualButton = document.getElementById("map-visual-button");
+const mapVisualModal = document.getElementById("map-visual-modal");
+
+mapVisualButton.onclick = function(){
+    modalContainer.style.display = "flex";
+    modalContainer.classList.add("green");
+    mapVisualModal.style.display = "flex";
+
+    createMapVisual();
+}
+
+const mapVisualClose = document.getElementById("map-visual-close");
+mapVisualClose.onclick = function(){
+    modalContainer.style.display = "none";
+    modalContainer.classList.remove("green");
+    mapVisualModal.style.display = "none";
+}
+
+function createMapVisual(){
+    const table = document.getElementById("map-visual-table");
+    table.innerHTML = "";
+    
+    const baseModes = ["tw", "sz", "tc", "rm", "cb"];
+    var modes = [];
+    for (var i = 0; i < baseModes.length; i++){
+        if (modeHasMaps(baseModes[i])){
+            modes.push(baseModes[i]);
+        }
+    }
+
+    var tr = document.createElement("tr");
+    const mapLabel = document.createElement("th");
+    mapLabel.innerText = "Map";
+    tr.appendChild(mapLabel);
+
+    for (var i = 0; i < modes.length; i++){
+        var td = document.createElement("th");
+        td.innerHTML = modes[i].toUpperCase();
+        tr.appendChild(td);
+    }
+
+    table.appendChild(tr);
+
+    for (var i = 0; i < allMaps.length; i++){
+        var sussyAmongusFortniteMinecrafter = false;
+
+        const tr = document.createElement("tr");
+
+        const mapName = document.createElement("td");
+        mapName.innerHTML = allMaps[i];
+        tr.appendChild(mapName);
+
+        for (var j = 0; j < modes.length; j++){
+            const td = document.createElement("td");
+            if (document.getElementById(`${modes[j]}-${allMaps[i]}-map-selector`).checked){
+                const circle = document.createElement("div");
+                circle.classList.add("circle");
+                td.appendChild(circle);
+                sussyAmongusFortniteMinecrafter = true;
+            }
+            tr.appendChild(td);
+        }
+
+        if (sussyAmongusFortniteMinecrafter){
+            table.appendChild(tr);
+        }
+    }
+
+    if (table.childNodes.length <= 1){
+        table.innerHTML = "No maps selected.";
+    }
+}
+
+
 const statsOptionsButton = document.getElementById("stats-button-options");
 statsOptionsButton.onclick = function(){
     statsHideAll();

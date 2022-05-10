@@ -57,6 +57,9 @@
                 <div class="title">Clam Blitz Maps</div>
                 <div class="detail" id="cb-picker-detail">0 Maps selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
+            <button class="button" id="map-visual-button">
+                <div class="title">Map Visual <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
+            </button>
 
             <div class="menu-header"><i class="left-bias fa-regular fa-floppy-disk"></i>Save & Load Map Pool</div>
             <button class="save-load button" id="save-button" onclick="saveOnClick()">
@@ -167,6 +170,39 @@
                 <button class="button select-all" id="cb-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="cb-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+        </div>
+
+        <div class="modal-content green" id="map-visual-modal">
+            <div class="modal-header">
+                <div class="modal-title">Map Visual</div>
+                <button class="button exit" id="map-visual-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <table class="map-visual-table" id="map-visual-table">
+                <tr>
+                    <th>Map</th>
+                    <th>TW</th>
+                    <th>SZ</th>
+                    <th>TC</th>
+                    <th>RM</th>
+                    <th>CB</th>
+                </tr>
+                <tr>
+                    <td>Placeholder</td>
+                    <td><div class="circle"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Placeholder</td>
+                    <td><div class="circle"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
 
         <div class="modal-content green" id="save-modal">
