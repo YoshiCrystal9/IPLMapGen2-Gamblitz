@@ -139,12 +139,19 @@
         margin-left: auto;
     }
 
+    .modal-container {
+        backdrop-filter: none;
+    }
+
     .modal-container.green {
         background: var(--color-bg-light);
+        box-shadow: none;
     }
 
     .modal-container.red{
         background: var(--color-accent-light);
+        box-shadow: none;
+
     }
 
     .modal-header{

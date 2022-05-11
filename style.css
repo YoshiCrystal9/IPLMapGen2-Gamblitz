@@ -502,7 +502,7 @@ input:focus{
 
 .modal-container{
     display: none;
-    background: #000000BB;
+    backdrop-filter: blur(3px) brightness(35%) saturate(70%);
     position: fixed;
     z-index: 1;
     align-items: center;
@@ -526,7 +526,7 @@ input:focus{
     animation: zoom .25s 1;
     max-width: 85vh;
     max-height: 85vh;
-    overflow: auto;
+    overflow: auto;    
     transition-duration: var(--transition-duration);
 }
 .modal-content::-webkit-scrollbar-thumb{
@@ -537,6 +537,7 @@ input:focus{
     color: var(--color-bg-dark);
     background-color: var(--color-bg-light);
     border-color: var(--color-primary);
+    box-shadow: 0px 0px 150px 60px #2df8a315;
 }
 .modal-content.green::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -546,6 +547,7 @@ input:focus{
     color: var(--color-accent-dark);
     background-color: var(--color-accent-light);
     border-color: var(--color-accent-dark);
+    box-shadow: 0px 0px 150px 60px #9c42321f;
 }
 .modal-content.red::-webkit-scrollbar-thumb{
     background: var(--color-accent-dark);
@@ -877,7 +879,7 @@ input:focus{
     width: 250px;
     margin-left: auto;
     margin-right: auto;
-}
+    }
 
 
 /* first open animations*/
