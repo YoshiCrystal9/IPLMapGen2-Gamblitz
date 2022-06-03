@@ -105,6 +105,18 @@ function createMapVisual(){
 
     if (table.childNodes.length <= 1){
         table.innerHTML = "No maps selected.";
+    } else if (window.innerWidth <= 600) {
+        //little hacky but it fixes mobile ui stuff
+
+        const targetWidth = window.innerWidth - 30;
+        console.log(table);
+        table.style.fontSize = `${targetWidth}px`;
+        var fontSize = parseInt(table.style.fontSize);
+        while (table.offsetWidth > targetWidth) {
+            table.style.fontSize = fontSize + "px";
+            fontSize -= 10;
+        }
+        console.log(table.offsetWidth, targetWidth);
     }
 }
 
