@@ -27,7 +27,7 @@
     .options-panel::before, .maps-panel::before{
         text-align: center;
         border-radius: .4em;
-        padding: 6px;
+        padding: .4em;
         font-weight: 600;
         font-size: 1.2em;
     }
@@ -48,7 +48,7 @@
     }
 
     .button{
-        margin: 6px;
+        margin: .5em;
         justify-content: space-between;
     }
     .button:hover{
@@ -87,7 +87,7 @@
     
     :root{
         --global-margin: 8px;
-        font-size: 20px;
+        font-size: 18px;
     }
     
     ::-webkit-scrollbar{
@@ -95,10 +95,10 @@
     }
 
     .button {
-        border: 1px solid var(--color-bg-dark);
-        border-radius: 12px;
-        padding: 8px;
-        margin: 4px;
+        border: 1px solid rgba(0, 0, 0, .4);
+        border-radius: .75em;
+        padding: .5em;
+        margin: .25em;
     }
     .button:hover{
         border-color: white;
@@ -167,8 +167,8 @@
     }
 
     .modal-content label {
-        border: 1px solid var(--color-bg-dark);
-        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, .4);
+        border-radius: .5em;
     }
 
 }

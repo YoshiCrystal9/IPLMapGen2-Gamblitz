@@ -2,7 +2,7 @@
     color: white;
     font-family: 'Roboto Mono', monospace;
     font-weight: normal;
-    font-size: calc(16px + .3vw);
+    font-size: calc(1em + .3vw);
 
     --high-contrast: false;
 
@@ -17,14 +17,17 @@
 }
 
 ::-webkit-scrollbar{
-    width: 12px;
+    width: .7em;
 }
 ::-webkit-scrollbar-track{
     background: #00000000;
 }
 ::-webkit-scrollbar-thumb{
     background: var(--color-primary);
-    border-radius: 6px;
+    border-radius: .4em;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: white;
 }
 
 body {
@@ -46,8 +49,8 @@ button {
 
 input{
     background: #00000000;
-    border: solid 2px white;
-    border-radius: 10px;
+    border: solid .1em white;
+    border-radius: .6em;
     font-family: 'Roboto Mono', monospace;
     font-size: 1em;
 }
@@ -120,14 +123,13 @@ input:focus{
     flex-direction: column;
     border-radius: calc(var(--global-margin) * 2.5);
     margin: var(--global-margin);
-    border: 4px solid;
+    border: .28em solid;
     color: var(--color-bg-dark);
-    padding: 24px;
+    padding: 1.25em;
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
     animation: first_scaleIn 1s forwards;
-
 }
 
 .options-panel{
@@ -158,28 +160,28 @@ input:focus{
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    border-radius: 20px;
+    border-radius: .8em;
     transition-duration: var(--transition-duration);
-    padding: 12px;
-    margin: 4px 6px;
+    padding: .5em;
+    margin: .25em .2em;
     margin-right: auto;
     text-align: left;
     color: var(--color-bg-dark);
 }
 .button:hover{
     background: white;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 .1em .3em rgba(0, 0, 0, 0.26);
     letter-spacing: 0.015em;
 }
 .button:active{
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 0 .22em rgba(0, 0, 0, 0.26);
     letter-spacing: -0.01em;
 }
 
 .map-picker > .title{
     font-size: 1.6em;
     font-weight: 600;
-    margin-right: 20px;
+    margin-right: 1em;
 }
 .map-picker > .detail{
     font-size: .8em;
@@ -187,21 +189,21 @@ input:focus{
 }
 
 .map-visual-table{
-    border-spacing: 8px;
+    border-spacing: .5em;
     font-size: 1.2em;
 }
 
 .map-visual-table th{
     background: var(--color-bg-dark);
     color: var(--color-primary);
-    border-radius: 16px;
-    padding: 8px;
+    border-radius: .5em;
+    padding: .25em;
     font-weight: 700;
     font-size: .9em;
 }
 
 .map-visual-table td{
-    padding: 2px 16px 2px 16px;
+    padding: .1em .5em .1em .5em;
     font-weight: 600;
 }
 
@@ -213,7 +215,7 @@ input:focus{
     width: .85em;
     height: .85em;
     border-radius: 50%;
-    margin: 2px;
+    margin: .05em;
     background: var(--color-bg-dark);
     margin-left: auto;
     margin-right: auto;
@@ -222,7 +224,7 @@ input:focus{
 .save-load > .title {
     font-weight: 400;
     font-size: 1.4em;
-    margin-right: 20px;
+    margin-right: 1em;
 }
 .save-load > .detail {
     font-size: .8em;
@@ -233,16 +235,20 @@ input:focus{
     flex-direction: row;
     font-size: .8em;
     font-weight: 400;
-    margin: 24px 18px 12px 18px;
+    margin: 2.8em 1em .5em 1em;
     align-items: center;
     white-space: nowrap;
     letter-spacing: .1em;
 }
 .menu-header:after{
     content: '';
-    height: 2px;
+    height: .1em;
     width: 100%;
     margin-left: 1em;
+}
+
+.menu-header:first-child{
+    margin-top: 1em;
 }
 
 .options-panel > .menu-header {
@@ -253,7 +259,8 @@ input:focus{
 }
 
 .add-round-header{
-    margin: 18px;
+    margin: 1em;
+    margin-left: 1em;
     margin-bottom: 0;
     font-size: .7em;
     letter-spacing: .1em;
@@ -263,21 +270,20 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 18px;
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin-left: .5em;
+    margin-top: .1em;
+    margin-bottom: .1em;
 }
 .round-adder > .detail{
     font-size: .8em;
     display: flex;
-    margin-left: 4px;
 }
 .round-adder input {
     transition-duration: var(--transition-duration);
     border-color: var(--color-bg-dark);
     color: var(--color-bg-dark);
-    padding: 4px;
-    margin-right: 4px;
+    padding: .35em;
+    margin-right: .5em;
 }
 .round-adder input[type=text]{
     vertical-align: middle;
@@ -287,9 +293,8 @@ input:focus{
     border-color: #00000000;
     color: var(--color-bg-dark);
     background-color: white;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
-    padding: 6px;
-    margin: 0px;
+    box-shadow: 0 .2em .5em rgba(0, 0, 0, 0.26);
+    transform: scale(1.03);
 }
 .round-adder input[type=number]{
     width: 4em;
@@ -301,18 +306,14 @@ input:focus{
     min-width: 0;
 }
 .round-adder input[type=checkbox]:focus{
-    padding: 4px;
-    margin: 2px;
+    padding: .2em;
 }
 .round-adder button {
-    margin: 0;
-    margin-left: 4px;
-    padding: 12px;
+    padding: .5em;
 }
 
 .round-editor {
-    padding-left: 12px;
-    width: auto;
+    padding-left: .7em;
     transition-duration: var(--transition-duration);
 }
 
@@ -326,28 +327,30 @@ input:focus{
 }
 
 @keyframes addedRound {
-    from{ left: 60px; opacity: 0%; }
-    to { left: 0px; opacity: 100%; }
+    from{ left: 5em; opacity: 0%; }
+    to { left: 0em; opacity: 100%; }
 }
 
 .added-round > .title{
     font-size: 1.3em;
     font-weight: 600;
-    padding: 8px 4px;
+    padding: .25em .3em;
+    padding-left: 0;
     margin-right: .6em;
 }
 
 .added-round > .games{
-    padding: 8px 4px;
+    padding: .5em .25em;
+    font-size: .8em;
 }
 
 .added-round > .counterpick{
     color: var(--color-primary);
     background: var(--color-bg-dark);
-    border-radius: 6px;
-    padding: 5px;
+    border-radius: .5em;
+    padding: .35em;
     font-size: .7em;
-    margin-right: .6em;
+    margin-right: .8em;
     margin-left: .5em;
 }
 
@@ -357,8 +360,7 @@ input:focus{
 
 .error-message{
     font-size: .8em;
-    padding: 6px 12px 6px 12px;
-    margin: 4px 6px;
+    padding: .8em .5em .5em .8em;
     animation: errorFlash 1.5s infinite;
 }
 .error-message::before{
@@ -372,7 +374,7 @@ input:focus{
     font-weight: 900;
     content: "\f071";
 
-    padding: 4px;
+    padding: .25em;
     font-size: 1.1em;
     margin-right: .4em;
     color: var(--color-accent-dark);
@@ -387,7 +389,7 @@ input:focus{
 .generate > .title {
     font-weight: 700;
     font-size: 1.5em;
-    margin-right: 20px;
+    margin-right: 1em;
 }
 
 .generate > .detail {
@@ -404,7 +406,7 @@ input:focus{
     text-align: center;
     font-size: 1.4em;
     font-weight: 600;
-    padding: 32px;
+    padding: 2em;
     margin: auto;
     user-select: none;
 }
@@ -418,6 +420,10 @@ input:focus{
     animation: fadeIn .5s 1;
 }
 
+.round-container:not(:first-child){
+    margin-top: 1.5em;
+}
+
 .round-container > .menu-header {
     color: var(--color-accent-dark);
 }
@@ -428,40 +434,39 @@ input:focus{
 .round-container > .game-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    margin: 10px 18px;
+    align-items: center;
+    margin: .25em .5em;
     font-size: 1.4em;
     font-weight: 600;
     position: relative;
-    animation: gameAdded .5s 1;
+    animation: gameAdded .75s 1;
     animation-fill-mode: forwards;
     opacity: 0%;
     user-select: none;
 }
 
 @keyframes gameAdded {
-    from { right: 150px; opacity: 0%; }
-    to   { right: 0px; opacity: 100%; }
+    from { right: 8em; opacity: 0%; }
+    to   { right: 0em; opacity: 100%; }
 }
 
 .map-drop-menu {
-    margin-left: 24px;
-    padding: 4px;
-    width: -webkit-fill-available;
+    margin-left: .75em;
+    padding: .2em;
     height: 1.8em;
     background: #00000000;
     font-family: 'Roboto Mono', monospace;
     color: var(--color-accent-dark);
     border-color: var(--color-accent-dark);
-    border-radius: 12px;
-    border-width: 0px;
+    border-radius: .5em;
+    border-width: 0em;
     font-size: .8em;
     font-weight: 400;
     transition-duration: var(--transition-duration);
 }
 .map-drop-menu:hover{
     background: white;
-    box-shadow: 0px 2px 8px rgb(0 0 0 / 26%);
+    box-shadow: 0em .1em .25em rgb(0 0 0 / 26%);
     border-color: white;
     transform: scale(1.02);
     cursor: pointer;
@@ -469,26 +474,31 @@ input:focus{
 .map-drop-menu:focus{
     border-color: #00000000;
     background-color: white;
-    box-shadow: 0px 6px 32px rgba(0, 0, 0, 0.45);
-    transform: scale(1.02);
+    box-shadow: 0em .3em .6em rgba(0, 0, 0, 0.45);
+    transform: scale(1.03);
 }
 .map-drop-menu:active {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.45);
+    box-shadow: 0em .1em .25em rgba(0, 0, 0, 0.45);
+}
+
+.fill{
+    width: -webkit-fill-available;
+    width: -moz-available;
 }
 
 .maps-footer-buttons-container{
     display: none;
     flex-direction: column;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 1.5em;
     animation: fadeIn .5s 1;
 }
 
 .maps-footer {
     color: var(--color-accent-dark);
     background-color: #00000000;
-    margin-right: 6px;
-    font-size: 1.3em;
+    margin-right: 0;
+    font-size: 1.2em;
     font-weight: 600;
 }
 .maps-footer:hover{
@@ -516,9 +526,9 @@ input:focus{
     transition-duration: var(--transition-duration);
 }
 
-@supports (backdrop-filter: blur(3px)) {
+@supports (backdrop-filter: blur(.15em)) {
     .modal-container{
-        backdrop-filter: blur(3px) brightness(35%) saturate(70%);
+        backdrop-filter: blur(.15em) brightness(35%) saturate(70%);
         background-color: #00000000;
     }
 }
@@ -527,9 +537,9 @@ input:focus{
     display: none;
     position: relative;
     flex-direction: column;
-    border: solid 5px;
-    border-radius: 30px;
-    padding: 25px;
+    border: solid .25em;
+    border-radius: 1.5em;
+    padding: 1em;
     animation: zoom .25s 1;
     max-width: 85vh;
     max-height: 85vh;
@@ -544,7 +554,7 @@ input:focus{
     color: var(--color-bg-dark);
     background-color: var(--color-bg-light);
     border-color: var(--color-primary);
-    box-shadow: 0px 0px 150px 60px #2df8a315;
+    box-shadow: 0 0 15em 6em #2df8a315;
 }
 .modal-content.green::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -554,7 +564,7 @@ input:focus{
     color: var(--color-accent-dark);
     background-color: var(--color-accent-light);
     border-color: var(--color-accent-dark);
-    box-shadow: 0px 0px 150px 60px #9c42321f;
+    box-shadow: 0 0 15em 6em #9c42322a;
 }
 .modal-content.red::-webkit-scrollbar-thumb{
     background: var(--color-accent-dark);
@@ -587,9 +597,9 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 12px;
-    margin: 4px;
-    border-radius: 12px;
+    padding: .4em;
+    margin: .25em;
+    border-radius: .5em;
     transition-duration: var(--transition-duration);
     font-weight: 400;
     font-size: 1.2em;
@@ -598,12 +608,12 @@ input:focus{
 }
 .modal-content label:hover{
     background: white;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 .1em .3em rgba(0, 0, 0, 0.26);
     transform: scale(1.02);
 }
 .modal-content label:active{
     transform: scale(1.00);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.26);
+    box-shadow: 0 0 .15em rgba(0, 0, 0, 0.26);
 }
 
 .modal-content .map-name{
@@ -620,7 +630,7 @@ input:focus{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: .65em;
 }
 
 .modal-content > .text-export-textarea{
@@ -633,10 +643,10 @@ input:focus{
     font-weight: 400;
     background: var(--color-accent-dark);
     color: var(--color-accent-light);
-    padding: 20px;
+    padding: .75em;
     resize: none;
     overflow: auto;
-    border-radius: 16px;
+    border-radius: 1em;
 }
 .modal-content > .text-export-textarea:focus-visible{
     outline: none;
@@ -652,7 +662,7 @@ input:focus{
 .modal-content > .text-export-subtitle{
     font-size: .9em;
     font-weight: 400;
-    margin-bottom: 12px;
+    margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
     user-select: none;
@@ -671,9 +681,9 @@ input:focus{
     align-items: baseline;
     font-size: 1.4em;
     font-weight: 700;
-    padding: 12px;
-    margin-bottom: 24px;
-    border-bottom: solid 1px;
+    padding: .5em;
+    margin-bottom: .75em;
+    border-bottom: solid .05em;
 }
 .modal-header > .exit {
     margin: 0;
@@ -720,8 +730,8 @@ input:focus{
     color: var(--color-accent-light);
     background: var(--color-accent-dark);
     text-align: center;
-    border: 2px solid #00000000;
-    margin: 4px;
+    border: .1em solid #00000000;
+    margin: .2em;
 }
 .stats-nav > .button:hover{
     color: var(--color-accent-dark);
@@ -736,12 +746,12 @@ input:focus{
     font-weight: 700;
     color: var(--color-accent-dark);
     background: var(--color-accent-light);
-    border: 2px solid var(--color-accent-dark);
+    border: .1em solid var(--color-accent-dark);
     letter-spacing: normal;
 }
 
 .stats-options > .stats-option{
-    padding: 6px 18px 6px 18px;
+    padding: .3em 1em;
 }
 
 .stats-option > .stats-option-name{
@@ -769,9 +779,9 @@ input:focus{
     background: var(--color-accent-dark);
     color: var(--color-accent-light);
     height: 1.2em;
-    padding: 4px;
-    padding-right: 16px;
-    border-radius: 12px;
+    padding: .25em;
+    padding-right: 1em;
+    border-radius: .6em;
     margin-bottom: .5em;
     font-weight: 700;
     animation: wipeIn .5s 1;
@@ -787,10 +797,10 @@ input:focus{
 }
 
 .save-name{
-    margin: 2px;
-    margin-top: .2em;
-    padding: 8px;
-    border: 2px solid var(--color-bg-dark);
+    margin: .25em 0;
+    margin-top: .1em;
+    padding: .4em;
+    border: .1em solid var(--color-bg-dark);
     color: var(--color-bg-dark);
 }
 
@@ -804,13 +814,13 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: 2px solid var(--color-bg-dark);
-    margin-top: 8px;
-    padding-bottom: 8px;
+    border-bottom: .01em solid var(--color-bg-dark);
+    margin-top: .5em;
+    padding-bottom: .5em;
 }
 
 .load-wrapper > .button {
-    margin: 2px;
+    margin: .2em;
 }
 
 .load-name{
@@ -818,7 +828,6 @@ input:focus{
     margin-right: auto;
     padding-right: 1.5em;
     font-size: 1.4em;
-    margin-left: 18px;
 }
 
 .load-button:hover, .load-delete:hover{
@@ -828,7 +837,7 @@ input:focus{
 
 
 .picker-select-shortcuts .button{
-    margin: 4px 6px;
+    margin: .25em .3em;
     font-weight: 700;
 }
 .picker-select-shortcuts .button:hover{
@@ -871,6 +880,10 @@ input:focus{
     animation: first_fromBottom 1s forwards;
 }
 
+.footer a{
+    color: inherit;
+}
+
 .about-container{
     display: flex;
     flex-direction: column;
@@ -883,7 +896,7 @@ input:focus{
 
 .about-container img{
     border-radius: 20%;
-    width: 250px;
+    width: 16em;
     margin-left: auto;
     margin-right: auto;
     }
@@ -904,7 +917,7 @@ input:focus{
 @keyframes first_fromTop {
     from {
         opacity: 0%;
-        bottom: 60px;
+        bottom: 2em;
     }
     to {
         opacity: 100%;
@@ -915,7 +928,7 @@ input:focus{
 @keyframes first_fromBottom {
     from {
         opacity: 0%;
-        top: 60px;
+        top: 2em;
     }
     to {
         opacity: 100%;

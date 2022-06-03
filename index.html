@@ -63,7 +63,7 @@
 
             <div class="menu-header"><i class="left-bias fa-regular fa-floppy-disk"></i>Save & Load Map Pool</div>
             <button class="save-load button" id="save-button" onclick="saveOnClick()">
-                <div class="title">Save Current Map Pool</div>
+                <div class="title">Save or Share Current Map Pool</div>
                 <div class="detail"><i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
             <button class="save-load button" id="load-button" onclick="loadOnClick()">
@@ -207,14 +207,14 @@
 
         <div class="modal-content green" id="save-modal">
             <div class="modal-header">
-                <div class="modal-title">Save Map Pool</div>
+                <div class="modal-title">Save or Share Map Pool</div>
                 <button class="button exit" id="save-close"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
             <div class="detail">Save locally</div>
             <input type="text" class="save-name" id="save-name" placeholder="Name" maxlength="32">
             <button class="button" id="save-button" onclick="saveDialogOnClick()"><i class="left-bias fa-solid fa-floppy-disk"></i> Save</button>
             <div style="margin: 8px;"></div>
-            <div class="detail">Save via URL</div>
+            <div class="detail">Save/Share via URL</div>
             <input type="text" style="font-size: .7em;" class="save-name" id="save-url" value="" readonly>
         </div>
 
@@ -289,6 +289,8 @@
     </div>
 
     <div class="footer">
+        <a href="https://maps.iplabs.ink/?pool=tw:d60402;sz:960422;tc:d64400;rm:8a5002;cb:cc1020&rounds=Groups_Round_1:2-0,3-3,4-10;Groups_Round_2:0-12,1-5,2-8;Groups_Round_3:3-21,4-4,0-0;Top_Cut_Quarter_Finals:1-4,2-2,3-10,4-0,0-5;Top_Cut_Semi_Finals:1-2,2-4,3-5,4-17,0-21;Grand_Finals:1-12,5-un,5-un,5-un,5-un,5-un,5-un">Example</a>
+        ·
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="about-button">About</a>
     </div>
 </body>

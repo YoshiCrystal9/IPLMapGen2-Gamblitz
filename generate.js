@@ -101,7 +101,7 @@ function addMapElements(){
             gameContainer.appendChild(modeDropMenu);
 
             const mapDropMenu = document.createElement("select");
-            mapDropMenu.setAttribute("class", "map-drop-menu");
+            mapDropMenu.setAttribute("class", "map-drop-menu fill");
             mapDropMenu.id ="map-drop-menu";
             mapDropMenu.addEventListener("change", mapDropMenuOnChange(mapDropMenu));
 
@@ -434,7 +434,7 @@ function getStats(){
             const mapCount = document.createElement("div");
             mapCount.className = "map-count";
             mapCount.innerText = maps[j].count;
-            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 20px)`;
+            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 1.5em)`;
 
             mapContainer.appendChild(mapName);
             mapContainer.appendChild(mapCount);
