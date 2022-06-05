@@ -151,7 +151,6 @@
     .modal-container.red{
         background: var(--color-accent-light);
         box-shadow: none;
-
     }
 
     .modal-header{

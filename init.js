@@ -56,6 +56,7 @@ mapVisualClose.onclick = function(){
 function createMapVisual(){
     const table = document.getElementById("map-visual-table");
     table.innerHTML = "";
+    table.style.fontSize = "1em";
     
     const baseModes = ["tw", "sz", "tc", "rm", "cb"];
     var modes = [];
@@ -102,21 +103,23 @@ function createMapVisual(){
             table.appendChild(tr);
         }
     }
+    
+    const mapVisualZoomIn = document.getElementById("map-visual-zoomin");
+    const mapVisualZoomOut = document.getElementById("map-visual-zoomout");
+    const zoomMin = .5;
+    const zoomMax = 3;
+
+    mapVisualZoomIn.onclick = function(){
+        table.style.fontSize = Math.min(parseFloat(table.style.fontSize) + 0.1, zoomMax) + "em";
+    }
+    mapVisualZoomOut.onclick = function(){
+        table.style.fontSize = Math.max(parseFloat(table.style.fontSize) - 0.1, zoomMin) + "em";
+    }
 
     if (table.childNodes.length <= 1){
         table.innerHTML = "No maps selected.";
-    } else if (window.innerWidth <= 600) {
-        //little hacky but it fixes mobile ui stuff
-
-        const targetWidth = window.innerWidth - 30;
-        console.log(table);
-        table.style.fontSize = `${targetWidth}px`;
-        var fontSize = parseInt(table.style.fontSize);
-        while (table.offsetWidth > targetWidth) {
-            table.style.fontSize = fontSize + "px";
-            fontSize -= 10;
-        }
-        console.log(table.offsetWidth, targetWidth);
+        mapVisualZoomIn.style.display = "none";
+        mapVisualZoomOut.style.display = "none";
     }
 }
 
