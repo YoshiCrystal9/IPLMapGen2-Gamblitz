@@ -525,7 +525,7 @@ input:focus{
 
 .modal-container{
     display: none;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.75);
     position: fixed;
     z-index: 1;
     align-items: center;
@@ -537,13 +537,6 @@ input:focus{
     top: 0;
     animation: fadeIn .25s 1;
     transition-duration: var(--transition-duration);
-}
-
-@supports (backdrop-filter: blur(.15em)) {
-    .modal-container{
-        backdrop-filter: blur(.15em) brightness(35%) saturate(70%);
-        background-color: #00000000;
-    }
 }
 
 .modal-content{
