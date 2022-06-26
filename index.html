@@ -12,8 +12,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/66a42373e4.js" crossorigin="anonymous"></script>
 
@@ -31,6 +29,10 @@
             <i class="fa-regular fa-map"></i>
             <img src="ipl-mono-bold.svg">
             MAPS.IPLABS.INK
+        </div>
+        <div class="mobile-nav-bar">
+            <button class="mobile-nav button">Options</button>
+            <button class="mobile-nav button">Map list</button>
         </div>
     </div>
     <div class="column-container">
@@ -266,12 +268,26 @@
                 <p>Visit <a href="http://iplabs.ink/">Inkling Performance Labs</a> for more information about us. We run high quality Splatoon events to help grow the competitive scene.</p>
             </div>
         </div>
+
+        <div class="modal-content green" id="settings-modal">
+            <div class="modal-header">
+                <div class="modal-title">Settings</div>
+                <button class="button exit" id="settings-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <p>Preferred sorting method</p>
+            <select id="preferred-sort-setting">
+                <option value="release">Release order</option>
+                <option value="alpha">Alphabetical order</option>
+            </select>
+        </div>
     </div>
 
     <div class="footer">
         <a href="https://maps.iplabs.ink/?pool=tw:d60402;sz:960422;tc:d64400;rm:8a5002;cb:cc1020&rounds=Groups_Round_1:2-0,3-3,4-10;Groups_Round_2:0-12,1-5,2-8;Groups_Round_3:3-21,4-4,0-0;Top_Cut_Quarter_Finals:1-4,2-2,3-10,4-0,0-5;Top_Cut_Semi_Finals:1-2,2-4,3-5,4-17,0-21;Grand_Finals:1-12,5-un,5-un,5-un,5-un,5-un,5-un">Example</a>
         ·
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="about-button">About</a>
+        ·
+        <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="settings-button">Settings</a>
     </div>
 </body>
 <script src="init.js"></script>

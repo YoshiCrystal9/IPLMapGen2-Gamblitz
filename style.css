@@ -111,6 +111,10 @@ input:focus{
     justify-content: center;
 }
 
+.mobile-nav-bar{
+    display: none;
+}
+
 .column-container{
     flex: 1 1 auto;
     display: flex;
@@ -905,7 +909,7 @@ input:focus{
     width: 16em;
     margin-left: auto;
     margin-right: auto;
-    }
+}
 
 
 /* first open animations*/

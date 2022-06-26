@@ -9,6 +9,11 @@
     }
 
     .header{
+        display: block;
+        position: sticky;
+        top: 0px;
+        z-index: 1;
+        background: var(--color-bg-dark);
         flex: none;
         margin: var(--global-margin) auto 0 auto;
     }
@@ -19,32 +24,22 @@
         content: "";
     }
 
+    .mobile-nav-bar{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .mobile-nav{
+        background: white;
+    }
+
     .column-container{
         display: inline;
         overflow: auto;
     }
 
-    .options-panel::before, .maps-panel::before{
-        text-align: center;
-        border-radius: .4em;
-        padding: .4em;
-        font-weight: 600;
-        font-size: 1.2em;
-    }
-
-    .options-panel::before{
-        content: "Settings";
-        color: var(--color-bg-light);
-        background: var(--color-bg-dark);
-    }
-
     .maps-panel{
         margin-left: var(--global-margin);
-    }
-    .maps-panel::before{
-        content: "Map List";
-        color: var(--color-accent-light);
-        background: var(--color-accent-dark);
     }
 
     .button{

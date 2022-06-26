@@ -281,8 +281,27 @@ aboutClose.onclick = function(){
 }
 
 
+const settingsButton = document.getElementById("settings-button");
+const settingsModal = document.getElementById("settings-modal");
+const settingsClose = document.getElementById("settings-close");
+
+settingsButton.onclick = function(){
+    modalContainer.style.display = "flex";
+    settingsModal.style.display = "flex";
+    modalContainer.classList.add("green");
+}
+
+settingsClose.onclick = function(){
+    modalContainer.style.display = "none";
+    settingsModal.style.display = "none";
+    modalContainer.classList.remove("green");
+}
+
+
+
 //load map options into page
 const allMaps = ["The Reef", "Musselforge Fitness", "Starfish Mainstage", "Humpback Pump Track", "Inkblot Art Academy", "Sturgeon Shipyard", "Moray Towers", "Port Mackerel", "Manta Maria", "Kelp Dome", "Snapper Canal", "Blackbelly Skatepark", "MakoMart", "Walleye Warehouse", "Shellendorf Institute", "Arowana Mall", "Goby Arena", "Piranha Pit", "Camp Triggerfish", "Wahoo World", "New Albacore Hotel", "Ancho-V Games", "Skipper Pavilion"];
+const allMapsAlpha = [...allMaps].sort((a,b) => a.localeCompare(b));
 
 for (var i = 0; i < allMaps.length; i++){
     const modes = ["tw","sz","tc","rm","cb"];
@@ -293,6 +312,8 @@ for (var i = 0; i < allMaps.length; i++){
         const mapLabel = document.createElement("label");
         mapLabel.setAttribute("for", mapInputId);
         mapLabel.innerHTML = `<div class="map-name">${allMaps[i]}</div>`;
+        mapLabel.setAttribute("release-order", i);
+        mapLabel.setAttribute("alpha-order", allMapsAlpha.indexOf(allMaps[i]));
 
         const mapInput = document.createElement("input");
         mapInput.type = "checkbox";
