@@ -863,8 +863,10 @@ const columnContainer = document.getElementsByClassName("column-container")[0];
 const footer = document.getElementsByClassName("footer")[0];
 const startPage = document.getElementById("start-page-wrapper");
 
+const urlParams = new URLSearchParams(window.location.search);
 const visited = localStorage.getItem('visited');
-if (visited != 1){
+
+if (visited != 1 && (urlParams.get("pool") == null || urlParams.get("rounds") != null)){
     const startPageButton = document.getElementById("start-page-button");
     startPageButton.setAttribute("onclick", 'startButtonClick()');
 
@@ -879,6 +881,7 @@ else {
         mapsPanel.style.animationDuration = ".4s";
     }, 1000);
 }
+
 
 function startButtonClick(){
     startPage.style.animation = "startPageClose .5s forwards";
@@ -977,6 +980,22 @@ function changeToAlphaSort(){
     }
 }
 
+const contrastToggle = document.getElementById("contrast-toggle");
+
+contrastToggle.addEventListener("change", function(){
+    if (contrastToggle.checked){
+        document.documentElement.style.filter = "contrast(1.4) saturate(1.15)";
+        localStorage.setItem("high-contrast", 1);
+    } else {
+        document.documentElement.style.filter = "none";
+        localStorage.setItem("high-contrast", 0);
+    }
+});
+
+if (localStorage.getItem("high-contrast") == 1){
+    contrastToggle.checked = true;
+    contrastToggle.dispatchEvent(new Event("change"));
+}
 
 
 

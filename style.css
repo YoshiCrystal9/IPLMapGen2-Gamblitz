@@ -4,8 +4,6 @@
     font-weight: normal;
     font-size: calc(1em + .3vw);
 
-    --high-contrast: false;
-
     --color-bg-dark: #254459;
     --color-bg-light: #b6f3da;
     --color-primary: #2df8a4;
@@ -975,6 +973,7 @@ input:focus{
     margin: .25em;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     font-size: 1.2em;
 }
 

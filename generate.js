@@ -492,8 +492,6 @@ function exportToJSONFile(){
 
 
 //check url params
-const urlParams = new URLSearchParams(window.location.search);
-
 const urlPool = urlParams.get("pool");
 if (urlPool != null){
     decodeMapPool(urlPool);
