@@ -27,6 +27,11 @@ function clearGenerateContainer(){
             i--;
         }
     }
+
+    setTimeout(() => {
+        document.getElementById("maplist-tab").click();
+        scrollToMapList();
+    }, 100);
 }
 
 
@@ -295,7 +300,6 @@ function generateEmptyRounds(){
         modeDropMenu.dispatchEvent(event);
     }
 
-    scrollToMapList();
 }
 
 function generateModes(){
@@ -498,7 +502,5 @@ if (urlPool != null){
 const urlRounds = urlParams.get("rounds");
 if (urlRounds != null){
     decodeRounds(urlRounds);
-    setTimeout(() => {
-        scrollToMapList();
-    }, 1050);
+    scrollToMapList();
 }

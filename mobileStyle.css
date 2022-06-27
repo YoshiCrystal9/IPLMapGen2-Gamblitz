@@ -40,11 +40,12 @@
     .mobile-nav-bar > .button{
         width: 100%;
         justify-content: center;
-        font-weight: 600;
+        font-weight: 500;
         padding: .2em;
         margin: .3em;
         border: .1em solid var(--color-bg-dark);
         transition-duration: .2s;
+        transform: scale(.95);
     }
 
     .mobile-nav-bar > .button:nth-child(1){
@@ -56,6 +57,10 @@
         color: var(--color-accent-dark);
     }
 
+    .mobile-nav-bar > .active{
+        transform: scale(1);
+        font-weight: 700;
+    }
     .mobile-nav-bar > .active:nth-child(1){
         background: var(--color-primary);
         color: var(--color-bg-dark);
@@ -112,6 +117,8 @@
 
     .round-container > .game-container {
         flex: 1;
+        animation-name: none;
+        opacity: 1;
     }
 
     .footer{
@@ -129,6 +136,14 @@
     
     ::-webkit-scrollbar{
         width: 8px;
+    }
+
+    .start-page-title{
+        font-size: 1.75em;
+    }
+
+    .start-page-subtext{
+        font-size: 1.35em;
     }
 
     .button {
@@ -203,6 +218,10 @@
     .modal-content label {
         border: 1px solid rgba(0, 0, 0, .4);
         border-radius: .5em;
+    }
+
+    .footer{
+        margin-bottom: 1em;
     }
 
 }

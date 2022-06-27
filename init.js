@@ -833,7 +833,7 @@ function decodeRounds(rounds){
 }
 
 function scrollToMapList(){
-    document.getElementById("maps-panel").scrollIntoView({behavior: "smooth"});
+    window.scrollTo(0,0);
 }
 
 
@@ -890,6 +890,8 @@ function startButtonClick(){
         footer.style.display = "block";
 
         localStorage.setItem("visited", 1);
+
+        window.scrollTo(0,0);
 
     }, 600);
 
