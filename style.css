@@ -4,8 +4,6 @@
     font-weight: normal;
     font-size: calc(1em + .3vw);
 
-    --high-contrast: false;
-
     --color-bg-dark: #254459;
     --color-bg-light: #b6f3da;
     --color-primary: #2df8a4;
@@ -28,6 +26,14 @@
 }
 ::-webkit-scrollbar-thumb:hover{
     background: white;
+}
+
+@media (prefers-reduced-motion) {
+    * {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+    }
 }
 
 body {
@@ -68,6 +74,89 @@ input:focus{
 
 .data {
     display: none;
+}
+
+.start-page-wrapper{
+    z-index: 10;
+    height: 100%;
+    color: var(--color-bg-dark);
+    background: linear-gradient(142deg, var(--color-bg-light) 0%, var(--color-accent-light) 125%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 5% 20%;
+    overflow-y: scroll;
+    animation: startPageOpen 1s forwards;
+}
+
+@keyframes startPageOpen {
+    from{opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes startPageText {
+    from{
+        position: relative;
+        opacity: 0;
+        bottom: -8rem;
+    }
+    to{
+        position: relative;
+        opacity: 1;
+        bottom: 0rem;
+    }
+}
+
+@keyframes startPageClose {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.start-page-title{
+    font-weight: 700;
+    font-size: 2.5em;
+    margin-bottom: 1.5rem;
+    animation: startPageText 1s .5s forwards;
+    opacity: 0;
+}
+
+.start-page-subtext{
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 3rem;
+    animation: startPageText 1s .7s forwards;
+    opacity: 0;
+}
+
+.start-page-tutorial{
+    line-height: 1.5em;
+    animation: startPageText 1s .9s forwards;
+    opacity: 0;
+}
+
+.start-page-tutorial b{
+    font-size: 1.4em;
+}
+
+.start-page-button{
+    margin-top: 2rem;
+    transition-duration: .2s;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 600;
+    background: rgba(255, 255, 255, .25);
+    padding: .5em 1em;
+    border-radius: .5em;
+    user-select: none;
+    animation: startPageText 1s 1.2s forwards;
+    opacity: 0;
+}
+
+.start-page-button:hover{
+    letter-spacing: .025em;
+    font-weight: 700;
+    background: white;
 }
 
 .header{
@@ -111,6 +200,10 @@ input:focus{
     justify-content: center;
 }
 
+.mobile-nav-bar{
+    display: none;
+}
+
 .column-container{
     flex: 1 1 auto;
     display: flex;
@@ -129,7 +222,6 @@ input:focus{
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
-    animation: first_scaleIn 1s forwards;
 }
 
 .options-panel{
@@ -138,6 +230,7 @@ input:focus{
     background: var(--color-bg-light);
     user-select: none;
     transition-duration: var(--transition-duration);
+    animation: from_right 1s forwards;
 }
 .options-panel::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -150,6 +243,7 @@ input:focus{
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
+    animation: from_left 1s forwards;
 }
 .maps-panel::-webkit-scrollbar-thumb{
     background: var(--color-accent-dark);
@@ -162,8 +256,8 @@ input:focus{
     flex-wrap: wrap;
     border-radius: .8em;
     transition-duration: var(--transition-duration);
-    padding: .5em;
-    margin: .25em .2em;
+    padding: .5em .75rem;
+    margin: .2em .25rem;
     margin-right: auto;
     text-align: left;
     color: var(--color-bg-dark);
@@ -224,7 +318,7 @@ input:focus{
     background: #0000000e;
 }
 
-.circle{
+.circle {
     width: .85em;
     height: .85em;
     border-radius: 50%;
@@ -248,7 +342,7 @@ input:focus{
     flex-direction: row;
     font-size: .8em;
     font-weight: 400;
-    margin: 2.8em 1em .5em 1em;
+    margin: 2.8em 1rem .5em 1rem;
     align-items: center;
     white-space: nowrap;
     letter-spacing: .1em;
@@ -273,7 +367,7 @@ input:focus{
 
 .add-round-header{
     margin: 1em;
-    margin-left: 1em;
+    margin-left: 1rem;
     margin-bottom: 0;
     font-size: .7em;
     letter-spacing: .1em;
@@ -283,7 +377,7 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-left: .5em;
+    margin-left: 1rem;
     margin-top: .1em;
     margin-bottom: .1em;
 }
@@ -326,7 +420,7 @@ input:focus{
 }
 
 .round-editor {
-    padding-left: .7em;
+    padding-left: 1rem;
     transition-duration: var(--transition-duration);
 }
 
@@ -337,6 +431,7 @@ input:focus{
     align-items: center;
     position: relative;
     animation: addedRound .5s 1;
+    padding: .3em 0;
 }
 
 @keyframes addedRound {
@@ -347,14 +442,11 @@ input:focus{
 .added-round > .title{
     font-size: 1.3em;
     font-weight: 600;
-    padding: .25em .3em;
-    padding-left: 0;
-    margin-right: .6em;
 }
 
 .added-round > .games{
-    padding: .5em .25em;
     font-size: .8em;
+    margin-left: 1rem;
 }
 
 .added-round > .counterpick{
@@ -363,17 +455,21 @@ input:focus{
     border-radius: .5em;
     padding: .35em;
     font-size: .7em;
-    margin-right: .8em;
-    margin-left: .5em;
+    margin-left: .5rem;
+}
+
+.added-round > .button:first-of-type{
+    margin-left: .25rem;
 }
 
 .added-round > .button{
     margin: 0;
+    margin-left: .1rem;
 }
 
 .error-message{
     font-size: .8em;
-    padding: .8em .5em .5em .8em;
+    margin: .2em 1rem;
     animation: errorFlash 1.5s infinite;
 }
 .error-message::before{
@@ -448,7 +544,7 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: .25em .5em;
+    margin: .25em 1rem;
     font-size: 1.4em;
     font-weight: 600;
     position: relative;
@@ -687,7 +783,7 @@ input:focus{
     align-items: baseline;
     font-size: 1.4em;
     font-weight: 700;
-    padding: .5em;
+    padding: 0 .5em;
     margin-bottom: .75em;
     border-bottom: solid .05em;
 }
@@ -875,6 +971,37 @@ input:focus{
     transform: scale(.99);
 }
 
+.sorting-menu {
+    padding: .4em;
+    margin: .25em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 1.2em;
+}
+
+.sorting-menu select{
+    margin-left: .75em;
+    padding: .2em;
+    background: #00000000;
+    font-family: 'Roboto Mono', monospace;
+    color: var(--color-bg-dark);
+    border-radius: .5em;
+    border-width: 0em;
+    font-size: .8em;
+    font-weight: 400;
+    margin-left: 2em;
+    transition-duration: .1s;
+}
+
+.sorting-menu select:hover{
+    background: white;
+    box-shadow: 0em .1em .25em rgb(0 0 0 / 26%);
+    border-color: white;
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
 .footer {
     text-align: center;
     font-size: .75em;
@@ -905,20 +1032,10 @@ input:focus{
     width: 16em;
     margin-left: auto;
     margin-right: auto;
-    }
+}
 
 
 /* first open animations*/
-@keyframes first_scaleIn {
-    from {
-        transform: scale(0.75);
-        opacity: 0%;
-    }
-    to {
-        transform: scale(1);
-        opacity: 100%;
-    }
-}
 
 @keyframes first_fromTop {
     from {
@@ -939,5 +1056,28 @@ input:focus{
     to {
         opacity: 100%;
         top: 0px;
+    }
+}
+
+
+@keyframes from_left {
+    from{
+        left: 5rem;
+        opacity: 0;
+    }
+    to{
+        left: 0rem;
+        opacity: 1;
+    }
+}
+
+@keyframes from_right {
+    from{
+        right: 5rem;
+        opacity: 0;
+    }
+    to{
+        right: 0rem;
+        opacity: 1;
     }
 }

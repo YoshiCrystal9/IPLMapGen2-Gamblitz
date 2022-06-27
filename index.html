@@ -12,8 +12,6 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/66a42373e4.js" crossorigin="anonymous"></script>
 
@@ -26,11 +24,37 @@
     <title>maps.iplabs.ink</title>
 </head>
 <body>
+    <div class="start-page-wrapper" id="start-page-wrapper">
+        <div class="start-page-title">
+            Welcome to MAPS.IPLABS.INK
+        </div>
+        <div class="start-page-subtext">
+            A Splatoon 2 map generator created by <a href="http://iplabs.ink/">Inkling Preformance Labs</a> for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="start-page-tutorial">
+            <b><i class="fa-solid fa-graduation-cap"></i> A very quick tutorial:</b><br>
+            <i class="fa-solid fa-arrow-right"></i> Create a map pool for each of the five modes in the game. Add as many or as few maps as you'd like.<br>
+            <i class="fa-solid fa-arrow-right"></i> Once your map pool is finished, add the rounds that appear in your tournament. Each round need a name and the number of games within it.<br>
+            <i class="fa-solid fa-arrow-right"></i> Finally, choose a generate option to create a map list. You can have the app try to make one, or you can make one from scratch if desired. You can always edit the final result.<br>
+            <i class="fa-solid fa-arrow-right"></i> Once your map list is finished, you can export it to as a discord message, JSON file, or share it via URL.<br>
+            <br>
+            <b><i class="fa-solid fa-lightbulb"></i> More tips:</b><br>
+            <i class="fa-solid fa-arrow-right"></i> You can quickly create a graphic of your map pool to screenshot by clicking the map visual button.<br>
+            <i class="fa-solid fa-arrow-right"></i> You can share your map pool with someone by sharing the URL provided in the Save or Share Map Pool button.<br>
+            <i class="fa-solid fa-arrow-right"></i> Once you've generated a map list, you can view how often a map/mode appears by clicking the stats button<br>
+            
+        </div>
+        <div class="start-page-button" id="start-page-button">Start <i class="fa-solid fa-play"></i></div>
+    </div>
     <div class="header">
         <div class="logo-wrapper">
             <i class="fa-regular fa-map"></i>
             <img src="ipl-mono-bold.svg">
             MAPS.IPLABS.INK
+        </div>
+        <div class="mobile-nav-bar">
+            <button class="active button" id="settings-tab">Settings</button>
+            <button class="button" id="maplist-tab">Map list</button>
         </div>
     </div>
     <div class="column-container">
@@ -104,7 +128,7 @@
         </div>
 
         
-        <div class="maps-panel" id="maps-panel">
+        <div class="maps-panel mobile-hidden" id="maps-panel">
             <div class="maps-instruction" id="maps-instruction">
                 Add maps to the map pool.<br>
                 Add round info.<br>
@@ -130,6 +154,7 @@
                 <button class="button select-all" id="tw-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tw-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="tw-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="sz-picker-modal">
             <div class="modal-header">
@@ -140,6 +165,7 @@
                 <button class="button select-all" id="sz-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="sz-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="sz-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="tc-picker-modal">
             <div class="modal-header">
@@ -150,6 +176,7 @@
                 <button class="button select-all" id="tc-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tc-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="tc-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="rm-picker-modal">
             <div class="modal-header">
@@ -160,6 +187,7 @@
                 <button class="button select-all" id="rm-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="rm-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="rm-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="cb-picker-modal">
             <div class="modal-header">
@@ -170,6 +198,7 @@
                 <button class="button select-all" id="cb-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="cb-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="cb-picker-wrapper"></div>
         </div>
 
         <div class="modal-content green" id="map-visual-modal" style="max-width: 95vw;">
@@ -266,12 +295,31 @@
                 <p>Visit <a href="http://iplabs.ink/">Inkling Performance Labs</a> for more information about us. We run high quality Splatoon events to help grow the competitive scene.</p>
             </div>
         </div>
+
+        <div class="modal-content green" id="preferences-modal">
+            <div class="modal-header">
+                <div class="modal-title">Preferences</div>
+                <button class="button exit" id="preferences-close"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+            <div class="sorting-menu">Preferred Map Order
+                <select id="preferred-sort-setting">
+                    <option value="release">Release order</option>
+                    <option value="alpha">Alphabetical order</option>
+                </select>
+            </div>
+            <label for="contrast-toggle">
+                <div class="map-name">Higher Contrast</div>
+                <input type="checkbox" id="contrast-toggle"></select>
+            </label>
+        </div>
     </div>
 
     <div class="footer">
         <a href="https://maps.iplabs.ink/?pool=tw:d60402;sz:960422;tc:d64400;rm:8a5002;cb:cc1020&rounds=Groups_Round_1:2-0,3-3,4-10;Groups_Round_2:0-12,1-5,2-8;Groups_Round_3:3-21,4-4,0-0;Top_Cut_Quarter_Finals:1-4,2-2,3-10,4-0,0-5;Top_Cut_Semi_Finals:1-2,2-4,3-5,4-17,0-21;Grand_Finals:1-12,5-un,5-un,5-un,5-un,5-un,5-un">Example</a>
         ·
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="about-button">About</a>
+        ·
+        <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
 <script src="init.js"></script>

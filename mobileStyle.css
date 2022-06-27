@@ -8,43 +8,93 @@
         height: auto;
     }
 
+    .start-page-wrapper{
+        padding: 2em;
+        height: calc(100vh - 4em);
+    }
+
     .header{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        background: var(--color-bg-dark);
         flex: none;
         margin: var(--global-margin) auto 0 auto;
+        position: sticky;
+        top: 0px;
+        z-index: 1;
+        width: 100%;
     }
     .header::before{
-        content: "";
+        display: none;
     }
     .header::after{
-        content: "";
+        display: none;
+    }
+
+    .mobile-nav-bar{
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        animation: mobile-nav-in .4s forwards;
+    }
+
+    @keyframes mobile-nav-in {
+        from { opacity: 0; transform: scale(.9); }
+        to {opacity: 1; transform: scale(1);}
+    }
+
+    .mobile-nav-bar > .button{
+        width: 100%;
+        justify-content: center;
+        font-weight: 500;
+        padding: .2em;
+        margin: .3em;
+        border: .1em solid var(--color-bg-dark);
+        transition-duration: .2s;
+        transform: scale(.95);
+    }
+
+    .mobile-nav-bar > .button:nth-child(1){
+        background: var(--color-bg-light);
+        color: var(--color-bg-dark);
+    }
+    .mobile-nav-bar > .button:nth-child(2){
+        background: var(--color-accent-light);
+        color: var(--color-accent-dark);
+    }
+
+    .mobile-nav-bar > .active{
+        transform: scale(1);
+        font-weight: 700;
+    }
+    .mobile-nav-bar > .active:nth-child(1){
+        background: var(--color-primary);
+        color: var(--color-bg-dark);
+        border: solid var(--color-bg-light);
+    }
+    .mobile-nav-bar > .active:nth-child(2){
+        background: var(--color-accent-dark);
+        color: var(--color-accent-light);
+        border: solid var(--color-accent-light);
     }
 
     .column-container{
         display: inline;
         overflow: auto;
+        padding: var(--global-margin);
+        overflow-x: hidden;
+        justify-content: center;
     }
 
-    .options-panel::before, .maps-panel::before{
-        text-align: center;
-        border-radius: .4em;
-        padding: .4em;
-        font-weight: 600;
-        font-size: 1.2em;
+    .options-panel, .maps-panel{
+        margin: 0;
+        width: -webkit-fill-available;
+        width: -moz-available;
     }
 
-    .options-panel::before{
-        content: "Settings";
-        color: var(--color-bg-light);
-        background: var(--color-bg-dark);
-    }
-
-    .maps-panel{
-        margin-left: var(--global-margin);
-    }
-    .maps-panel::before{
-        content: "Map List";
-        color: var(--color-accent-light);
-        background: var(--color-accent-dark);
+    .mobile-hidden {
+        display: none !important;
     }
 
     .button{
@@ -60,10 +110,11 @@
         transform: scale(.99);
     }
 
+    .maps-instruction{
+        padding: 2em .2em;
+    }
     .maps-instruction::before{
-        content: "↑";
-        display: block;
-        font-size: 2em;
+        display: none;
     }
     .maps-instruction::after{
         content: "";
@@ -75,6 +126,8 @@
 
     .round-container > .game-container {
         flex: 1;
+        animation-name: none;
+        opacity: 1;
     }
 
     .footer{
@@ -94,6 +147,14 @@
         width: 8px;
     }
 
+    .start-page-title{
+        font-size: 1.75em;
+    }
+
+    .start-page-subtext{
+        font-size: 1.35em;
+    }
+
     .button {
         border: 1px solid rgba(0, 0, 0, .4);
         border-radius: .75em;
@@ -104,11 +165,13 @@
         border-color: white;
     }
 
+    .column-container{
+        padding: 0;
+    }
+
     .options-panel, .maps-panel {
         padding: 8px;
-        margin: calc(var(--global-margin) * 4);
-        margin-left: 0;
-        margin-right: 0;
+        margin-bottom: calc(var(--global-margin) * 4);
         border-radius: 0;
         border-left: none;
         border-right: none;
@@ -128,7 +191,16 @@
     }
     .round-adder input[type=text]{
         width: -webkit-fill-available;
+        width: -moz-available;
         margin-bottom: .25em;
+    }
+
+    .added-round > .button:first-of-type{
+        margin-left: 1rem;
+    }
+
+    .maps-instruction{
+        font-size: 1.2em;
     }
 
     .map-drop-menu {
@@ -168,6 +240,10 @@
     .modal-content label {
         border: 1px solid rgba(0, 0, 0, .4);
         border-radius: .5em;
+    }
+
+    .footer{
+        margin-bottom: 1em;
     }
 
 }
