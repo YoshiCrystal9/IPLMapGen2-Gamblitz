@@ -70,6 +70,89 @@ input:focus{
     display: none;
 }
 
+.start-page-wrapper{
+    z-index: 10;
+    height: 100%;
+    color: var(--color-bg-dark);
+    background: linear-gradient(142deg, var(--color-bg-light) 0%, var(--color-accent-light) 125%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 20%;
+    overflow-y: scroll;
+    animation: startPageOpen 1s forwards;
+}
+
+@keyframes startPageOpen {
+    from{opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes startPageText {
+    from{
+        position: relative;
+        opacity: 0;
+        bottom: -8rem;
+    }
+    to{
+        position: relative;
+        opacity: 1;
+        bottom: 0rem;
+    }
+}
+
+@keyframes startPageClose {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.start-page-title{
+    font-weight: 700;
+    font-size: 2.5em;
+    margin-bottom: 1.5rem;
+    animation: startPageText 1s .5s forwards;
+    opacity: 0;
+}
+
+.start-page-subtext{
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-bottom: 3rem;
+    animation: startPageText 1s .7s forwards;
+    opacity: 0;
+}
+
+.start-page-tutorial{
+    line-height: 1.5em;
+    animation: startPageText 1s .9s forwards;
+    opacity: 0;
+}
+
+.start-page-tutorial b{
+    font-size: 1.4em;
+}
+
+.start-page-button{
+    margin-top: 2rem;
+    transition-duration: .2s;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 600;
+    background: rgba(255, 255, 255, .25);
+    padding: .5em 1em;
+    border-radius: .5em;
+    user-select: none;
+    animation: startPageText 1s 1.2s forwards;
+    opacity: 0;
+}
+
+.start-page-button:hover{
+    letter-spacing: .025em;
+    font-weight: 700;
+    background: white;
+}
+
 .header{
     flex: 0 1 auto;
     font-size: 1.2em;

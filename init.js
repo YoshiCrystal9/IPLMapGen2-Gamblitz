@@ -832,6 +832,38 @@ function scrollToMapList(){
 
 
 
+const header = document.getElementsByClassName("header")[0];
+const columnContainer = document.getElementsByClassName("column-container")[0];
+const footer = document.getElementsByClassName("footer")[0];
+const startPage = document.getElementById("start-page-wrapper");
+
+const visited = localStorage.getItem('visited');
+if (visited != 1){
+    const startPageButton = document.getElementById("start-page-button");
+    startPageButton.setAttribute("onclick", 'startButtonClick()');
+
+    header.style.display = "none";
+    columnContainer.style.display = "none";
+    footer.style.display = "none";
+}
+else {
+    startPage.style.display = "none";
+}
+
+function startButtonClick(){
+    startPage.style.animation = "startPageClose .5s forwards";
+
+    setTimeout(function(){
+        startPage.style.display = "none";
+        header.style.display = "flex";
+        columnContainer.style.display = "flex";
+        footer.style.display = "block";
+
+        localStorage.setItem("visited", 1);
+
+    }, 600);
+}
+
 
 
 
