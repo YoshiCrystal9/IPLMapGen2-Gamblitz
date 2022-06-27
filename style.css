@@ -30,7 +30,8 @@
 
 @media (prefers-reduced-motion) {
     * {
-        animation-name: none !important;
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
         transition-duration: 0s !important;
     }
 }
@@ -255,8 +256,8 @@ input:focus{
     flex-wrap: wrap;
     border-radius: .8em;
     transition-duration: var(--transition-duration);
-    padding: .5em;
-    margin: .25em .2em;
+    padding: .5em .75rem;
+    margin: .2em .25rem;
     margin-right: auto;
     text-align: left;
     color: var(--color-bg-dark);
@@ -317,7 +318,7 @@ input:focus{
     background: #0000000e;
 }
 
-.circle{
+.circle {
     width: .85em;
     height: .85em;
     border-radius: 50%;
@@ -341,7 +342,7 @@ input:focus{
     flex-direction: row;
     font-size: .8em;
     font-weight: 400;
-    margin: 2.8em 1em .5em 1em;
+    margin: 2.8em 1rem .5em 1rem;
     align-items: center;
     white-space: nowrap;
     letter-spacing: .1em;
@@ -366,7 +367,7 @@ input:focus{
 
 .add-round-header{
     margin: 1em;
-    margin-left: 1em;
+    margin-left: 1rem;
     margin-bottom: 0;
     font-size: .7em;
     letter-spacing: .1em;
@@ -376,7 +377,7 @@ input:focus{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-left: .5em;
+    margin-left: 1rem;
     margin-top: .1em;
     margin-bottom: .1em;
 }
@@ -419,7 +420,7 @@ input:focus{
 }
 
 .round-editor {
-    padding-left: .7em;
+    padding-left: 1rem;
     transition-duration: var(--transition-duration);
 }
 
@@ -430,6 +431,7 @@ input:focus{
     align-items: center;
     position: relative;
     animation: addedRound .5s 1;
+    padding: .3em 0;
 }
 
 @keyframes addedRound {
@@ -440,14 +442,11 @@ input:focus{
 .added-round > .title{
     font-size: 1.3em;
     font-weight: 600;
-    padding: .25em .3em;
-    padding-left: 0;
-    margin-right: .6em;
 }
 
 .added-round > .games{
-    padding: .5em .25em;
     font-size: .8em;
+    margin-left: 1rem;
 }
 
 .added-round > .counterpick{
@@ -456,17 +455,21 @@ input:focus{
     border-radius: .5em;
     padding: .35em;
     font-size: .7em;
-    margin-right: .8em;
-    margin-left: .5em;
+    margin-left: .5rem;
+}
+
+.added-round > .button:first-of-type{
+    margin-left: .25rem;
 }
 
 .added-round > .button{
     margin: 0;
+    margin-left: .1rem;
 }
 
 .error-message{
     font-size: .8em;
-    padding: .8em .5em .5em .8em;
+    margin: .2em 1rem;
     animation: errorFlash 1.5s infinite;
 }
 .error-message::before{
@@ -541,7 +544,7 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: .25em .5em;
+    margin: .25em 1rem;
     font-size: 1.4em;
     font-weight: 600;
     position: relative;
@@ -780,7 +783,7 @@ input:focus{
     align-items: baseline;
     font-size: 1.4em;
     font-weight: 700;
-    padding: .5em;
+    padding: 0 .5em;
     margin-bottom: .75em;
     border-bottom: solid .05em;
 }

@@ -143,12 +143,14 @@ function getMapPoolSelectors(mode){
         return mapPool;
     }
 
-    for (var i = 0; i < allMaps.length; i++){
-        const checkBox = document.getElementById(`${shortHandMode}-${allMaps[i]}-map-selector`);
+    var preferedMapSort = localStorage.getItem("sorting-order") != "alpha" ? allMaps : allMapsAlpha;
+
+    for (var i = 0; i < preferedMapSort.length; i++){
+        const checkBox = document.getElementById(`${shortHandMode}-${preferedMapSort[i]}-map-selector`);
         if (checkBox.checked){
             const selector = document.createElement("option");
-            selector.value = allMaps[i];
-            selector.innerText = allMaps[i];
+            selector.value = preferedMapSort[i];
+            selector.innerText = preferedMapSort[i];
             mapPool.push(selector);
         }
     }
@@ -387,12 +389,14 @@ function getStats(){
     for (var i = 0; i < modes.length; i++){
         const shortHandMode = getShortHandMode(modes[i]);
 
+        var preferedMapSort = localStorage.getItem("sorting-order") != "alpha" ? allMaps : allMapsAlpha;
+
         var maps = [];
-        for (var j = 0; j < allMaps.length; j++){
-            const checkBox = document.getElementById(`${shortHandMode}-${allMaps[j]}-map-selector`);
+        for (var j = 0; j < preferedMapSort.length; j++){
+            const checkBox = document.getElementById(`${shortHandMode}-${preferedMapSort[j]}-map-selector`);
             if (checkBox.checked){
                 maps.push({
-                    name: allMaps[j],
+                    name: preferedMapSort[j],
                     count: 0
                 });
             }

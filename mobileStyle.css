@@ -10,6 +10,7 @@
 
     .start-page-wrapper{
         padding: 2em;
+        height: calc(100vh - 4em);
     }
 
     .header{
@@ -192,6 +193,10 @@
         width: -webkit-fill-available;
         width: -moz-available;
         margin-bottom: .25em;
+    }
+
+    .added-round > .button:first-of-type{
+        margin-left: 1rem;
     }
 
     .maps-instruction{

@@ -866,7 +866,7 @@ const startPage = document.getElementById("start-page-wrapper");
 const urlParams = new URLSearchParams(window.location.search);
 const visited = localStorage.getItem('visited');
 
-if (visited != 1 && (urlParams.get("pool") == null || urlParams.get("rounds") != null)){
+if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
     const startPageButton = document.getElementById("start-page-button");
     startPageButton.setAttribute("onclick", 'startButtonClick()');
 
@@ -951,6 +951,11 @@ function changeToReleaseSort(){
         sortedByRel.forEach(e =>
             document.querySelector("#" + stageSelModals[i].id).appendChild(e));
     }
+
+    const mapDropMenu = document.getElementsByClassName("map-drop-menu");
+    for (var i = 0; i < mapDropMenu.length; i++){
+        mapDropMenu[i].dispatchEvent(new Event("change"));
+    }
 }
 
 function changeToAlphaSort(){
@@ -977,6 +982,11 @@ function changeToAlphaSort(){
         });
         sortedByAlpha.forEach(e =>
             document.querySelector("#" + stageSelModals[i].id).appendChild(e));
+    }
+
+    const mapDropMenu = document.getElementsByClassName("map-drop-menu");
+    for (var i = 0; i < mapDropMenu.length; i++){
+        mapDropMenu[i].dispatchEvent(new Event("change"));
     }
 }
 
