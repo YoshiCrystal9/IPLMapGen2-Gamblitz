@@ -8,38 +8,82 @@
         height: auto;
     }
 
+    .start-page-wrapper{
+        padding: 2em;
+    }
+
     .header{
-        display: block;
-        position: sticky;
-        top: 0px;
-        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
         background: var(--color-bg-dark);
         flex: none;
         margin: var(--global-margin) auto 0 auto;
+        position: sticky;
+        top: 0px;
+        z-index: 1;
+        width: 100%;
     }
     .header::before{
-        content: "";
+        display: none;
     }
     .header::after{
-        content: "";
+        display: none;
     }
 
     .mobile-nav-bar{
         display: flex;
         flex-direction: row;
+        box-sizing: border-box;
     }
 
-    .mobile-nav{
-        background: white;
+    .mobile-nav-bar > .button{
+        width: 100%;
+        justify-content: center;
+        font-weight: 600;
+        padding: .2em;
+        margin: .3em;
+        border: .1em solid var(--color-bg-dark);
+        transition-duration: .2s;
+    }
+
+    .mobile-nav-bar > .button:nth-child(1){
+        background: var(--color-bg-light);
+        color: var(--color-bg-dark);
+    }
+    .mobile-nav-bar > .button:nth-child(2){
+        background: var(--color-accent-light);
+        color: var(--color-accent-dark);
+    }
+
+    .mobile-nav-bar > .active:nth-child(1){
+        background: var(--color-primary);
+        color: var(--color-bg-dark);
+        border: solid var(--color-bg-light);
+    }
+    .mobile-nav-bar > .active:nth-child(2){
+        background: var(--color-accent-dark);
+        color: var(--color-accent-light);
+        border: solid var(--color-accent-light);
     }
 
     .column-container{
         display: inline;
         overflow: auto;
+        padding: var(--global-margin);
+        overflow-x: hidden;
+    }
+
+    .options-panel{
+        margin: 0;
     }
 
     .maps-panel{
-        margin-left: var(--global-margin);
+        margin: 0;
+    }
+
+    .mobile-hidden {
+        display: none !important;
     }
 
     .button{
@@ -56,9 +100,7 @@
     }
 
     .maps-instruction::before{
-        content: "↑";
-        display: block;
-        font-size: 2em;
+        display: none;
     }
     .maps-instruction::after{
         content: "";
@@ -101,9 +143,7 @@
 
     .options-panel, .maps-panel {
         padding: 8px;
-        margin: calc(var(--global-margin) * 4);
-        margin-left: 0;
-        margin-right: 0;
+        margin-bottom: calc(var(--global-margin) * 4);
         border-radius: 0;
         border-left: none;
         border-right: none;

@@ -29,7 +29,7 @@
             Welcome to MAPS.IPLABS.INK
         </div>
         <div class="start-page-subtext">
-            A Splatoon 2 map generator created by Inkling Preformance Labs for the tournament organizers in the community <i class="fa-solid fa-heart"></i>
+            A Splatoon 2 map generator created by Inkling Preformance Labs for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
         </div>
         <div class="start-page-tutorial">
             <b><i class="fa-solid fa-graduation-cap"></i> A very quick tutorial:</b><br>
@@ -53,8 +53,8 @@
             MAPS.IPLABS.INK
         </div>
         <div class="mobile-nav-bar">
-            <button class="mobile-nav button">Options</button>
-            <button class="mobile-nav button">Map list</button>
+            <button class="active button" id="settings-tab">Settings</button>
+            <button class="button" id="maplist-tab">Map list</button>
         </div>
     </div>
     <div class="column-container">
@@ -128,7 +128,7 @@
         </div>
 
         
-        <div class="maps-panel" id="maps-panel">
+        <div class="maps-panel mobile-hidden" id="maps-panel">
             <div class="maps-instruction" id="maps-instruction">
                 Add maps to the map pool.<br>
                 Add round info.<br>
@@ -154,6 +154,7 @@
                 <button class="button select-all" id="tw-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tw-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="tw-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="sz-picker-modal">
             <div class="modal-header">
@@ -164,6 +165,7 @@
                 <button class="button select-all" id="sz-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="sz-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="sz-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="tc-picker-modal">
             <div class="modal-header">
@@ -174,6 +176,7 @@
                 <button class="button select-all" id="tc-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="tc-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="tc-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="rm-picker-modal">
             <div class="modal-header">
@@ -184,6 +187,7 @@
                 <button class="button select-all" id="rm-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="rm-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="rm-picker-wrapper"></div>
         </div>
         <div class="modal-content green" id="cb-picker-modal">
             <div class="modal-header">
@@ -194,6 +198,7 @@
                 <button class="button select-all" id="cb-select-all"><i class="left-bias fa-solid fa-list-check"></i> Select All</button>
                 <button class="button deselect-all" id="cb-deselect-all"><i class="left-bias fa-solid fa-list-ul"></i> Deselect All</button>
             </div>
+            <div id="cb-picker-wrapper"></div>
         </div>
 
         <div class="modal-content green" id="map-visual-modal" style="max-width: 95vw;">
@@ -291,10 +296,10 @@
             </div>
         </div>
 
-        <div class="modal-content green" id="settings-modal">
+        <div class="modal-content green" id="preferences-modal">
             <div class="modal-header">
-                <div class="modal-title">Settings</div>
-                <button class="button exit" id="settings-close"><i class="fa-solid fa-circle-xmark"></i></button>
+                <div class="modal-title">Preferences</div>
+                <button class="button exit" id="preferences-close"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
             <p>Preferred sorting method</p>
             <select id="preferred-sort-setting">
@@ -309,7 +314,7 @@
         ·
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="about-button">About</a>
         ·
-        <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="settings-button">Settings</a>
+        <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
 <script src="init.js"></script>

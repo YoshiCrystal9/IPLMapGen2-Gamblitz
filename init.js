@@ -1,3 +1,4 @@
+
 //connect buttons to open modals
 const stageButtons = document.getElementsByClassName("map-picker button");
 const modalContainer = document.getElementById("modal-container");
@@ -79,18 +80,23 @@ function createMapVisual(){
 
     table.appendChild(tr);
 
-    for (var i = 0; i < allMaps.length; i++){
+    var mapsSort = allMaps;
+    if (localStorage.getItem("sorting-order") == "alpha"){
+        mapsSort = allMapsAlpha;
+    }
+
+    for (var i = 0; i < mapsSort.length; i++){
         var sussyAmongusFortniteMinecrafter = false;
 
         const tr = document.createElement("tr");
 
         const mapName = document.createElement("td");
-        mapName.innerHTML = allMaps[i];
+        mapName.innerHTML = mapsSort[i];
         tr.appendChild(mapName);
 
         for (var j = 0; j < modes.length; j++){
             const td = document.createElement("td");
-            if (document.getElementById(`${modes[j]}-${allMaps[i]}-map-selector`).checked){
+            if (document.getElementById(`${modes[j]}-${mapsSort[i]}-map-selector`).checked){
                 const circle = document.createElement("div");
                 circle.classList.add("circle");
                 td.appendChild(circle);
@@ -281,19 +287,19 @@ aboutClose.onclick = function(){
 }
 
 
-const settingsButton = document.getElementById("settings-button");
-const settingsModal = document.getElementById("settings-modal");
-const settingsClose = document.getElementById("settings-close");
+const preferencesButton = document.getElementById("preferences-button");
+const preferencesModal = document.getElementById("preferences-modal");
+const preferencesClose = document.getElementById("preferences-close");
 
-settingsButton.onclick = function(){
+preferencesButton.onclick = function(){
     modalContainer.style.display = "flex";
-    settingsModal.style.display = "flex";
+    preferencesModal.style.display = "flex";
     modalContainer.classList.add("green");
 }
 
-settingsClose.onclick = function(){
+preferencesClose.onclick = function(){
     modalContainer.style.display = "none";
-    settingsModal.style.display = "none";
+    preferencesModal.style.display = "none";
     modalContainer.classList.remove("green");
 }
 
@@ -312,8 +318,8 @@ for (var i = 0; i < allMaps.length; i++){
         const mapLabel = document.createElement("label");
         mapLabel.setAttribute("for", mapInputId);
         mapLabel.innerHTML = `<div class="map-name">${allMaps[i]}</div>`;
-        mapLabel.setAttribute("release-order", i);
-        mapLabel.setAttribute("alpha-order", allMapsAlpha.indexOf(allMaps[i]));
+        mapLabel.setAttribute("data-release", i);
+        mapLabel.setAttribute("data-alpha", allMapsAlpha.indexOf(allMaps[i]));
 
         const mapInput = document.createElement("input");
         mapInput.type = "checkbox";
@@ -324,7 +330,7 @@ for (var i = 0; i < allMaps.length; i++){
 
         mapLabel.appendChild(mapInput);
 
-        document.getElementById(`${modes[j]}-picker-modal`).appendChild(mapLabel);
+        document.getElementById(`${modes[j]}-picker-wrapper`).appendChild(mapLabel);
 
 
         //make "select all" & "deselect all" buttons work for each mode
@@ -831,6 +837,26 @@ function scrollToMapList(){
 }
 
 
+const settingsTab = document.getElementById("settings-tab");
+const mapListTab = document.getElementById("maplist-tab");
+const optionsPanel = document.getElementsByClassName("options-panel")[0];
+const mapsPanel = document.getElementsByClassName("maps-panel")[0];
+
+settingsTab.onclick = function(){
+    optionsPanel.classList.remove("mobile-hidden");
+    mapsPanel.classList.add("mobile-hidden");
+    settingsTab.classList.add("active");
+    mapListTab.classList.remove("active");
+    
+};
+mapListTab.onclick = function(){
+    optionsPanel.classList.add("mobile-hidden");
+    mapsPanel.classList.remove("mobile-hidden");
+    settingsTab.classList.remove("active");
+    mapListTab.classList.add("active");
+};
+
+
 
 const header = document.getElementsByClassName("header")[0];
 const columnContainer = document.getElementsByClassName("column-container")[0];
@@ -848,6 +874,10 @@ if (visited != 1){
 }
 else {
     startPage.style.display = "none";
+    setTimeout(() => {
+        optionsPanel.style.animationDuration = ".4s";
+        mapsPanel.style.animationDuration = ".4s";
+    }, 1000);
 }
 
 function startButtonClick(){
@@ -862,6 +892,87 @@ function startButtonClick(){
         localStorage.setItem("visited", 1);
 
     }, 600);
+
+    setTimeout(() => {
+        optionsPanel.style.animationDuration = ".4s";
+        mapsPanel.style.animationDuration = ".4s";
+    }, 1600);
+}
+
+
+const preferredSortSetting = document.getElementById("preferred-sort-setting");
+var sortingMethod = localStorage.getItem("sorting-order");
+if (sortingMethod == null){
+    localStorage.setItem("sorting-order", preferredSortSetting.value);
+} else {
+    preferredSortSetting.value = sortingMethod;
+    if (sortingMethod == "alpha"){
+        changeToAlphaSort();
+    }
+}
+
+//on sorting method change
+preferredSortSetting.onchange = function(){
+    localStorage.setItem("sorting-order", preferredSortSetting.value);
+    if (preferredSortSetting.value == "alpha"){
+        changeToAlphaSort();
+    } else {
+        changeToReleaseSort();
+    }
+}
+
+function changeToReleaseSort(){
+    const stageSelModals = [
+        document.getElementById("tw-picker-wrapper"),
+        document.getElementById("sz-picker-wrapper"),
+        document.getElementById("tc-picker-wrapper"),
+        document.getElementById("rm-picker-wrapper"),
+        document.getElementById("cb-picker-wrapper")
+    ];
+
+    for (var i = 0; i < stageSelModals.length; i++){
+        const childLabels = stageSelModals[i].children;
+        const indexesArray = Array.from(childLabels);
+        const sortedByRel = indexesArray.sort(function(a,b){
+            const ai = parseInt(a.dataset.release);
+            const bi = parseInt(b.dataset.release);
+            if (ai < bi){
+                return -1;
+            } else if (ai > bi){
+                return 1;
+            }
+            return 0;
+        });
+        sortedByRel.forEach(e =>
+            document.querySelector("#" + stageSelModals[i].id).appendChild(e));
+    }
+}
+
+function changeToAlphaSort(){
+    const stageSelModals = [
+        document.getElementById("tw-picker-wrapper"),
+        document.getElementById("sz-picker-wrapper"),
+        document.getElementById("tc-picker-wrapper"),
+        document.getElementById("rm-picker-wrapper"),
+        document.getElementById("cb-picker-wrapper")
+    ];
+
+    for (var i = 0; i < stageSelModals.length; i++){
+        const childLabels = stageSelModals[i].children;
+        const indexesArray = Array.from(childLabels);
+        const sortedByAlpha = indexesArray.sort(function(a,b){
+            const ai = parseInt(a.dataset.alpha);
+            const bi = parseInt(b.dataset.alpha);
+            if (ai < bi){
+                return -1;
+            } else if (ai > bi){
+                return 1;
+            }
+            return 0;
+        });
+        sortedByAlpha.forEach(e =>
+            document.querySelector("#" + stageSelModals[i].id).appendChild(e));
+    }
 }
 
 

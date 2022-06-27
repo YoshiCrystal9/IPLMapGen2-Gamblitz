@@ -78,8 +78,8 @@ input:focus{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    padding: 0 20%;
+    justify-content: flex-start;
+    padding: 5% 20%;
     overflow-y: scroll;
     animation: startPageOpen 1s forwards;
 }
@@ -216,7 +216,6 @@ input:focus{
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
-    animation: first_scaleIn 1s forwards;
 }
 
 .options-panel{
@@ -225,6 +224,7 @@ input:focus{
     background: var(--color-bg-light);
     user-select: none;
     transition-duration: var(--transition-duration);
+    animation: from_right 1s forwards;
 }
 .options-panel::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -237,6 +237,7 @@ input:focus{
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
+    animation: from_left 1s forwards;
 }
 .maps-panel::-webkit-scrollbar-thumb{
     background: var(--color-accent-dark);
@@ -996,16 +997,6 @@ input:focus{
 
 
 /* first open animations*/
-@keyframes first_scaleIn {
-    from {
-        transform: scale(0.75);
-        opacity: 0%;
-    }
-    to {
-        transform: scale(1);
-        opacity: 100%;
-    }
-}
 
 @keyframes first_fromTop {
     from {
@@ -1026,5 +1017,28 @@ input:focus{
     to {
         opacity: 100%;
         top: 0px;
+    }
+}
+
+
+@keyframes from_left {
+    from{
+        left: 5rem;
+        opacity: 0;
+    }
+    to{
+        left: 0rem;
+        opacity: 1;
+    }
+}
+
+@keyframes from_right {
+    from{
+        right: 5rem;
+        opacity: 0;
+    }
+    to{
+        right: 0rem;
+        opacity: 1;
     }
 }
