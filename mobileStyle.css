@@ -90,7 +90,7 @@
     }
 
     .button{
-        margin: .5em;
+        margin: .25em .25rem;
         justify-content: space-between;
     }
     .button:hover{
@@ -147,11 +147,13 @@
         font-size: 1.35em;
     }
 
+    .menu-header{
+        margin-top: 3.5em;
+    }
+
     .button {
-        border: 1px solid rgba(0, 0, 0, .4);
+        border: 1px solid rgba(0, 0, 0, .2);
         border-radius: .75em;
-        padding: .5em;
-        margin: .25em;
     }
     .button:hover{
         border-color: white;
@@ -188,6 +190,15 @@
         width: -webkit-fill-available;
         width: -moz-available;
         margin-bottom: .25em;
+    }
+
+    .added-round > .title{
+        width: 100%;
+    }
+
+    .added-round > .games{
+        margin-left: 0;
+        font-size: .85em;
     }
 
     .added-round > .button:first-of-type{
