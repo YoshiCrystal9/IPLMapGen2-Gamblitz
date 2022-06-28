@@ -647,6 +647,7 @@ input:focus{
     max-height: 85vh;
     overflow: auto;    
     transition-duration: var(--transition-duration);
+    padding-bottom: 1em;
 }
 .modal-content::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
