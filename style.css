@@ -298,6 +298,7 @@ input:focus{
     border-spacing: .5em;
     font-size: 1.2em;
     transition-duration: .15s;
+    padding: .5em 1.5rem;
 }
 
 .map-visual-table th{
@@ -641,7 +642,6 @@ input:focus{
     flex-direction: column;
     border: solid .25em;
     border-radius: 1.5em;
-    padding: 1em;
     animation: zoom .25s 1;
     max-width: 85vh;
     max-height: 85vh;
@@ -699,8 +699,8 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: .4em;
-    margin: .25em;
+    padding: .5em .75rem;
+    margin: .25em .75rem;
     border-radius: .5em;
     transition-duration: var(--transition-duration);
     font-weight: 400;
@@ -732,15 +732,14 @@ input:focus{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0 1.5rem;
     margin-bottom: .65em;
 }
 
 .modal-content > .text-export-textarea{
-    width: 85%;
     height: 100%;
     border: none;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 1.5rem;
     font-size: .8em;
     font-weight: 400;
     background: var(--color-accent-dark);
@@ -764,32 +763,37 @@ input:focus{
 .modal-content > .text-export-subtitle{
     font-size: .9em;
     font-weight: 400;
+    margin: 0 1.5rem;
     margin-bottom: 1em;
-    margin-left: auto;
-    margin-right: auto;
     user-select: none;
 }
 
 .modal-content > .detail{
     font-size: .7em;
     font-weight: 400;
+    margin: 0 1.5rem;
     margin-top: 1em;
 }
 
 .modal-header{
     display: flex;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
     flex-direction: row;
     justify-content: space-between;
     align-items: baseline;
     font-size: 1.4em;
     font-weight: 700;
-    padding: 0 .5em;
+    padding: .5em 1.5rem;
+    padding-right: 0;
     margin-bottom: .75em;
-    border-bottom: solid .05em;
+    border-bottom: solid .09rem;
 }
 .modal-header > .exit {
-    margin: 0;
-    padding: .5em;
+    margin: 0 .75rem;
+    padding: .75rem;
+    border-radius: 100%;
 }
 .modal-header > .exit:hover{
     transform: scale(1.04);
@@ -798,9 +802,11 @@ input:focus{
 
 .red > .modal-header{
     border-color: var(--color-accent-dark);
+    background: var(--color-accent-light);
 }
 .green > .modal-header{
     border-color: var(--color-bg-dark);
+    background: var(--color-bg-light);
 }
 .red > .exit{
     color: var(--color-accent-dark);
@@ -816,6 +822,7 @@ input:focus{
 
 .mode-container-title{
     font-size: 1.4em;
+    margin: 0 1.5rem;
     margin-bottom: .6em;
     font-weight: 600;
 }
@@ -823,6 +830,7 @@ input:focus{
 .stats-nav{
     display: flex;
     flex-direction: row;
+    margin: 0 1.25rem;
     margin-bottom: 1.5em;
     flex-wrap: wrap;
     justify-content: center;
@@ -833,7 +841,7 @@ input:focus{
     background: var(--color-accent-dark);
     text-align: center;
     border: .1em solid #00000000;
-    margin: .2em;
+    margin: .25rem;
 }
 .stats-nav > .button:hover{
     color: var(--color-accent-dark);
@@ -853,7 +861,8 @@ input:focus{
 }
 
 .stats-options > .stats-option{
-    padding: .3em 1em;
+    padding: .3em .75rem;
+    margin: .25em .75rem;
 }
 
 .stats-option > .stats-option-name{
@@ -864,10 +873,12 @@ input:focus{
     font-size: .9em;
     font-weight: 400;
     letter-spacing: .12em;
+    margin: 0 1.5rem;
     margin-bottom: .2em;
 }
 
 .stats-footer {
+    margin: 0 1.5rem;
     margin-top: 4em;
     font-size: .6em;
     font-style: italic;
@@ -881,7 +892,8 @@ input:focus{
     background: var(--color-accent-dark);
     color: var(--color-accent-light);
     height: 1.2em;
-    padding: .25em;
+    padding: .25rem;
+    margin: 0 1.25rem;
     padding-right: 1em;
     border-radius: .6em;
     margin-bottom: .5em;
@@ -899,11 +911,15 @@ input:focus{
 }
 
 .save-name{
-    margin: .25em 0;
+    margin: .25em 1.5rem;
     margin-top: .1em;
     padding: .4em;
     border: .1em solid var(--color-bg-dark);
     color: var(--color-bg-dark);
+}
+
+.modal-content > .save-button {
+    margin: .25em 1.5em;
 }
 
 .load-container{
@@ -917,8 +933,7 @@ input:focus{
     flex-direction: row;
     align-items: center;
     border-bottom: .01em solid var(--color-bg-dark);
-    margin-top: .5em;
-    padding-bottom: .5em;
+    margin: .5em 1.5rem;
 }
 
 .load-wrapper > .button {
@@ -939,8 +954,8 @@ input:focus{
 
 
 .picker-select-shortcuts .button{
-    margin: .25em .3em;
     font-weight: 700;
+    margin: 0;
 }
 .picker-select-shortcuts .button:hover{
     background: white;
@@ -948,6 +963,7 @@ input:focus{
 
 .picker-select-shortcuts .select-all{
     background: var(--color-primary);
+    margin-right: .2em;
 }
 .picker-select-shortcuts .select-all:hover{
     letter-spacing: normal;
@@ -961,6 +977,7 @@ input:focus{
 .picker-select-shortcuts .deselect-all{
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
+    margin-left: .2em;
 }
 .picker-select-shortcuts .deselect-all:hover{
     letter-spacing: normal;
@@ -972,8 +989,8 @@ input:focus{
 }
 
 .sorting-menu {
-    padding: .4em;
-    margin: .25em;
+    padding: .25rem;
+    margin: .25em 1.25rem;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1024,7 +1041,7 @@ input:focus{
 }
 
 .about-container p {
-    margin: .5em;
+    margin: .5em 1.5rem;
 }
 
 .about-container img{

@@ -442,7 +442,7 @@ function getStats(){
             const mapCount = document.createElement("div");
             mapCount.className = "map-count";
             mapCount.innerText = maps[j].count;
-            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 1.5em)`;
+            mapCount.style.width = `calc(${(maps[j].count / maps[0].count) * 100}% - 4rem)`;
 
             mapContainer.appendChild(mapName);
             mapContainer.appendChild(mapCount);
