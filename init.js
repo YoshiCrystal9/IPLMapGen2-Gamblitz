@@ -994,7 +994,7 @@ const contrastToggle = document.getElementById("contrast-toggle");
 
 contrastToggle.addEventListener("change", function(){
     if (contrastToggle.checked){
-        document.documentElement.style.filter = "contrast(1.4) saturate(1.15)";
+        document.documentElement.style.filter = "contrast(1.6) saturate(.8)";
         localStorage.setItem("high-contrast", 1);
     } else {
         document.documentElement.style.filter = "none";

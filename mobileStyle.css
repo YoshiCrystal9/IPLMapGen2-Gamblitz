@@ -4,10 +4,6 @@
         font-size: calc(16px + .5vw);
     }
 
-    body{
-        height: auto;
-    }
-
     .start-page-wrapper{
         padding: 2em;
         height: calc(100vh - 4em);
@@ -20,9 +16,6 @@
         background: var(--color-bg-dark);
         flex: none;
         margin: var(--global-margin) auto 0 auto;
-        position: sticky;
-        top: 0px;
-        z-index: 1;
         width: 100%;
     }
     .header::before{
@@ -80,7 +73,6 @@
     }
 
     .column-container{
-        display: inline;
         overflow: auto;
         padding: var(--global-margin);
         overflow-x: hidden;
@@ -170,11 +162,14 @@
     }
 
     .options-panel, .maps-panel {
-        padding: 8px;
-        margin-bottom: calc(var(--global-margin) * 4);
+        padding: .1em;
         border-radius: 0;
         border-left: none;
         border-right: none;
+    }
+
+    .map-visual-table{
+        padding: .5em 0;
     }
 
     .save-load > .title {
@@ -230,11 +225,15 @@
     }
 
     .modal-content{
-        max-width: 95vw;
+        width: 100%;
         max-height: 85vh;
         margin: 0;
         border: none;
         border-radius: 0;
+    }
+
+    .modal-content.green, .modal-content.red{
+        box-shadow: none;
     }
 
     .modal-content label {
@@ -243,7 +242,7 @@
     }
 
     .footer{
-        margin-bottom: 1em;
+        margin: .5em 0;
     }
 
 }
