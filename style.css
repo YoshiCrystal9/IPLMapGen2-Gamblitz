@@ -934,8 +934,7 @@ input:focus{
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-bottom: .01em solid var(--color-bg-dark);
-    margin: .5em 1.5rem;
+    margin: .25em 1.5rem;
 }
 
 .load-wrapper > .button {
@@ -1038,8 +1037,9 @@ input:focus{
     font-size: 1.2em;
     font-weight: 600;
     box-shadow: 0em .2em 1em rgb(0 0 0 / 35%);
-    animation: toast-open .75s;
+    animation: toast-open .5s;
     z-index: 100;
+    transition-duration: .5s;
 }
 
 .toast-close{

@@ -1000,6 +1000,12 @@ if (localStorage.getItem("high-contrast") == 1){
 
 
 function createToast(innerHTML){
+    const existingToasts = document.getElementsByClassName("toast");
+    for (var i = 0; i < existingToasts.length; i++){
+        const offset = (existingToasts.length - i + 1) * 4;
+        existingToasts[i].style.bottom = offset + "rem";
+    }
+
     const toast = document.createElement("div");
     toast.classList.add("toast");
     const id = `toast-${Date.now()}`;
@@ -1023,7 +1029,7 @@ function createToast(innerHTML){
 
     setTimeout(() => {
         toast.style.animation = "toast-fade 1s 4s";
-    }, 750);
+    }, 500);
 
     setTimeout(() => {
         toast.remove();
