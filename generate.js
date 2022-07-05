@@ -492,6 +492,7 @@ function exportToJSONFile(){
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
+    createToast("Downloading map list as JSON");
 }
 
 
