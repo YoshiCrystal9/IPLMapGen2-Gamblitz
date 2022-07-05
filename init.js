@@ -225,10 +225,7 @@ exportDiscordClose.onclick = function(){
 exportDiscordCopy.onclick = function(){
     const text = document.getElementById("discord-export-textarea");
     navigator.clipboard.writeText(text.value).then(function() {
-        exportDiscordCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-check fa-bounce"></i>Copied';
-        setTimeout(function(){
-            exportDiscordCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-list"></i>Copy';
-        }, 2000);
+        createToast("Copied text");
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
@@ -260,10 +257,7 @@ exportURLClose.onclick = function(){
 exportURLCopy.onclick = function(){
     const text = document.getElementById("url-export-textarea");
     navigator.clipboard.writeText(text.value).then(function() {
-        exportURLCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-check fa-bounce"></i>Copied';
-        setTimeout(function(){
-            exportURLCopy.innerHTML = '<i class="left-bias fa-solid fa-clipboard-list"></i>Copy';
-        }, 2000);
+        createToast("Copied text");
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
@@ -588,6 +582,8 @@ function saveDialogOnClick(){
     localStorage.setItem(`maps.iplabs.ink-${saveName}`, JSON.stringify(maps));
 
     saveModalClose.click();
+
+    createToast("Map pool saved as " + saveName);
 }
 
 function loadOnClick(){
@@ -642,13 +638,8 @@ function loadOnClick(){
                     adjustSelectedCount(modes[j]);
                 }
 
-                const oldInner = loadButton.innerHTML;
-                loadButton.innerHTML = '<i class="left-bias fa-solid fa-bounce fa-check"></i>Loaded'
-                
-                setTimeout(function(){
-                    loadModalClose.click();
-                    loadButton.innerHTML = oldInner;
-                }, 1000);
+                loadModalClose.click();
+                createToast("Map pool loaded");
             });
 
             const loadDeleteButton = document.createElement("button");
@@ -1005,6 +996,38 @@ contrastToggle.addEventListener("change", function(){
 if (localStorage.getItem("high-contrast") == 1){
     contrastToggle.checked = true;
     contrastToggle.dispatchEvent(new Event("change"));
+}
+
+
+function createToast(innerHTML){
+    const toast = document.createElement("div");
+    toast.classList.add("toast");
+    const id = `toast-${Date.now()}`;
+    toast.id = id;
+
+    const toastClose = document.createElement("div");
+    toastClose.classList.add("toast-close");
+    toastClose.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+    const toastContent = document.createElement("div");
+    toastContent.innerHTML = innerHTML;
+
+    toast.appendChild(toastClose);
+    toast.appendChild(toastContent);
+
+    document.body.appendChild(toast);
+
+    toastClose.addEventListener("click", function(){
+        document.getElementById(id).remove();
+    });
+
+    setTimeout(() => {
+        toast.style.animation = "toast-fade 1s 4s";
+    }, 750);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 5000);
 }
 
 
