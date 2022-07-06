@@ -16,22 +16,13 @@ for (var i = 0; i < stageButtons.length; i++){
     }
 
     modalClose.onclick = function(){
-        modalContainer.style.display = "none";
-        modalContent.style.display = "none";
-        modalContainer.classList.remove("green");
-        modalContainer.classList.remove("red");
+        closeModal(modalContent);
     }
 }
 
 window.addEventListener("click", function(event){
     if (event.target == modalContainer){
-        modalContainer.style.display = "none";
-        modalContainer.classList.remove("green");
-        modalContainer.classList.remove("red");
-        const modals = document.getElementsByClassName("modal-content");
-        for (var i = 0; i < modals.length; i++){
-            modals[i].style.display = "none";
-        }
+        closeModal();
     }
 });
 
@@ -49,9 +40,7 @@ mapVisualButton.onclick = function(){
 
 const mapVisualClose = document.getElementById("map-visual-close");
 mapVisualClose.onclick = function(){
-    modalContainer.style.display = "none";
-    modalContainer.classList.remove("green");
-    mapVisualModal.style.display = "none";
+    closeModal(mapVisualModal);
 }
 
 function createMapVisual(){
@@ -182,10 +171,7 @@ mapStatsButton.onclick = function(){
 }
 
 mapStatsClose.onclick = function(){
-    modalContainer.style.display = "none";
-    mapStatsModal.style.display = "none";
-    modalContainer.classList.remove("red");
-    modalContainer.classList.remove("green");
+    closeModal(mapStatsModal);
 }
 
 function statsHideAll(){
@@ -216,10 +202,7 @@ exportButtonDiscord.onclick = function(){
 }
 
 exportDiscordClose.onclick = function(){
-    modalContainer.style.display = "none";
-    exportDiscordModal.style.display = "none";
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
+    closeModal(exportDiscordModal);
 }
 
 exportDiscordCopy.onclick = function(){
@@ -248,10 +231,7 @@ exportButtonURL.onclick = function(){
 }
 
 exportURLClose.onclick = function(){
-    modalContainer.style.display = "none";
-    exportURLModal.style.display = "none";
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
+    closeModal(exportURLModal);
 }
 
 exportURLCopy.onclick = function(){
@@ -275,9 +255,7 @@ aboutButton.onclick = function(){
 }
 
 aboutClose.onclick = function(){
-    modalContainer.style.display = "none";
-    aboutModal.style.display = "none";
-    modalContainer.classList.remove("green");
+    closeModal(aboutModal);
 }
 
 
@@ -292,9 +270,7 @@ preferencesButton.onclick = function(){
 }
 
 preferencesClose.onclick = function(){
-    modalContainer.style.display = "none";
-    preferencesModal.style.display = "none";
-    modalContainer.classList.remove("green");
+    closeModal(preferencesModal);
 }
 
 
@@ -540,19 +516,13 @@ function updateGenerateButtonStatus(){
 const saveModal = document.getElementById("save-modal");
 const saveModalClose = document.getElementById("save-close");
 saveModalClose.addEventListener("click", function(){
-    saveModal.style.display = "none";
-    modalContainer.style.display = "none";
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
+    closeModal(saveModal);
 });
 
 const loadModal = document.getElementById("load-modal");
 const loadModalClose = document.getElementById("load-close");
 loadModalClose.addEventListener("click", function(){
-    loadModal.style.display = "none";
-    modalContainer.style.display = "none";
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
+    closeModal(loadModal);
 });
 
 function saveOnClick(){
@@ -581,7 +551,7 @@ function saveDialogOnClick(){
 
     localStorage.setItem(`maps.iplabs.ink-${saveName}`, JSON.stringify(maps));
 
-    saveModalClose.click();
+    closeModal(saveModal);
 
     createToast("Map pool saved as " + saveName);
 }
@@ -638,7 +608,7 @@ function loadOnClick(){
                     adjustSelectedCount(modes[j]);
                 }
 
-                loadModalClose.click();
+                closeModal(loadModal);
                 createToast("Map pool loaded");
             });
 
@@ -1036,7 +1006,44 @@ function createToast(innerHTML){
     }, 5000);
 }
 
+function closeModal(modalContent){
+    modalContainer.classList.remove("green");
+    modalContainer.classList.remove("red");
 
+    var timeout = window.matchMedia("(prefers-reduced-motion)").matches ? 0 : 150;
+    
+    modalContainer.style.animation = "fadeOut .15s 1";
+
+    setTimeout(() => {
+        modalContainer.style.display = "none";
+        modalContainer.style.animation = "fadeIn .25s 1";
+    }, timeout);
+
+    if (modalContent != undefined){
+        modalContent.style.animation = "zoomOut .15s 1";
+
+        setTimeout(() => {
+            modalContent.style.display = "none";
+            modalContent.style.animation = "zoom .25s 1";
+        }, timeout);
+
+    } else {
+        const modals = document.getElementsByClassName("modal-content");
+
+        for (var i = 0; i < modals.length; i++){
+            if (modals[i].style.display == "flex"){
+                const visibleModal = modals[i];
+
+                visibleModal.style.animation = "zoomOut .15s 1";
+
+                setTimeout(() => {
+                    visibleModal.style.display = "none";
+                    visibleModal.style.animation = "zoom .25s 1";
+                }, timeout);
+            }
+        }
+    }
+}
 
 
 //thank you for checking out the code. Here is your reward.

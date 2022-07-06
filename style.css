@@ -674,13 +674,23 @@ input:focus{
 }
 
 @keyframes fadeIn {
-    from { opacity: 0%; }
-    to { opacity: 100%; }
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 @keyframes zoom {
     from { transform: scale(0.85); }
     to { transform: scale(1); }
+}
+
+@keyframes zoomOut {
+    from { transform: scale(1); }
+    to { transform: scale(0.85); }
 }
 
 .modal-content > .button{
