@@ -113,6 +113,7 @@ function createMapVisual(){
 
     if (table.childNodes.length <= 1){
         table.innerHTML = "No maps selected.";
+        table.style.borderSpacing = "0";
         mapVisualZoomIn.style.display = "none";
         mapVisualZoomOut.style.display = "none";
     }
@@ -338,7 +339,6 @@ const roundNameInput = document.getElementById("round-name");
 const roundGamesInput = document.getElementById("round-games");
 const roundIsCounterpick = document.getElementById("round-counterpick-check");
 const roundError = document.getElementById("round-error-message");
-
 const roundEditor = document.getElementById("round-editor");
 
 addRoundButton.addEventListener("click", function(){
@@ -538,6 +538,7 @@ function saveOnClick(){
 function saveDialogOnClick(){
     const saveName = document.getElementById("save-name").value;
     if (saveName == ""){
+        createToast("Enter a name to save.");
         return;
     }
 
@@ -554,6 +555,8 @@ function saveDialogOnClick(){
     closeModal(saveModal);
 
     createToast("Map pool saved as " + saveName);
+
+    document.getElementById("save-name").value = "";
 }
 
 function loadOnClick(){
@@ -966,6 +969,23 @@ contrastToggle.addEventListener("change", function(){
 if (localStorage.getItem("high-contrast") == 1){
     contrastToggle.checked = true;
     contrastToggle.dispatchEvent(new Event("change"));
+}
+
+const fontSizeToggle = document.getElementById("font-size-toggle");
+
+fontSizeToggle.addEventListener("change", function(){
+    if (fontSizeToggle.checked){
+        document.documentElement.style.fontSize = "1.3em";
+        localStorage.setItem("consistent-font", 1);
+    } else {
+        document.documentElement.style.removeProperty("font-size");
+        localStorage.setItem("consistent-font", 0);
+    }
+});
+
+if (localStorage.getItem("consistent-font") == 1){
+    fontSizeToggle.checked = true;
+    fontSizeToggle.dispatchEvent(new Event("change"));
 }
 
 

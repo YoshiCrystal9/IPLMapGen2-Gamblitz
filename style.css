@@ -32,7 +32,7 @@
     * {
         animation-duration: 0s !important;
         animation-delay: 0s !important;
-        transition-duration: 0s !important;
+        transition-duration: 0s !important; 
     }
 }
 
@@ -940,6 +940,12 @@ input:focus{
     align-items: stretch;
 }
 
+.load-container:empty::after{
+    position: relative;
+    content: "No saved map lists.";
+    padding: 1rem 1.5rem;
+}
+
 .load-wrapper{
     display: flex;
     flex-direction: row;
@@ -948,7 +954,11 @@ input:focus{
 }
 
 .load-wrapper > .button {
-    margin: .2em;
+    margin: 0;
+}
+
+.load-wrapper > .button:nth-child(2) {
+    margin-right: .5rem;
 }
 
 .load-name{
@@ -1001,7 +1011,7 @@ input:focus{
 
 .sorting-menu {
     padding: .25rem;
-    margin: .25em 1.25rem;
+    margin: .5em 1.25rem;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
