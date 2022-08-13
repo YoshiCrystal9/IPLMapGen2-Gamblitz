@@ -4,7 +4,7 @@
 
 Data can be stored in the URL to share map pool and map lists without needing a backend storage solution. The data found in the URL needs to be compressed to keep the URL length in check. This doc will explain how that process works in case other developers in the Splatoon community want to adopt this as a standard.
 
-Example URL:
+Example URL: *Will not work until splat3 branch is live, use [this link](https://splat3.iplmapgen2.pages.dev/?3&pool=tw:1998;sz:1d0a;tc:164c;rm:15e0;cb:1ce0&rounds=Round_1:1-1,2-2,3-5;Round_2:4-4,0-3,1-0;Round_3:2-9,3-1,4-5) for now*
 ```
 https://maps.iplabs.ink/?3&pool=tw:1998;sz:1d0a;tc:164c;rm:15e0;cb:1ce0&rounds=Round_1:1-1,2-2,3-5;Round_2:4-4,0-3,1-0;Round_3:2-9,3-1,4-5
                         ^1 ^2                                           ^3
