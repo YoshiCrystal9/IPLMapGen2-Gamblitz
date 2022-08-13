@@ -151,6 +151,10 @@
         margin-top: 3.5em;
     }
 
+    .splat-2-warn{
+        margin-top: 1em;
+    }
+
     .button {
         border: 1px solid rgba(0, 0, 0, .2);
         border-radius: .75em;

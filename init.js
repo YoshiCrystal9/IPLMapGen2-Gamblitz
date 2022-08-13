@@ -1,3 +1,28 @@
+//multi game functions (splatoon 3 stuff)
+const gameSetting = document.getElementById("game-setting");
+
+if (localStorage.getItem("game") != null){
+    gameSetting.value = localStorage.getItem("game");
+} else {
+    gameSetting.value = "splat3";
+    localStorage.setItem("game", "splat3");
+}
+
+gameSetting.onchange = function(){
+    localStorage.setItem("game", gameSetting.value);
+    document.getElementById("game-change-reload").style.display = "flex"
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("3") != null){
+    gameSetting.value = "splat3";
+} else if (urlParams.get("pool") != null) {
+    gameSetting.value = "splat2";
+}
+
+if (gameSetting.value != "splat2"){
+    document.getElementsByClassName("splat-2-warn")[0].remove();
+}
 
 //connect buttons to open modals
 const stageButtons = document.getElementsByClassName("map-picker button");
@@ -228,7 +253,8 @@ exportButtonURL.onclick = function(){
     const text = document.getElementById("url-export-textarea");
 
     const url = window.location.href.split("?")[0];
-    text.value = url + "?pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+    const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
+    text.value = url + spl3Marker + "pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
 }
 
 exportURLClose.onclick = function(){
@@ -277,8 +303,8 @@ preferencesClose.onclick = function(){
 
 
 //load map options into page
-const allMaps = ["The Reef", "Musselforge Fitness", "Starfish Mainstage", "Humpback Pump Track", "Inkblot Art Academy", "Sturgeon Shipyard", "Moray Towers", "Port Mackerel", "Manta Maria", "Kelp Dome", "Snapper Canal", "Blackbelly Skatepark", "MakoMart", "Walleye Warehouse", "Shellendorf Institute", "Arowana Mall", "Goby Arena", "Piranha Pit", "Camp Triggerfish", "Wahoo World", "New Albacore Hotel", "Ancho-V Games", "Skipper Pavilion"];
-const allMapsAlpha = [...allMaps].sort((a,b) => a.localeCompare(b));
+var allMaps = gameSetting.value == "splat3" ? splat3Maps : splat2Maps;
+var allMapsAlpha = [...allMaps].sort((a,b) => a.localeCompare(b));
 
 for (var i = 0; i < allMaps.length; i++){
     const modes = ["tw","sz","tc","rm","cb"];
@@ -532,7 +558,8 @@ function saveOnClick(){
 
     const saveUrl = document.getElementById("save-url");
     const url = window.location.href.split("?")[0];
-    saveUrl.value = url + "?pool=" + encodeMapPool();
+    const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
+    saveUrl.value = url + spl3Marker + "pool=" + encodeMapPool();
 }
 
 function saveDialogOnClick(){
@@ -646,18 +673,23 @@ function encodeMapPool(){
 
         for (var j = 0; j < allMaps.length; j++){
             //if map is checked
-            const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked
+            const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked;
             thisPool.p += checked ? "1" : "0";
-            hasMaps = checked ? checked : hasMaps;
+            hasMaps = checked ? checked : hasMaps;    
         }
 
         if (!hasMaps){
             continue
         }
 
+        /*
         thisPool.p = thisPool.p.match(/.{4}/g).reduce(function(acc, i) {
             return acc + parseInt(i, 2).toString(16);
         }, '');
+        */
+
+        thisPool.p = parseInt(thisPool.p, 2).toString(16);
+        console.log(thisPool.p);
 
         pools.push(thisPool);
     }
@@ -721,7 +753,6 @@ function encodeRounds(){
 }
 
 
-//tw:11111111111111111111111;sz:;tc:11111111111111111111111;rm:;cb:;
 function decodeMapPool(pools){ 
     pools = pools.split(";");
 
@@ -732,8 +763,10 @@ function decodeMapPool(pools){
             return acc + ('000' + parseInt(i, 16).toString(2)).substr(-4, 4);
         }, '')
 
-        for (var j = 1; j < decodedHex.length; j++){
-            document.getElementById(thisPool[0] + "-" + allMaps[j-1] + "-map-selector").checked = decodedHex[j] == "1";
+        const offset = decodedHex.length - allMaps.length;
+        for (var j = offset; j < decodedHex.length; j++){
+            console.log(j - offset);
+            document.getElementById(thisPool[0] + "-" + allMaps[j-offset] + "-map-selector").checked = decodedHex[j] == "1";
         }
 
         adjustSelectedCount(thisPool[0]);
@@ -741,7 +774,6 @@ function decodeMapPool(pools){
 }
 
 
-// Round_1:4-14,0-19,1-3;Round_2:2-21,3-8,4-2,0-11,1-22;Round_3:2-17,3-0,4-12,0-10,1-16,2-18,3-1;
 function decodeRounds(rounds){
     var rounds = rounds.split(";");
     for (var i = 0; i < rounds.length; i++){
@@ -827,7 +859,6 @@ const columnContainer = document.getElementsByClassName("column-container")[0];
 const footer = document.getElementsByClassName("footer")[0];
 const startPage = document.getElementById("start-page-wrapper");
 
-const urlParams = new URLSearchParams(window.location.search);
 const visited = localStorage.getItem('visited');
 
 if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
@@ -1064,6 +1095,8 @@ function closeModal(modalContent){
         }
     }
 }
+
+
 
 
 //thank you for checking out the code. Here is your reward.

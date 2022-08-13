@@ -249,6 +249,17 @@ input:focus{
     background: var(--color-accent-dark);
 }
 
+.splat-2-warn{
+    background: var(--color-primary);
+    padding: 1rem;
+    border-radius: 1.25rem;
+}
+
+.splat-2-warn a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .button{
     display: flex;
     flex-direction: row;
@@ -1019,7 +1030,6 @@ input:focus{
 }
 
 .sorting-menu select{
-    margin-left: .75em;
     padding: .2em;
     background: #00000000;
     font-family: 'Roboto Mono', monospace;
@@ -1028,7 +1038,7 @@ input:focus{
     border-width: 0em;
     font-size: .8em;
     font-weight: 400;
-    margin-left: 2em;
+    margin-left: auto;
     transition-duration: .1s;
 }
 

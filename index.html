@@ -29,7 +29,7 @@
             Welcome to MAPS.IPLABS.INK
         </div>
         <div class="start-page-subtext">
-            A Splatoon 2 map generator created by <a href="http://iplabs.ink/">Inkling Performance Labs</a> for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
+            A Splatoon map generator created by <a href="http://iplabs.ink/">Inkling Performance Labs</a> for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
         </div>
         <div class="start-page-tutorial">
             <b><i class="fa-solid fa-graduation-cap"></i> A very quick tutorial:</b><br>
@@ -59,6 +59,8 @@
     </div>
     <div class="column-container">
         <div class="options-panel">
+
+            <div class="splat-2-warn">Using Splatoon 2 maps, switch to Splatoon 3 maps in the <a onclick="document.getElementById('preferences-button').click()">preferences menu</a>.</div>
 
             <div class="menu-header"><i class="left-bias fa-regular fa-pen-to-square"></i>Edit Current Map Pool</div>
             <button class="map-picker button" id="tw-picker">
@@ -301,6 +303,13 @@
                 <div class="modal-title">Preferences</div>
                 <button class="button exit" id="preferences-close"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
+            <div class="sorting-menu">Game
+                <select id="game-setting">
+                    <option value="splat3">Splatoon 3</option>
+                    <option value="splat2">Splatoon 2</option>
+                </select>
+            </div>
+            <button id="game-change-reload" class="save-button button" style="display: none;" onclick="window.location.href = window.location.href.split('?')[0]"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
             <div class="sorting-menu">Preferred Map Order
                 <select id="preferred-sort-setting">
                     <option value="release">Release order</option>
@@ -326,6 +335,7 @@
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
+<script src="data.js"></script>
 <script src="init.js"></script>
 <script src="generate.js"></script>
 </html>
