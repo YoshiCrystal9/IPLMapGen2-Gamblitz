@@ -85,13 +85,17 @@
         width: -moz-available;
     }
 
-    .map-picker, .pool-optionm, .generate{
+    .map-picker, .pool-option, .generate{
         flex-direction: row;
         flex-wrap: nowrap;
     }
 
     .map-picker > .detail, .generate > .detail{
         white-space: nowrap;
+    }
+
+    .pool-option > .detail {
+        text-align: right;
     }
 
     .mobile-hidden {
@@ -189,11 +193,8 @@
         margin: .15em 1rem;
     }
 
-    .pool-option > .detail {
-        text-align: right;
-    }
 
-    .map-picker{
+    .map-picker, .generate{
         flex-direction: column;
         align-items: flex-start;
     }
