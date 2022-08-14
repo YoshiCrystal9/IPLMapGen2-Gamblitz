@@ -168,7 +168,6 @@ input:focus{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    transition-duration: var(--transition-duration);
     user-select: none;
     position: relative;
     animation: first_fromTop 1s forwards;
@@ -189,7 +188,6 @@ input:focus{
 .header img, .header i{
     width: auto;
     height: 1em;
-    transition-duration: var(--transition-duration);
     margin-right: .5em;
 }
 
@@ -229,7 +227,6 @@ input:focus{
     border-color: var(--color-primary);
     background: var(--color-bg-light);
     user-select: none;
-    transition-duration: var(--transition-duration);
     animation: from_right 1s forwards;
 }
 .options-panel::-webkit-scrollbar-thumb{
@@ -238,7 +235,6 @@ input:focus{
 
 .maps-panel{
     flex: none;
-    transition-duration: var(--transition-duration);
     margin-left: 0;
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
@@ -340,12 +336,12 @@ input:focus{
     margin-right: auto;
 }
 
-.save-load > .title {
+.pool-option > .title {
     font-weight: 400;
     font-size: 1.4em;
     margin-right: 1em;
 }
-.save-load > .detail {
+.pool-option > .detail {
     font-size: .8em;
 }
 
