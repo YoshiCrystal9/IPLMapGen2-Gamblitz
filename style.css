@@ -984,6 +984,12 @@ input:focus{
     transform: scale(1.03);
 }
 
+.load-alt-game-counter {
+    font-size: .75em;
+    margin: .25rem 1.5rem;
+    margin-top: 1rem;
+}
+
 
 .picker-select-shortcuts .button{
     font-weight: 700;

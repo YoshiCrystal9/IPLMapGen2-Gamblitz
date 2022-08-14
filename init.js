@@ -141,6 +141,10 @@ function createMapVisual(){
         table.style.borderSpacing = "0";
         mapVisualZoomIn.style.display = "none";
         mapVisualZoomOut.style.display = "none";
+    } else {
+        table.style.borderSpacing = ".5em";
+        mapVisualZoomIn.style.display = "flex";
+        mapVisualZoomOut.style.display = "flex";
     }
 }
 
@@ -577,7 +581,8 @@ function saveDialogOnClick(){
         }
     }
 
-    localStorage.setItem(`maps.iplabs.ink-${saveName}`, JSON.stringify(maps));
+    const loadName = gameSetting.value == "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    localStorage.setItem(`${loadName}${saveName}`, JSON.stringify(maps));
 
     closeModal(saveModal);
 
@@ -599,12 +604,16 @@ function loadOnClick(){
         const noSaves = document.createElement("div");
         noSaves.innerText = "No saves found.";
         loadContainer.appendChild(noSaves);
+        return;
     }
 
+    const checkFor = gameSetting.value == "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    const checkAgainst = gameSetting.value != "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    var otherGameCount = 0;
 
     for (var i = 0; i < storage.length; i++){
-        if (storage[i].startsWith("maps.iplabs.ink-")){
 
+        if (storage[i].startsWith(checkFor)){
             const loadWrapper = document.createElement("div");
             loadWrapper.setAttribute("class", "load-wrapper");
 
@@ -614,7 +623,7 @@ function loadOnClick(){
 
             const loadName = document.createElement("div");
             loadName.setAttribute("class", "load-name");
-            loadName.innerText = storage[i].slice("maps.iplabs.ink-".length);
+            loadName.innerText = storage[i].slice(checkFor.length);
 
             const loadButton = document.createElement("button");
             loadButton.setAttribute("class", "button load-button");
@@ -656,6 +665,18 @@ function loadOnClick(){
             loadWrapper.appendChild(loadDeleteButton);
             loadContainer.appendChild(loadWrapper);
         }
+        else if (storage[i].startsWith(checkAgainst)){
+            otherGameCount++;
+        }
+    }
+
+    if(otherGameCount > 0){
+        const otherGameNotice = document.createElement("div");
+        otherGameNotice.classList.add("load-alt-game-counter");
+        otherGameNotice.innerText = `${otherGameCount} map list${otherGameCount == 1 ? "" : "s"} for ${gameSetting.value == "splat3" ? "Splatoon 2" : "Splatoon 3"}.
+            Change game in the preferences menu.`;
+        
+        loadContainer.appendChild(otherGameNotice);
     }
 }
 
