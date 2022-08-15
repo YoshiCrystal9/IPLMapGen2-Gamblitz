@@ -81,7 +81,7 @@ input:focus{
     height: 100%;
     color: var(--color-bg-dark);
     background: linear-gradient(142deg, var(--color-bg-light) 0%, var(--color-accent-light) 125%);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1184,6 +1184,18 @@ input:focus{
     }
     to{
         right: 0rem;
+        opacity: 1;
+    }
+}
+
+
+@keyframes button_show {
+    from {
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+    }
+    to {
         opacity: 1;
     }
 }

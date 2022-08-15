@@ -162,6 +162,18 @@ function getMapPoolSelectors(mode){
     return mapPool;
 }
 
+function getMapPool(mode){
+    const shortHandMode = getShortHandMode(mode);
+    var pool = [];
+    for (var i = 0; i < allMaps.length; i++){
+        const checkBox = document.getElementById(`${shortHandMode}-${allMaps[i]}-map-selector`);
+        if (checkBox.checked){
+            pool.push(allMaps[i]);
+        }
+    }
+    return pool;
+}
+
 const getShortHandMode = function(mode){
     switch(mode){
         case "Turf War": return "tw";
@@ -280,7 +292,7 @@ function getRecentMapsCap(){
         lowest = Math.min(lowest, cbMaps);
     }
 
-    lowest = Math.max(0, lowest-3);
+    lowest = Math.max(0, Math.ceil(lowest/2));
     return lowest;
 }
 
@@ -354,19 +366,52 @@ function generateMaps(){
 
     var recentMaps = [];
     const recentCap = getRecentMapsCap();
+
+
+    var modeMapTracker = {
+        "Turf War": {}, "Splat Zones": {}, "Tower Control": {}, "Rainmaker": {}, "Clam Blitz": {}
+    };
+    for (const i in modeMapTracker) {
+        const pool = getMapPool(i);
+        for (var j = 0; j < allMaps.length; j++){
+            if (pool.includes(allMaps[j])){
+                modeMapTracker[i][allMaps[j]] = 0;
+            }
+        }
+    }
     
     for (var i = 0; i < gameContainers.length; i++){        
+        var targetNum = gameContainers.length;
+        for (const j in modeMapTracker){
+            for (const k in modeMapTracker[j]){
+                targetNum = Math.min(targetNum, modeMapTracker[j][k]);
+            }
+        }
+
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
-        if (mapDropMenu.value == "Unknown Map" && mapDropMenu.parentElement.querySelector("#mode-drop-menu").value == "Unknown Mode"){
+        const mode = mapDropMenu.parentElement.querySelector("#mode-drop-menu").value;
+        if (mapDropMenu.value == "Unknown Map" && mode == "Unknown Mode"){
             continue;
         }
         
-        //choose a random selection on mapDropMenu that isn't in recentMaps
-        var mapIndex = Math.floor(Math.random() * mapDropMenu.length);
-        while (recentMaps.includes(mapDropMenu.options[mapIndex].value) || mapDropMenu.options[mapIndex].value == "Unknown Map"){
-            mapIndex = Math.floor(Math.random() * mapDropMenu.length);
-        }
+        //choose a random selection on mapDropMenu that isn't in recentMaps and hasn't appeared in the mode before
+        var mapIndex;
+        const safetyCapVal = 999;
+        var safetyCap = 999;
+        do {
+            mapIndex = Math.floor(Math.random() * (mapDropMenu.length-1));
+            // console.log(mode, mapDropMenu.options[mapIndex].value, modeMapTracker[mode][mapDropMenu.options[mapIndex].value], modeMapTracker[mode]);
+            safetyCap--;
+            if (safetyCap <= 0){
+                safetyCap = safetyCapVal;
+                targetNum++;
+            }
+        } while (recentMaps.includes(mapDropMenu.options[mapIndex].value) 
+            || mapDropMenu.options[mapIndex].value == "Unknown Map"
+            || modeMapTracker[mode][mapDropMenu.options[mapIndex].value] > targetNum);
+        
         mapDropMenu.value = mapDropMenu.options[mapIndex].value;
+        modeMapTracker[mode][mapDropMenu.value] += 1;
 
         const event = new Event("change");
         mapDropMenu.dispatchEvent(event);

@@ -710,7 +710,6 @@ function encodeMapPool(){
         */
 
         thisPool.p = parseInt(thisPool.p, 2).toString(16);
-        console.log(thisPool.p);
 
         pools.push(thisPool);
     }
@@ -786,7 +785,6 @@ function decodeMapPool(pools){
 
         const offset = decodedHex.length - allMaps.length;
         for (var j = offset; j < decodedHex.length; j++){
-            console.log(j - offset);
             document.getElementById(thisPool[0] + "-" + allMaps[j-offset] + "-map-selector").checked = decodedHex[j] == "1";
         }
 
@@ -883,6 +881,7 @@ const startPage = document.getElementById("start-page-wrapper");
 const visited = localStorage.getItem('visited');
 
 if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
+    startPage.style.display = "flex";
     const startPageButton = document.getElementById("start-page-button");
     startPageButton.setAttribute("onclick", 'startButtonClick()');
 
@@ -891,7 +890,6 @@ if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") !
     footer.style.display = "none";
 }
 else {
-    startPage.style.display = "none";
     setTimeout(() => {
         optionsPanel.style.animationDuration = ".4s";
         mapsPanel.style.animationDuration = ".4s";
