@@ -385,8 +385,11 @@ addRoundButton.addEventListener("click", function(){
         changeRoundError("Please enter an alphanumeric round name.");
         return;
     }
-
-    changeRoundError();
+    if (parseInt(roundGamesInput.value) >= 100){
+        changeRoundError("That might be a bad idea.");
+    } else {
+        changeRoundError();
+    }
 
     addRound(roundNameInput.value, roundGamesInput.value, roundIsCounterpick.checked);
     
@@ -481,7 +484,7 @@ function changeRoundError(message){
     if (message == ""){
         roundError.style.display = "none";
     }
-    else{
+    else {
         roundError.style.display = "block";
     }
 }
@@ -535,7 +538,7 @@ function updateGenerateButtonStatus(){
         }
         errorMessage.style.display = "block";
     }
-    else{
+    else {
         errorMessage.style.display = "none";
     }
 }
