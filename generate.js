@@ -15,15 +15,27 @@ function getTemplateMap() {
 
 
 function clearGenerateContainer(){
+    const mapsPanel = document.getElementById("maps-panel"); 
+    const computedStyle = getComputedStyle(mapsPanel);
+    var mapsPanelWidth = mapsPanel.clientWidth;
+    mapsPanelWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
+    mapsPanelWidth -= parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+    console.log(mapsPanelWidth);
+    mapsPanel.style.minWidth = mapsPanelWidth + "px";
+
+    setTimeout(() => {
+    mapsPanel.style.minWidth = "0px";
+    }, 1500);
+
     document.getElementById("maps-instruction").style.display = "none";
     document.getElementById("export-buttons-container").style.display = "flex";
 
-    const mapsPanel = document.getElementById("generate-container");
+    const mapsContainer = document.getElementById("generate-container");
     
-    for (var i = 0; i < mapsPanel.children.length; i++){
-        const child = mapsPanel.children[i];
+    for (var i = 0; i < mapsContainer.children.length; i++){
+        const child = mapsContainer.children[i];
         if (child.classList.contains("round-container")){
-            mapsPanel.removeChild(child);
+            mapsContainer.removeChild(child);
             i--;
         }
     }
@@ -128,6 +140,16 @@ function addMapElements(){
 
         document.getElementById("generate-container").appendChild(roundContainer);
     }
+}
+
+function animateMapContainer(){
+    const generateContainer = document.getElementById("generate-container");
+    const exportContainer = document.getElementById("export-buttons-container");
+
+    generateContainer.style.animation = "maps_in 1.5s 1";
+    generateContainer.style.animationFillMode = "forwards";
+    exportContainer.style.animation = "maps_in 1.5s 1";
+    exportContainer.style.animationFillMode = "forwards";
 }
 
 function getMapPoolSelectors(mode){
@@ -301,6 +323,7 @@ function generateEmptyRounds(){
     clearGenerateContainer();
     importRounds();
     addMapElements();
+    animateMapContainer();
 
     const generateContainer = document.getElementById("generate-container");
     const gameContainers = generateContainer.getElementsByClassName("game-container");
@@ -320,6 +343,7 @@ function generateModes(){
     clearGenerateContainer();
     importRounds();
     addMapElements();
+    animateMapContainer()
 
     const modesTemp = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
     const modes = [];
