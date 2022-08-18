@@ -438,24 +438,22 @@ input:focus{
     flex-wrap: wrap;
     align-items: center;
     position: relative;
-    animation: addedRound .4s 1;
     padding: .3em 0;
+    animation: shoveIn .4s 1;
+    animation-fill-mode: forwards;
 }
 
-@keyframes addedRound {
+@keyframes shoveIn {
     0%{
         opacity: 0;
-        padding: 0;
         font-size: 0em;
     }
-    50% {
+    70% {
         opacity: 0;
-        padding: .3em 0;
         font-size: 1em;
     }
     100%{
         opacity: 1;
-        padding: .3em 0;
         font-size: 1em;
     }
 }
@@ -486,12 +484,17 @@ input:focus{
 .added-round > .button{
     margin: 0;
     margin-left: .1rem;
+    transition-duration: 0s;
+}
+
+.added-round > .button:hover{
+    transition-duration: var(--transition-duration);
 }
 
 .error-message{
-    font-size: .8em;
     margin: .2em 1rem;
-    animation: errorFlash 1.5s infinite;
+    animation: errorFlash 1.5s infinite, errorIn .3s 1;
+    animation-fill-mode: forwards;
 }
 .error-message::before{
     display: inline-block;
@@ -514,6 +517,21 @@ input:focus{
     0% { color: var(--color-bg-dark); }
     50% { color: var(--color-accent-dark); }
     100% { color: var(--color-bg-dark); }
+}
+
+@keyframes errorIn {
+    0%{
+        opacity: 0;
+        font-size: 0em;
+    }
+    80% {
+        opacity: 0;
+        font-size: .8em;
+    }
+    100%{
+        opacity: 1;
+        font-size: .8em;
+    }
 }
 
 .generate > .title {
@@ -654,6 +672,7 @@ input:focus{
     left: 0;
     top: 0;
     animation: fadeIn .25s 1;
+    animation-fill-mode: forwards;
     transition-duration: var(--transition-duration);
 }
 
@@ -664,6 +683,7 @@ input:focus{
     border: solid .25em;
     border-radius: 1.5em;
     animation: zoom .25s 1;
+    animation-fill-mode: forwards;
     max-width: 85vh;
     max-height: 85vh;
     overflow: auto;    
@@ -1226,15 +1246,9 @@ input:focus{
 
 @keyframes maps_in {
     0%{
-        font-size: 0em;
-        opacity: 0;
-    }
-    50%{
-        font-size: 1em;
         opacity: 0;
     }
     100%{
-        font-size: 1em;
         opacity: 1;
     }
 
