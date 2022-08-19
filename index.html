@@ -314,7 +314,7 @@
                     <option value="splat2">Splatoon 2</option>
                 </select>
             </div>
-            <button id="game-change-reload" class="save-button button" style="display: none; animation: button_show .6s 1; animation-fill-mode: forwards;" onclick="window.location.href = window.location.href.split('?')[0]"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
+            <button id="game-change-reload" class="save-button button" style="display: none;" onclick="window.location.href = window.location.href.split('?')[0]"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
             <div class="sorting-menu">Preferred Map Order
                 <select id="preferred-sort-setting">
                     <option value="release">Release order</option>
@@ -340,6 +340,7 @@
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
 <script src="data.js"></script>
 <script src="init.js"></script>
 <script src="generate.js"></script>

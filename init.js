@@ -10,7 +10,10 @@ if (localStorage.getItem("game") != null){
 
 gameSetting.onchange = function(){
     localStorage.setItem("game", gameSetting.value);
-    document.getElementById("game-change-reload").style.display = "flex"
+    const gameChangeButton = document.getElementById("game-change-reload");
+    gameChangeButton.style.display = "flex";
+    const tl = gsap.timeline();
+    tl.fromTo(gameChangeButton, {opacity: 0, height: 0})
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -38,6 +41,8 @@ for (var i = 0; i < stageButtons.length; i++){
         modalContainer.style.display = "flex";
         modalContent.style.display = "flex";
         modalContainer.classList.add("green");
+        gsap.fromTo(modalContent, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+        gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
     }
 
     modalClose.onclick = function(){
@@ -59,6 +64,8 @@ mapVisualButton.onclick = function(){
     modalContainer.style.display = "flex";
     modalContainer.classList.add("green");
     mapVisualModal.style.display = "flex";
+    gsap.fromTo(mapVisualModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 
     createMapVisual();
 }
@@ -194,6 +201,8 @@ mapStatsButton.onclick = function(){
     modalContainer.style.display = "flex";
     mapStatsModal.style.display = "flex";
     modalContainer.classList.add("red");
+    gsap.fromTo(mapStatsModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 
     getStats();
 
@@ -229,6 +238,9 @@ exportButtonDiscord.onclick = function(){
     modalContainer.style.display = "flex";
     exportDiscordModal.style.display = "flex";
     modalContainer.classList.add("red");
+
+    gsap.fromTo(exportDiscordModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 exportDiscordClose.onclick = function(){
@@ -259,6 +271,9 @@ exportButtonURL.onclick = function(){
     const url = window.location.href.split("?")[0];
     const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
     text.value = url + spl3Marker + "pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+
+    gsap.fromTo(exportURLModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 exportURLClose.onclick = function(){
@@ -283,6 +298,9 @@ aboutButton.onclick = function(){
     modalContainer.style.display = "flex";
     aboutModal.style.display = "flex";
     modalContainer.classList.add("green");
+
+    gsap.fromTo(aboutModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 aboutClose.onclick = function(){
@@ -298,6 +316,9 @@ preferencesButton.onclick = function(){
     modalContainer.style.display = "flex";
     preferencesModal.style.display = "flex";
     modalContainer.classList.add("green");
+
+    gsap.fromTo(preferencesModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 preferencesClose.onclick = function(){
@@ -436,8 +457,17 @@ function addRound(name, games, isCounterpick){
     upButton.innerHTML = '<i class="fa-solid fa-angle-up"></i>';
     upButton.addEventListener("click", function(){
         const parent = this.parentElement;
-        if(parent.previousElementSibling)
-            parent.parentNode.insertBefore(parent, parent.previousElementSibling);
+        if(parent.previousElementSibling){
+            const prevElement = parent.previousElementSibling;
+            const pt1 = gsap.timeline({onComplete: function(){
+                parent.parentNode.insertBefore(parent, parent.previousElementSibling);
+                const pt2 = gsap.timeline();
+                pt2.fromTo(parent, {bottom: -22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut});
+                pt2.fromTo(prevElement, {bottom: 22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut}, "<");
+            }});
+            pt1.to(parent, {bottom: 22, opacity: 0, duration: .15, ease: Power4.easeIn});
+            pt1.to(prevElement, {bottom: -22, opacity: 0, duration: .15, ease: Power4.easeIn}, "<");
+        }
     });
     addedRound.appendChild(upButton);
 
@@ -446,8 +476,17 @@ function addRound(name, games, isCounterpick){
     downButton.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
     downButton.addEventListener("click", function(){
         const parent = this.parentElement;
-        if(parent.nextElementSibling)
-            parent.parentNode.insertBefore(parent.nextElementSibling, parent);
+        if(parent.nextElementSibling){
+            const nextElement = parent.nextElementSibling;
+            const pt1 = gsap.timeline({onComplete: function(){
+                parent.parentNode.insertBefore(parent.nextElementSibling, parent);
+                const pt2 = gsap.timeline();
+                pt2.fromTo(parent, {bottom: 22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut});
+                pt2.fromTo(nextElement, {bottom: -22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut}, "<");
+            }});
+            pt1.to(parent, {bottom: -22, opacity: 0, duration: .1, ease: Power4.easeIn});
+            pt1.to(nextElement, {bottom: 22, opacity: 0, duration: .1, ease: Power4.easeIn}, "<");
+        }
     });
     addedRound.appendChild(downButton);
 
@@ -455,12 +494,21 @@ function addRound(name, games, isCounterpick){
     removeButton.setAttribute("class", "remove button");
     removeButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     removeButton.addEventListener("click", function(){
-        removeButton.parentElement.remove();
+        const roundElement = removeButton.parentElement;
+
+        const tl = gsap.timeline({onComplete: function() {roundElement.remove()}});
+        tl.to(roundElement, {opacity: 0, duration: .10});
+        tl.to(roundElement, {height: 0, padding: 0, margin: 0, duration: .20, ease: Power3.easeInOut});
+        
         updateGenerateButtonStatus();
     });
     addedRound.appendChild(removeButton);
 
     roundEditor.appendChild(addedRound);
+
+    const tl = gsap.timeline();
+    tl.fromTo(addedRound, {opacity: 0, height: 0}, {opacity: 0, height: "auto", duration: .25});
+    tl.fromTo(addedRound, {opacity: 0, left: 50}, {opacity: 1, left: 0, duration: .25})
 
     updateGenerateButtonStatus();
 }
@@ -539,7 +587,9 @@ function updateGenerateButtonStatus(){
         errorMessage.style.display = "block";
     }
     else {
-        errorMessage.style.display = "none";
+        const tl = gsap.timeline();
+        tl.fromTo(errorMessage,{opacity: 1}, {opacity: 0, duration: .25});
+        tl.to(errorMessage, {height: 0, margin: 0, padding: 0, duration: .25, display: "none"});
     }
 }
 
@@ -567,6 +617,9 @@ function saveOnClick(){
     const url = window.location.href.split("?")[0];
     const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
     saveUrl.value = url + spl3Marker + "pool=" + encodeMapPool();
+
+    gsap.fromTo(saveModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 function saveDialogOnClick(){
@@ -681,6 +734,9 @@ function loadOnClick(){
         
         loadContainer.appendChild(otherGameNotice);
     }
+
+    gsap.fromTo(loadModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 
@@ -1079,40 +1135,27 @@ function createToast(innerHTML){
     }, 5000);
 }
 
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+
 function closeModal(modalContent){
     modalContainer.classList.remove("green");
     modalContainer.classList.remove("red");
 
-    var timeout = window.matchMedia("(prefers-reduced-motion)").matches ? 0 : 150;
-    
-    modalContainer.style.animation = "fadeOut .15s 1";
-
-    setTimeout(() => {
-        modalContainer.style.display = "none";
-        modalContainer.style.animation = "fadeIn .25s 1";
-    }, timeout);
+    gsap.to(modalContainer, {opacity: 0, duration: .18, display: "none", ease: Power1.easeIn});
 
     if (modalContent != undefined){
-        modalContent.style.animation = "zoomOut .15s 1";
-
-        setTimeout(() => {
-            modalContent.style.display = "none";
-            modalContent.style.animation = "zoom .25s 1";
-        }, timeout);
-
+        gsap.to(modalContent, {scale: .85, duration: .18, display: "none", ease: Power1.easeIn});
     } else {
         const modals = document.getElementsByClassName("modal-content");
 
         for (var i = 0; i < modals.length; i++){
             if (modals[i].style.display == "flex"){
-                const visibleModal = modals[i];
-
-                visibleModal.style.animation = "zoomOut .15s 1";
-
-                setTimeout(() => {
-                    visibleModal.style.display = "none";
-                    visibleModal.style.animation = "zoom .25s 1";
-                }, timeout);
+                gsap.to(modals[i], {scale: .85, duration: .18, display: "none", ease: Power1.easeIn});
             }
         }
     }
