@@ -494,6 +494,7 @@ input:focus{
 .error-message{
     margin: .2em 1rem;
     font-size: .8em;
+    color: var(--color-accent-dark);
     /* animation: errorFlash 1.5s infinite, errorIn .3s 1;
     animation-fill-mode: forwards; */
 }
@@ -1102,9 +1103,9 @@ input:focus{
     font-size: 1.2em;
     font-weight: 600;
     box-shadow: 0em .2em 1em rgb(0 0 0 / 35%);
-    animation: toast-open .5s;
+    /* animation: toast-open .5s; */
     z-index: 100;
-    transition-duration: .5s;
+    /* transition-duration: .5s; */
 }
 
 .toast-close{

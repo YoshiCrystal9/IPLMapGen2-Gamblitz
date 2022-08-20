@@ -15,9 +15,15 @@ function getTemplateMap() {
 
 
 function clearGenerateContainer(){
+    const mapsInstruct = document.getElementById("maps-instruction");
 
-    document.getElementById("maps-instruction").style.display = "none";
-    document.getElementById("export-buttons-container").style.display = "flex";
+    if (mapsInstruct.style.display != "none"){
+        const exportButtonsContainer = document.getElementById("export-buttons-container");
+
+        const tl = gsap.timeline();
+        tl.to(mapsInstruct, {opacity: 0, duration: 1, display: "none"});
+        tl.fromTo(exportButtonsContainer, {opacity: 0, display: "flex"}, {opacity: 1, duration: 1});
+    }
 
     const mapsContainer = document.getElementById("generate-container");
     
@@ -28,11 +34,6 @@ function clearGenerateContainer(){
             i--;
         }
     }
-
-    setTimeout(() => {
-        document.getElementById("maplist-tab").click();
-        scrollToMapList();
-    }, 100);
 }
 
 

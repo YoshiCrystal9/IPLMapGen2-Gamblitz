@@ -12,8 +12,6 @@ gameSetting.onchange = function(){
     localStorage.setItem("game", gameSetting.value);
     const gameChangeButton = document.getElementById("game-change-reload");
     gameChangeButton.style.display = "flex";
-    const tl = gsap.timeline();
-    tl.fromTo(gameChangeButton, {opacity: 0, height: 0})
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -507,7 +505,7 @@ function addRound(name, games, isCounterpick){
     roundEditor.appendChild(addedRound);
 
     const tl = gsap.timeline();
-    tl.fromTo(addedRound, {opacity: 0, height: 0}, {opacity: 0, height: "auto", duration: .25});
+    tl.fromTo(addedRound, {opacity: 0, height: 0}, {opacity: 0, height: "auto", duration: .25, ease:Power2.easeOut});
     tl.fromTo(addedRound, {opacity: 0, left: 50}, {opacity: 1, left: 0, duration: .25})
 
     updateGenerateButtonStatus();
@@ -527,13 +525,20 @@ function changeRoundError(message){
     if (message == undefined)
         message = "";
 
-    roundError.innerText = message;
-
-    if (message == ""){
-        roundError.style.display = "none";
-    }
-    else {
-        roundError.style.display = "block";
+    const tl = gsap.timeline();
+    if (roundError.style.display == "block"){
+        if (message == ""){
+            tl.fromTo(roundError, {opacity: 1}, {opacity: 0, duration: .25});
+            tl.to(roundError, {height: 0, duration: .25, display: "none"});
+        } else {
+            tl.to(roundError, {opacity: 0, duration: .1, ease: Power4.easeOut, onComplete: function(){ roundError.innerText = message; }});
+            tl.to(roundError, {opacity: 1, duration: .1, ease: Power4.easeIn});
+        }
+    } else {
+        if (message == "") return;
+        roundError.innerText = message;
+        tl.fromTo(roundError, {height: 0, display: "block"}, {height: "auto",  duration: .25, ease:Power2.easeOut});
+        tl.fromTo(roundError, {opacity: 0}, {opacity: 1, duration: .25});
     }
 }
 
@@ -1101,8 +1106,8 @@ if (localStorage.getItem("consistent-font") == 1){
 function createToast(innerHTML){
     const existingToasts = document.getElementsByClassName("toast");
     for (var i = 0; i < existingToasts.length; i++){
-        const offset = (existingToasts.length - i + 1) * 4;
-        existingToasts[i].style.bottom = offset + "rem";
+        const offset = (existingToasts.length - i + 1) * 92;
+        gsap.to(existingToasts[i], {bottom: offset, duration: .5, ease: Power2.easeOut});
     }
 
     const toast = document.createElement("div");
@@ -1123,16 +1128,12 @@ function createToast(innerHTML){
     document.body.appendChild(toast);
 
     toastClose.addEventListener("click", function(){
-        document.getElementById(id).remove();
+        gsap.to(toast, {opacity: 0, scale: .9, duration: .2, onComplete: function(){ toast.remove(); }});
     });
 
-    setTimeout(() => {
-        toast.style.animation = "toast-fade 1s 4s";
-    }, 500);
-
-    setTimeout(() => {
-        toast.remove();
-    }, 5000);
+    const tl = gsap.timeline();
+    tl.fromTo(toast, {bottom: 10, opacity: 0, scale: .9}, {bottom: 90, opacity: 1, scale: 1, duration: .5, ease: Power2.easeOut});
+    tl.to(toast, {opacity: 0, scale: .9, onComplete: function(){toast.remove();}}, "+=4");
 }
 
 
