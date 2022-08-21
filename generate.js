@@ -13,18 +13,40 @@ function getTemplateMap() {
     }
 }
 
+var tl = gsap.timeline();
 
-function clearGenerateContainer(){
+
+function prepGeneration(generation){
     const mapsInstruct = document.getElementById("maps-instruction");
+    tl = gsap.timeline();
 
-    if (mapsInstruct.style.display != "none"){
-        const exportButtonsContainer = document.getElementById("export-buttons-container");
+    const generateContainer = document.getElementById("generate-container");
+    const oldWidth = generateContainer.offsetWidth;
 
-        const tl = gsap.timeline();
-        tl.to(mapsInstruct, {opacity: 0, duration: 1, display: "none"});
-        tl.fromTo(exportButtonsContainer, {opacity: 0, display: "flex"}, {opacity: 1, duration: 1});
+    if (mapsInstruct != undefined){
+        tl.to(mapsInstruct, {opacity: 0, duration: .2, display: "none", onComplete: function(){
+            mapsInstruct.remove();
+            removeMapContainers();
+            generation();
+            gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: .5, ease: "power3.inOut", onComplete: function(){
+                generateContainer.style.width = "auto";
+                generateContainer.style.minHeight = "auto";
+            }});
+        }});
+    } else {
+        tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
+            {bottom: 0, opacity: 1, display: "flex"},
+            {bottom: 50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: .2, ease: Power2.out}, onComplete: function(){
+                removeMapContainers();
+                generation();
+                gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: .5, ease: "power3.inOut", onComplete: function(){
+                    generateContainer.style.width = "auto";
+                }});
+            }});
     }
+}
 
+function removeMapContainers(){
     const mapsContainer = document.getElementById("generate-container");
     
     for (var i = 0; i < mapsContainer.children.length; i++){
@@ -304,10 +326,9 @@ function getRecentMapsCap(){
 
 
 function generateEmptyRounds(){
-    clearGenerateContainer();
     importRounds();
     addMapElements();
-    //animateMapContainer();
+    animateContainers();
 
     const generateContainer = document.getElementById("generate-container");
     const gameContainers = generateContainer.getElementsByClassName("game-container");
@@ -324,10 +345,9 @@ function generateEmptyRounds(){
 }
 
 function generateModes(){
-    clearGenerateContainer();
     importRounds();
     addMapElements();
-    //animateMapContainer()
+    animateContainers();
 
     const modesTemp = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
     const modes = [];
@@ -362,8 +382,6 @@ function generateModes(){
         mapDropMenu.value = "Unknown Map";
         mapDropMenu.dispatchEvent(event);
     }
-
-    scrollToMapList();
 }
 
 function generateMaps(){
@@ -548,6 +566,12 @@ function exportToJSONFile(){
     createToast("Downloading map list as JSON");
 }
 
+function animateContainers(){
+    tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
+        {bottom: -35, opacity: 0, display: "flex"},
+        {bottom: 0, opacity: 1, ease: Power2.out, duration: .35, stagger: {from: "start", amount: .8}});
+}
+
 
 //check url params
 const urlPool = urlParams.get("pool");
@@ -558,5 +582,4 @@ if (urlPool != null){
 const urlRounds = urlParams.get("rounds");
 if (urlRounds != null){
     decodeRounds(urlRounds);
-    scrollToMapList();
 }

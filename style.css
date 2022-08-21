@@ -495,6 +495,7 @@ input:focus{
     margin: .2em 1rem;
     font-size: .8em;
     color: var(--color-accent-dark);
+    position: relative;
     /* animation: errorFlash 1.5s infinite, errorIn .3s 1;
     animation-fill-mode: forwards; */
 }
@@ -552,14 +553,21 @@ input:focus{
     cursor: not-allowed;
 }
 
+.generate-container{
+    min-height: 100%;
+}
+
 .maps-instruction{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
     font-size: 1.4em;
     font-weight: 600;
-    padding: 1em;
     width: 16em;
     margin: auto;
     user-select: none;
+    height: 100%;
 }
 .maps-instruction::after{
     content: "←";
@@ -577,6 +585,7 @@ input:focus{
 
 .round-container > .menu-header {
     color: var(--color-accent-dark);
+    position: relative;
 }
 .round-container > .menu-header::after {
     background: var(--color-accent-dark);
@@ -642,7 +651,7 @@ input:focus{
     flex-direction: column;
     align-items: center;
     margin-top: 1.5em;
-    animation: fadeIn .5s 1;
+    position: relative;
 }
 
 .maps-footer {

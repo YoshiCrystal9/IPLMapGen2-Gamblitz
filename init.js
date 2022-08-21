@@ -525,6 +525,13 @@ function changeRoundError(message){
     if (message == undefined)
         message = "";
 
+    if (message == roundError.innerText){
+        const tl = gsap.timeline();
+        tl.to(roundError, {bottom: -10, duration: .15, ease: Power2.easeIn});
+        tl.to(roundError, {bottom: 0, duration: .45, ease:"bounce.out"});
+        return;
+    }
+
     const tl = gsap.timeline();
     if (roundError.style.display == "block"){
         if (message == ""){
@@ -911,11 +918,6 @@ function decodeRounds(rounds){
     addMapElements();
 }
 
-function scrollToMapList(){
-    window.scrollTo(0,0);
-}
-
-
 const settingsTab = document.getElementById("settings-tab");
 const mapListTab = document.getElementById("maplist-tab");
 const optionsPanel = document.getElementsByClassName("options-panel")[0];
@@ -1140,6 +1142,12 @@ function createToast(innerHTML){
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         closeModal();
+    }
+    if (event.key === "Enter"){
+        const active = document.activeElement;
+        if (active == roundNameInput || active == roundGamesInput){
+            addRoundButton.click();
+        }
     }
 });
 

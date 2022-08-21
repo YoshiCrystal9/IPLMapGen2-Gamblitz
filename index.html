@@ -104,6 +104,11 @@
 
             <div class="menu-header">Edit Rounds</div>
             <div class="round-editor" id="round-editor">
+                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
+                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
+                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
+                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
+                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
             </div>
             <div class="add-round-header">Add Round</div>
             <div class="round-adder">
@@ -120,15 +125,15 @@
             
             <div class="menu-header">Generate</div>
             <div class="error-message" id="generate-error-message" style="display: none;"></div>
-            <button class="generate button" onclick="generateMaps()">
+            <button class="generate button" onclick="prepGeneration(generateMaps)">
                 <div class="title">Generate All</div>
                 <div class="detail">Maps and modes <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="generate button" onclick="generateModes()">
+            <button class="generate button" onclick="prepGeneration(generateModes)">
                 <div class="title">Generate Modes Only</div>
                 <div class="detail">Chooses modes only <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="generate button" onclick="generateEmptyRounds()">
+            <button class="generate button" onclick="prepGeneration(generateEmptyRounds)">
                 <div class="title">Generate Empty Rounds</div>
                 <div class="detail">No maps or modes selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
@@ -136,12 +141,13 @@
 
         
         <div class="maps-panel mobile-hidden" id="maps-panel">
-            <div class="maps-instruction" id="maps-instruction">
-                Add maps to the map pool.<br>
-                Add rounds.<br>
-                Choose a generate option.    
-            </div> 
-            <div class="generate-container" id="generate-container"></div>
+            <div class="generate-container" id="generate-container">
+                <div class="maps-instruction" id="maps-instruction">
+                    Add maps to the map pool.<br>
+                    Add rounds.<br>
+                    Choose a generate option.    
+                </div> 
+            </div>
             <div class="maps-footer-buttons-container" id="export-buttons-container">
                 <button class="maps-footer button" id="stats-button"><i class="left-bias fa-solid fa-chart-bar"></i>Stats</button>
                 <button class="maps-footer button" id="export-button-discord"><i class="left-bias fa-brands fa-discord"></i>Discord Message</button>
