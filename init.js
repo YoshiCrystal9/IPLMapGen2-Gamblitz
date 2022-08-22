@@ -923,17 +923,30 @@ const optionsPanel = document.getElementsByClassName("options-panel")[0];
 const mapsPanel = document.getElementsByClassName("maps-panel")[0];
 
 settingsTab.onclick = function(){
-    optionsPanel.classList.remove("mobile-hidden");
-    mapsPanel.classList.add("mobile-hidden");
-    settingsTab.classList.add("active");
-    mapListTab.classList.remove("active");
-    
+    if (!settingsTab.classList.contains("active")){
+        settingsTab.classList.add("active");
+        mapListTab.classList.remove("active");
+        const tl = gsap.timeline();
+        tl.to(mapsPanel, {x: 100, opacity: 0, ease: "power3.in", duration: .20, onComplete: function(){
+            mapsPanel.classList.add("mobile-hidden");
+            optionsPanel.classList.remove("mobile-hidden");
+        }});
+        tl.fromTo(optionsPanel, {x: -100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .20});
+        tl.to(mapsPanel, {x: 0, opacity: 1, duration: 0});
+    }
 };
 mapListTab.onclick = function(){
-    optionsPanel.classList.add("mobile-hidden");
-    mapsPanel.classList.remove("mobile-hidden");
-    settingsTab.classList.remove("active");
-    mapListTab.classList.add("active");
+    if (!mapListTab.classList.contains("active")){
+        settingsTab.classList.remove("active");
+        mapListTab.classList.add("active");
+        const tl = gsap.timeline();
+        tl.to(optionsPanel, {x: -100, opacity: 0, ease: "power3.in", duration: .20, onComplete: function(){
+            mapsPanel.classList.remove("mobile-hidden");
+            optionsPanel.classList.add("mobile-hidden");
+        }});
+        tl.fromTo(mapsPanel, {x: 100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .20}); 
+        tl.to(optionsPanel, {x: 0, opacity: 1, duration: 0});
+    }
 };
 
 
@@ -962,24 +975,7 @@ if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") !
 
 
 function startButtonClick(){
-    // startPage.style.animation = "startPageClose .5s forwards";
-
-    // setTimeout(function(){
-    //     startPage.style.display = "none";
-    //     header.style.display = "flex";
-    //     columnContainer.style.display = "flex";
-    //     footer.style.display = "block";
-
-    //     localStorage.setItem("visited", 1);
-
-    //     window.scrollTo(0,0);
-
-    // }, 600);
-
-    // setTimeout(() => {
-    //     optionsPanel.style.animationDuration = ".4s";
-    //     mapsPanel.style.animationDuration = ".4s";
-    // }, 1600);
+    localStorage.setItem("visited", 1);
 
     const tl = gsap.timeline();
     tl.fromTo(".sp-textin", {opacity: 1, y: 0}, {opacity: 0, y: -80, ease: "power3.out", duration: .5, stagger: {each: .10, from: "end"}});

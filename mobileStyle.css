@@ -31,7 +31,6 @@
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-        animation: mobile-nav-in .4s forwards;
     }
 
     @keyframes mobile-nav-in {
@@ -133,7 +132,6 @@
 
     .round-container > .game-container {
         flex: 1;
-        animation-name: none;
         opacity: 1;
     }
 
