@@ -35,8 +35,8 @@ function prepGeneration(generation){
         }});
     } else {
         tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
-            {bottom: 0, opacity: 1, display: "flex"},
-            {bottom: 50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: .2, ease: Power2.out}, onComplete: function(){
+            {y: 0, opacity: 1, display: "flex"},
+            {y: -50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: .2, ease: Power2.out}, onComplete: function(){
                 removeMapContainers();
                 generation();
                 gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: .5, ease: "power3.inOut", onComplete: function(){
@@ -152,10 +152,8 @@ function addMapElements(){
 
         document.getElementById("generate-container").appendChild(roundContainer);
     }
-}
-
-function animateMapContainer(){
     
+    animateContainers();
 }
 
 function getMapPoolSelectors(mode){
@@ -328,7 +326,6 @@ function getRecentMapsCap(){
 function generateEmptyRounds(){
     importRounds();
     addMapElements();
-    animateContainers();
 
     const generateContainer = document.getElementById("generate-container");
     const gameContainers = generateContainer.getElementsByClassName("game-container");
@@ -347,7 +344,6 @@ function generateEmptyRounds(){
 function generateModes(){
     importRounds();
     addMapElements();
-    animateContainers();
 
     const modesTemp = ["Turf War", "Splat Zones", "Tower Control", "Rainmaker", "Clam Blitz"];
     const modes = [];
@@ -568,8 +564,8 @@ function exportToJSONFile(){
 
 function animateContainers(){
     tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
-        {bottom: -35, opacity: 0, display: "flex"},
-        {bottom: 0, opacity: 1, ease: Power2.out, duration: .35, stagger: {from: "start", amount: .8}});
+        {y: 35, opacity: 0, display: "flex"},
+        {y: 0, opacity: 1, ease: Power2.out, duration: .35, stagger: {from: "start", amount: .8}});
 }
 
 

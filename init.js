@@ -385,7 +385,7 @@ function massSelect(mode, isEnabling){
 //attach round adder stuff
 const addRoundButton = document.getElementById("add-round-button");
 const roundNameInput = document.getElementById("round-name");
-const roundGamesInput = document.getElementById("round-games");
+const roundGamesInput = document.getElementById("round-games-input");
 const roundIsCounterpick = document.getElementById("round-counterpick-check");
 const roundError = document.getElementById("round-error-message");
 const roundEditor = document.getElementById("round-editor");
@@ -527,8 +527,8 @@ function changeRoundError(message){
 
     if (message == roundError.innerText){
         const tl = gsap.timeline();
-        tl.to(roundError, {bottom: -10, duration: .15, ease: Power2.easeIn});
-        tl.to(roundError, {bottom: 0, duration: .45, ease:"bounce.out"});
+        tl.to(roundError, {y: 10, duration: .15, ease: Power2.easeOut});
+        tl.to(roundError, {y: 0, duration: .45, ease:"bounce.out"});
         return;
     }
 
@@ -914,8 +914,7 @@ function decodeRounds(rounds){
         addRound(round.name, round.maps.length, isUnknown);
     }
 
-    clearGenerateContainer();
-    addMapElements();
+    prepGeneration(addMapElements);
 }
 
 const settingsTab = document.getElementById("settings-tab");
@@ -1109,7 +1108,7 @@ function createToast(innerHTML){
     const existingToasts = document.getElementsByClassName("toast");
     for (var i = 0; i < existingToasts.length; i++){
         const offset = (existingToasts.length - i + 1) * 92;
-        gsap.to(existingToasts[i], {bottom: offset, duration: .5, ease: Power2.easeOut});
+        gsap.to(existingToasts[i], {y: offset, duration: .5, ease: Power2.easeOut});
     }
 
     const toast = document.createElement("div");
@@ -1134,7 +1133,7 @@ function createToast(innerHTML){
     });
 
     const tl = gsap.timeline();
-    tl.fromTo(toast, {bottom: 10, opacity: 0, scale: .9}, {bottom: 90, opacity: 1, scale: 1, duration: .5, ease: Power2.easeOut});
+    tl.fromTo(toast, {y: 60, opacity: 0, scale: .9}, {y: 0, opacity: 1, scale: 1, duration: .5, ease: Power2.easeOut});
     tl.to(toast, {opacity: 0, scale: .9, onComplete: function(){toast.remove();}}, "+=4");
 }
 
