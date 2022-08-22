@@ -946,7 +946,12 @@ const startPage = document.getElementById("start-page-wrapper");
 const visited = localStorage.getItem('visited');
 
 if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
+    const tl = gsap.timeline();
+
     startPage.style.display = "flex";
+    tl.fromTo(startPage, {opacity: 0}, {opacity: 1, duration: 1});
+    tl.fromTo(".sp-textin", {opacity: 0, y: 120}, {opacity: 1, y: 0, ease: "power3.out", duration: 1, stagger: .25});
+    
     const startPageButton = document.getElementById("start-page-button");
     startPageButton.setAttribute("onclick", 'startButtonClick()');
 
@@ -954,33 +959,40 @@ if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") !
     columnContainer.style.display = "none";
     footer.style.display = "none";
 }
-else {
-    setTimeout(() => {
-        optionsPanel.style.animationDuration = ".4s";
-        mapsPanel.style.animationDuration = ".4s";
-    }, 1000);
-}
 
 
 function startButtonClick(){
-    startPage.style.animation = "startPageClose .5s forwards";
+    // startPage.style.animation = "startPageClose .5s forwards";
 
-    setTimeout(function(){
-        startPage.style.display = "none";
-        header.style.display = "flex";
-        columnContainer.style.display = "flex";
-        footer.style.display = "block";
+    // setTimeout(function(){
+    //     startPage.style.display = "none";
+    //     header.style.display = "flex";
+    //     columnContainer.style.display = "flex";
+    //     footer.style.display = "block";
 
-        localStorage.setItem("visited", 1);
+    //     localStorage.setItem("visited", 1);
 
-        window.scrollTo(0,0);
+    //     window.scrollTo(0,0);
 
-    }, 600);
+    // }, 600);
 
-    setTimeout(() => {
-        optionsPanel.style.animationDuration = ".4s";
-        mapsPanel.style.animationDuration = ".4s";
-    }, 1600);
+    // setTimeout(() => {
+    //     optionsPanel.style.animationDuration = ".4s";
+    //     mapsPanel.style.animationDuration = ".4s";
+    // }, 1600);
+
+    const tl = gsap.timeline();
+    tl.fromTo(".sp-textin", {opacity: 1, y: 0}, {opacity: 0, y: -80, ease: "power3.out", duration: .5, stagger: {each: .10, from: "end"}});
+    tl.fromTo(startPage, {opacity: 1}, {opacity: 0, duration: 1.25, display: "none"}, ">");
+    tl.to(columnContainer, {display: "flex", duration: 0}, ">");
+    tl.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    tl.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    if (uiIsMobile()){
+        tl.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    } else {
+        tl.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+        tl.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    }
 }
 
 

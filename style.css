@@ -40,6 +40,7 @@
 
 body {
     background: var(--color-bg-dark);
+    overflow-y: hidden;
     display: flex;
     flex-flow: column;
     height: 100vh;
@@ -89,52 +90,22 @@ input:focus{
     justify-content: flex-start;
     padding: 5% 20%;
     overflow-y: scroll;
-    animation: startPageOpen 1s forwards;
-}
-
-@keyframes startPageOpen {
-    from{opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes startPageText {
-    from{
-        position: relative;
-        opacity: 0;
-        bottom: -8rem;
-    }
-    to{
-        position: relative;
-        opacity: 1;
-        bottom: 0rem;
-    }
-}
-
-@keyframes startPageClose {
-    from {opacity: 1;}
-    to {opacity: 0;}
 }
 
 .start-page-title{
     font-weight: 700;
     font-size: 2.5em;
     margin-bottom: 1.5rem;
-    animation: startPageText 1s .5s forwards;
-    opacity: 0;
 }
 
 .start-page-subtext{
     font-weight: 600;
     font-size: 1.5em;
     margin-bottom: 3rem;
-    animation: startPageText 1s .7s forwards;
-    opacity: 0;
 }
 
 .start-page-tutorial{
     line-height: 1.5em;
-    animation: startPageText 1s .9s forwards;
-    opacity: 0;
 }
 
 .start-page-tutorial b{
@@ -151,14 +122,16 @@ input:focus{
     padding: .5em 1em;
     border-radius: .5em;
     user-select: none;
-    animation: startPageText 1s 1.2s forwards;
-    opacity: 0;
 }
 
 .start-page-button:hover{
     letter-spacing: .025em;
     font-weight: 700;
     background: white;
+}
+
+.sp-textin {
+    position: relative;
 }
 
 .header{
@@ -172,7 +145,6 @@ input:focus{
     align-items: center;
     user-select: none;
     position: relative;
-    animation: first_fromTop 1s forwards;
 }
 .header::before{
     content: "Settings";
@@ -229,7 +201,6 @@ input:focus{
     border-color: var(--color-primary);
     background: var(--color-bg-light);
     user-select: none;
-    animation: from_right 1s forwards;
 }
 .options-panel::-webkit-scrollbar-thumb{
     background: var(--color-bg-dark);
@@ -241,7 +212,6 @@ input:focus{
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
-    animation: from_left 1s forwards;
 }
 .maps-panel::-webkit-scrollbar-thumb{
     background: var(--color-accent-dark);
@@ -575,10 +545,6 @@ input:focus{
     content: "←";
     display: block;
     font-size: 2em;
-}
-
-.round-container{
-    animation: fadeIn .5s 1;
 }
 
 .round-container:not(:first-child){
@@ -1158,10 +1124,9 @@ input:focus{
     font-size: .75em;
     margin: var(--global-margin);
     margin-top: 0;
-    transition-duration: var(--transition-duration);
     user-select: none;
     position: relative;
-    animation: first_fromBottom 1s forwards;
+    float: left;
 }
 
 .footer a{
