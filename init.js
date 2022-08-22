@@ -1169,6 +1169,9 @@ function closeModal(modalContent){
     }
 }
 
+function uiIsMobile(){
+    return getComputedStyle(document.documentElement).getPropertyValue('--is-mobile') === ' 1 ';
+}
 
 
 

@@ -12,6 +12,8 @@
 
     --global-margin: calc(.7vw + .35vh);
     --transition-duration: .15s;
+
+    --is-mobile: 0;
 }
 
 ::-webkit-scrollbar{
@@ -960,6 +962,16 @@ input:focus{
     border-radius: .6em;
     margin-bottom: .5em;
     font-weight: 700;
+    animation: wipeIn .5s 1;
+}
+
+@keyframes wipeIn {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
 }
 
 .save-name{

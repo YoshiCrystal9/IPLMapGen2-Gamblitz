@@ -2,6 +2,8 @@
   
     :root{
         font-size: calc(16px + .5vw);
+
+        --is-mobile: 1
     }
 
     .start-page-wrapper{

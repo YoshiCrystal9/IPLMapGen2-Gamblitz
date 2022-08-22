@@ -23,12 +23,14 @@ function prepGeneration(generation){
     const generateContainer = document.getElementById("generate-container");
     const oldWidth = generateContainer.offsetWidth;
 
+    const animScale = uiIsMobile() === true ? 0 : 1;
+
     if (mapsInstruct != undefined){
         tl.to(mapsInstruct, {opacity: 0, duration: .2, display: "none", onComplete: function(){
             mapsInstruct.remove();
             removeMapContainers();
             generation();
-            gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: .5, ease: "power3.inOut", onComplete: function(){
+            gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: animScale*.5, ease: "power3.inOut", onComplete: function(){
                 generateContainer.style.width = "auto";
                 generateContainer.style.minHeight = "auto";
             }});
@@ -36,13 +38,18 @@ function prepGeneration(generation){
     } else {
         tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
             {y: 0, opacity: 1, display: "flex"},
-            {y: -50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: .2, ease: Power2.out}, onComplete: function(){
+            {y: -50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: animScale*.2, ease: Power2.out}, onComplete: function(){
                 removeMapContainers();
                 generation();
-                gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: .5, ease: "power3.inOut", onComplete: function(){
+                gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: animScale*.5, ease: "power3.inOut", onComplete: function(){
                     generateContainer.style.width = "auto";
                 }});
             }});
+    }
+
+    if (uiIsMobile()){
+        const mapListButton = document.getElementById("maplist-tab");
+        mapListButton.click();
     }
 }
 
