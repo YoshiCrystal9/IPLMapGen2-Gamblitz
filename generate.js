@@ -429,7 +429,7 @@ function generateMaps(){
         //choose a random selection on mapDropMenu that isn't in recentMaps and hasn't appeared in the mode before
         var mapIndex;
         const safetyCapVal = 999;
-        var safetyCap = 999;
+        var safetyCap = safetyCapVal;
         do {
             mapIndex = Math.floor(Math.random() * (mapDropMenu.length-1));
             // console.log(mode, mapDropMenu.options[mapIndex].value, modeMapTracker[mode][mapDropMenu.options[mapIndex].value], modeMapTracker[mode]);

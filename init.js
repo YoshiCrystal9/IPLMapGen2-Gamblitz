@@ -968,27 +968,30 @@ const startPage = document.getElementById("start-page-wrapper");
 
 const visited = localStorage.getItem('visited');
 
-if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
-    const tl = gsap.timeline();
+function showUi() {
+    document.body.style.opacity = 1; 
+    if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
+        const tl = gsap.timeline();
 
-    startPage.style.display = "flex";
-    tl.fromTo(startPage, {opacity: 0}, {opacity: 1, duration: 1});
-    tl.fromTo(".sp-textin", {opacity: 0, y: 120}, {opacity: 1, y: 0, ease: "power3.out", duration: 1, stagger: .25});
-    
-    const startPageButton = document.getElementById("start-page-button");
-    startPageButton.setAttribute("onclick", 'startButtonClick()');
+        startPage.style.display = "flex";
+        tl.fromTo(startPage, {opacity: 0}, {opacity: 1, duration: 1});
+        tl.fromTo(".sp-textin", {opacity: 0, y: 120}, {opacity: 1, y: 0, ease: "power3.out", duration: 1, stagger: .25});
+        
+        const startPageButton = document.getElementById("start-page-button");
+        startPageButton.setAttribute("onclick", 'startButtonClick()');
 
-    header.style.display = "none";
-    columnContainer.style.display = "none";
-    footer.style.display = "none";
-} else {
-    gsap.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
-    gsap.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
-    if (uiIsMobile()){
-        gsap.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: "power3.out"});
+        header.style.display = "none";
+        columnContainer.style.display = "none";
+        footer.style.display = "none";
     } else {
-        gsap.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
-        gsap.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        gsap.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        gsap.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        if (uiIsMobile()){
+            gsap.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: "power3.out"});
+        } else {
+            gsap.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+            gsap.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        }
     }
 }
 
