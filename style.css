@@ -396,7 +396,20 @@ input:focus{
     padding: .2em;
 }
 .round-adder button {
+    margin-left: .5em;
     padding: .5em;
+}
+.round-adder label{
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    font-size: .8em;
+}
+
+.round-adder-split{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .round-editor {

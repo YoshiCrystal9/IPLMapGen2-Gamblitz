@@ -325,6 +325,9 @@ function getRecentMapsCap(){
         lowest = Math.min(lowest, cbMaps);
     }
 
+    if (lowest == 1){
+        return 0;
+    }
     lowest = Math.max(0, Math.ceil(lowest/2));
     return lowest;
 }

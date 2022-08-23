@@ -374,11 +374,18 @@ function adjustSelectedCount(mode){
 }
 
 function massSelect(mode, isEnabling){
-    for (var i = 0; i < allMaps.length; i++){
-        const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
-        checkBox.checked = isEnabling;
+    const tl = gsap.timeline();
+
+    const mapsSort = localStorage.getItem("sorting-order") == "alpha" ? allMapsAlpha : allMaps;
+
+    for (var i = 0; i < mapsSort.length; i++){
+        const checkBox = document.getElementById(`${mode}-${mapsSort[i]}-map-selector`);
+        tl.fromTo(checkBox, {scale: 1}, {scale: 1.3, duration: .2, ease: "Power2.in", onComplete: function(){
+            checkBox.checked = isEnabling;
+            gsap.to(checkBox, {scale: 1, duration: .4, ease: "bounce.out"});
+            adjustSelectedCount(mode);
+        }}, "-=.17  ");
     }
-    adjustSelectedCount(mode);
 }
 
 
@@ -414,9 +421,9 @@ addRoundButton.addEventListener("click", function(){
     
 
     //attempt to increment last character in name
-    const lastChar = roundNameInput.value.slice(-1);
+    const lastChar = roundNameInput.value.split(' ').at(-1);
     if (!isNaN(lastChar)){
-        const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
+        const newName = roundNameInput.value.substring(0, roundNameInput.value.lastIndexOf(' ')) + " " + (parseInt(lastChar) + 1);
         roundNameInput.value = newName;
     }
     else {
@@ -927,11 +934,11 @@ settingsTab.onclick = function(){
         settingsTab.classList.add("active");
         mapListTab.classList.remove("active");
         const tl = gsap.timeline();
-        tl.to(mapsPanel, {x: 100, opacity: 0, ease: "power3.in", duration: .20, onComplete: function(){
+        tl.to(mapsPanel, {x: 100, opacity: 0, ease: "power3.in", duration: .15, onComplete: function(){
             mapsPanel.classList.add("mobile-hidden");
             optionsPanel.classList.remove("mobile-hidden");
         }});
-        tl.fromTo(optionsPanel, {x: -100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .20});
+        tl.fromTo(optionsPanel, {x: -100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .15});
         tl.to(mapsPanel, {x: 0, opacity: 1, duration: 0});
     }
 };
@@ -940,11 +947,11 @@ mapListTab.onclick = function(){
         settingsTab.classList.remove("active");
         mapListTab.classList.add("active");
         const tl = gsap.timeline();
-        tl.to(optionsPanel, {x: -100, opacity: 0, ease: "power3.in", duration: .20, onComplete: function(){
+        tl.to(optionsPanel, {x: -100, opacity: 0, ease: "power3.in", duration: .15, onComplete: function(){
             mapsPanel.classList.remove("mobile-hidden");
             optionsPanel.classList.add("mobile-hidden");
         }});
-        tl.fromTo(mapsPanel, {x: 100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .20}); 
+        tl.fromTo(mapsPanel, {x: 100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .15}); 
         tl.to(optionsPanel, {x: 0, opacity: 1, duration: 0});
     }
 };
@@ -1159,10 +1166,10 @@ document.addEventListener('keydown', (event) => {
 });
 
 function closeModal(modalContent){
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
-
-    gsap.to(modalContainer, {opacity: 0, duration: .18, display: "none", ease: Power1.easeIn});
+    gsap.to(modalContainer, {opacity: 0, duration: .18, display: "none", ease: Power1.easeIn, onComplete: function(){
+        modalContainer.classList.remove("green");
+        modalContainer.classList.remove("red");
+    }});
 
     if (modalContent != undefined){
         gsap.to(modalContent, {scale: .85, duration: .18, display: "none", ease: Power1.easeIn});

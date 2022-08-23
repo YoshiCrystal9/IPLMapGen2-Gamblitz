@@ -113,13 +113,13 @@
             <div class="add-round-header">Add Round</div>
             <div class="round-adder">
                 <input type="text" id="round-name" maxlength="32" placeholder="Name"></input>
-                <input type="number" min="1" max="15" step="2" id="round-games-input" placeholder="Games"></input>
-                <wbr>
-                <label for="round-counterpick-check" class="detail">Counterpick
-                    <input id="round-counterpick-check" type="checkbox">
-                </label>
-                <wbr>
-                <button class="button" id="add-round-button">Add <i class="right-bias fa-solid fa-circle-chevron-right"></i></button>
+                <div class="round-adder-split">
+                    <input type="number" min="1" max="15" step="2" id="round-games-input" placeholder="Games"></input>
+                    <label for="round-counterpick-check" class="detail">Counterpick&nbsp;
+                        <input id="round-counterpick-check" type="checkbox">
+                    </label>
+                    <button class="button" id="add-round-button">Add <i class="right-bias fa-solid fa-circle-chevron-right"></i></button>
+                </div>
             </div>
             <div class="error-message" id="round-error-message" style="display: none"></div>
             
