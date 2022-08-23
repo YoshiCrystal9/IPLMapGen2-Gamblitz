@@ -384,7 +384,7 @@ function massSelect(mode, isEnabling){
             checkBox.checked = isEnabling;
             gsap.to(checkBox, {scale: 1, duration: .4, ease: "bounce.out"});
             adjustSelectedCount(mode);
-        }}, "-=.17  ");
+        }}, i == 0 ? "-=.1" : "-=.17");
     }
 }
 
@@ -501,11 +501,12 @@ function addRound(name, games, isCounterpick){
     removeButton.addEventListener("click", function(){
         const roundElement = removeButton.parentElement;
 
-        const tl = gsap.timeline({onComplete: function() {roundElement.remove()}});
+        const tl = gsap.timeline({onComplete: function() {
+            roundElement.remove();
+            updateGenerateButtonStatus();
+        }});
         tl.to(roundElement, {opacity: 0, duration: .10});
         tl.to(roundElement, {height: 0, padding: 0, margin: 0, duration: .20, ease: Power3.easeInOut});
-        
-        updateGenerateButtonStatus();
     });
     addedRound.appendChild(removeButton);
 
@@ -603,6 +604,8 @@ function updateGenerateButtonStatus(){
         else if (!mapsOk){
             errorMessage.innerText = "You must select maps.";
         }
+
+        errorMessage.removeAttribute("style");
         errorMessage.style.display = "block";
     }
     else {
@@ -978,6 +981,15 @@ if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") !
     header.style.display = "none";
     columnContainer.style.display = "none";
     footer.style.display = "none";
+} else {
+    gsap.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+    gsap.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+    if (uiIsMobile()){
+        gsap.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: "power3.out"});
+    } else {
+        gsap.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        gsap.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+    }
 }
 
 
@@ -1186,6 +1198,12 @@ function closeModal(modalContent){
 
 function uiIsMobile(){
     return getComputedStyle(document.documentElement).getPropertyValue('--is-mobile') === ' 1 ';
+}
+
+function gameChangeOnClick(){
+    gsap.to("body", {opacity: 0, duration: .35, onComplete: function(){
+        window.location.href = window.location.href.split('?')[0];
+    }})
 }
 
 

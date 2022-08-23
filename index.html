@@ -23,7 +23,7 @@
     
     <title>maps.iplabs.ink</title>
 </head>
-<body>
+<body style="opacity: 0;">
     <div class="start-page-wrapper" id="start-page-wrapper">
         <div class="start-page-title sp-textin">
             Welcome to MAPS.IPLABS.INK
@@ -103,13 +103,7 @@
             </button>
 
             <div class="menu-header">Edit Rounds</div>
-            <div class="round-editor" id="round-editor">
-                <!-- <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
-                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
-                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
-                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div>
-                <div class="added-round" style="height: auto; opacity: 1; left: 0px;"><div class="title" id="round-title">1</div><div class="games" id="round-games">5 games</div><button class="button first"><i class="fa-solid fa-angle-up"></i></button><button class="button"><i class="fa-solid fa-angle-down"></i></button><button class="remove button"><i class="fa-solid fa-trash-can"></i></button></div> -->
-            </div>
+            <div class="round-editor" id="round-editor"></div>
             <div class="add-round-header">Add Round</div>
             <div class="round-adder">
                 <input type="text" id="round-name" maxlength="32" placeholder="Name"></input>
@@ -320,7 +314,7 @@
                     <option value="splat2">Splatoon 2</option>
                 </select>
             </div>
-            <button id="game-change-reload" class="save-button button" style="display: none; animation: button_show .6s 1; animation-fill-mode: forwards;" onclick="window.location.href = window.location.href.split('?')[0]"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
+            <button id="game-change-reload" class="save-button button" style="display: none; animation: button_show .6s 1; animation-fill-mode: forwards;" onclick="gameChangeOnClick()"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
             <div class="sorting-menu">Preferred Map Order
                 <select id="preferred-sort-setting">
                     <option value="release">Release order</option>
@@ -350,4 +344,5 @@
 <script src="data.js"></script>
 <script src="init.js"></script>
 <script src="generate.js"></script>
+<script>document.body.style.opacity = 1</script>
 </html>
