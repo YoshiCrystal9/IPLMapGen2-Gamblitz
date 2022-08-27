@@ -17,14 +17,15 @@
 }
 
 ::-webkit-scrollbar{
-    width: .7em;
+    width: .5em;
+    transition-duration: .1s;
 }
 ::-webkit-scrollbar-track{
     background: #00000000;
 }
 ::-webkit-scrollbar-thumb{
-    background: var(--color-primary);
-    border-radius: .4em;
+    background: #8a8a8a8c;
+    border-radius: .3rem;
 }
 ::-webkit-scrollbar-thumb:hover{
     background: white;
@@ -202,9 +203,6 @@ input:focus{
     background: var(--color-bg-light);
     user-select: none;
 }
-.options-panel::-webkit-scrollbar-thumb{
-    background: var(--color-bg-dark);
-}
 
 .maps-panel{
     flex: none;
@@ -212,9 +210,6 @@ input:focus{
     border-color: var(--color-accent-dark);
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
-}
-.maps-panel::-webkit-scrollbar-thumb{
-    background: var(--color-accent-dark);
 }
 
 .splat-2-warn{
@@ -680,18 +675,12 @@ input:focus{
     overflow: auto;
     padding-bottom: 1em;
 }
-.modal-content::-webkit-scrollbar-thumb{
-    background: var(--color-bg-dark);
-}
 
 .modal-content.green{
     color: var(--color-bg-dark);
     background-color: var(--color-bg-light);
     border-color: var(--color-primary);
     box-shadow: 0 0 15em 6em #2df8a315;
-}
-.modal-content.green::-webkit-scrollbar-thumb{
-    background: var(--color-bg-dark);
 }
 
 .modal-content.red {
