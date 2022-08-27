@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/66a42373e4.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
 
     <meta content="maps.iplabs.ink" property="og:title">
     <meta content="A Splatoon map list generator created by Inkling Performance Labs." property="og:description" />
@@ -340,9 +341,10 @@
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+
 <script src="data.js"></script>
 <script src="init.js"></script>
 <script src="generate.js"></script>
-<script>document.body.style.opacity = 1</script>
+<script>showUi()</script>
+
 </html>
