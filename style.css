@@ -17,8 +17,7 @@
 }
 
 ::-webkit-scrollbar{
-    width: .5em;
-    transition-duration: .1s;
+    width: .55em;
 }
 ::-webkit-scrollbar-track{
     background: #00000000;
@@ -29,14 +28,7 @@
 }
 ::-webkit-scrollbar-thumb:hover{
     background: white;
-}
-
-@media (prefers-reduced-motion) {
-    * {
-        animation-duration: 0s !important;
-        animation-delay: 0s !important;
-        transition-duration: 0s !important; 
-    }
+    border: 1px solid #8a8a8a8c;
 }
 
 body {
@@ -419,23 +411,6 @@ input:focus{
     align-items: center;
     position: relative;
     padding: .3em 0;
-    /* animation: shoveIn .4s 1;
-    animation-fill-mode: forwards; */
-}
-
-@keyframes shoveIn {
-    0%{
-        opacity: 0;
-        font-size: 0em;
-    }
-    70% {
-        opacity: 0;
-        font-size: 1em;
-    }
-    100%{
-        opacity: 1;
-        font-size: 1em;
-    }
 }
 
 .added-round > .title{
@@ -476,8 +451,6 @@ input:focus{
     font-size: .8em;
     color: var(--color-accent-dark);
     position: relative;
-    /* animation: errorFlash 1.5s infinite, errorIn .3s 1;
-    animation-fill-mode: forwards; */
 }
 .error-message::before{
     display: inline-block;
@@ -494,27 +467,6 @@ input:focus{
     font-size: 1.1em;
     margin-right: .4em;
     color: var(--color-accent-dark);
-}
-
-@keyframes errorFlash {
-    0% { color: var(--color-bg-dark); }
-    50% { color: var(--color-accent-dark); }
-    100% { color: var(--color-bg-dark); }
-}
-
-@keyframes errorIn {
-    0%{
-        opacity: 0;
-        font-size: 0em;
-    }
-    80% {
-        opacity: 0;
-        font-size: .8em;
-    }
-    100%{
-        opacity: 1;
-        font-size: .8em;
-    }
 }
 
 .generate > .title {
@@ -575,15 +527,7 @@ input:focus{
     font-size: 1.4em;
     font-weight: 600;
     position: relative;
-    /* animation: gameAdded .75s 1; */
-    /* animation-fill-mode: forwards; */
-    /* opacity: 0%; */
     user-select: none;
-}
-
-@keyframes gameAdded {
-    from { right: 8em; opacity: 0%; }
-    to   { right: 0em; opacity: 100%; }
 }
 
 .map-drop-menu {
@@ -658,8 +602,6 @@ input:focus{
     height: 100%;
     left: 0;
     top: 0;
-    /* animation: fadeIn .25s 1;
-    animation-fill-mode: forwards; */
 }
 
 .modal-content{
@@ -668,8 +610,6 @@ input:focus{
     flex-direction: column;
     border: solid .25em;
     border-radius: 1.5em;
-    /* animation: zoom .25s 1;
-    animation-fill-mode: forwards; */
     max-width: 85vh;
     max-height: 85vh;
     overflow: auto;
@@ -688,29 +628,6 @@ input:focus{
     background-color: var(--color-accent-light);
     border-color: var(--color-accent-dark);
     box-shadow: 0 0 15em 6em #9c42322a;
-}
-.modal-content.red::-webkit-scrollbar-thumb{
-    background: var(--color-accent-dark);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@keyframes zoom {
-    from { transform: scale(0.85); }
-    to { transform: scale(1); }
-}
-
-@keyframes zoomOut {
-    from { transform: scale(1); }
-    to { transform: scale(0.85); }
 }
 
 .modal-content > .button{
@@ -787,9 +704,6 @@ input:focus{
 .modal-content > .text-export-textarea::selection{
     background: var(--color-accent-light);
     color: var(--color-accent-dark);
-}
-.modal-content > .text-export-textarea::-webkit-scrollbar-thumb{
-    background: white;
 }
 
 .modal-content > .text-export-subtitle{
@@ -930,16 +844,6 @@ input:focus{
     border-radius: .6em;
     margin-bottom: .5em;
     font-weight: 700;
-    animation: wipeIn .5s 1;
-}
-
-@keyframes wipeIn {
-    from {
-        clip-path: inset(0 100% 0 0);
-    }
-    to {
-        clip-path: inset(0 0 0 0);
-    }
 }
 
 .save-name{
@@ -1082,9 +986,7 @@ input:focus{
     font-size: 1.2em;
     font-weight: 600;
     box-shadow: 0em .2em 1em rgb(0 0 0 / 35%);
-    /* animation: toast-open .5s; */
     z-index: 100;
-    /* transition-duration: .5s; */
 }
 
 .toast-close{
@@ -1099,26 +1001,6 @@ input:focus{
     margin-right: .75em;
     border-radius: 100%;
     cursor: pointer;
-}
-
-@keyframes toast-open {
-    from{
-        bottom: 2rem;
-        opacity: 0;
-        transform: scale(.90);
-    }
-    to{
-        opacity: 1;
-    }
-}
-
-@keyframes toast-fade {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
 }
 
 .footer {
@@ -1150,84 +1032,4 @@ input:focus{
     width: 16em;
     margin-left: auto;
     margin-right: auto;
-}
-
-
-/* first open animations*/
-
-@keyframes first_fromTop {
-    from {
-        opacity: 0%;
-        bottom: 2em;
-    }
-    to {
-        opacity: 100%;
-        bottom: 0px;
-    }
-}
-
-@keyframes first_fromBottom {
-    from {
-        opacity: 0%;
-        top: 2em;
-    }
-    to {
-        opacity: 100%;
-        top: 0px;
-    }
-}
-
-
-@keyframes from_left {
-    from{
-        left: 5rem;
-        opacity: 0;
-    }
-    to{
-        left: 0rem;
-        opacity: 1;
-    }
-}
-
-@keyframes from_right {
-    from{
-        right: 5rem;
-        opacity: 0;
-    }
-    to{
-        right: 0rem;
-        opacity: 1;
-    }
-}
-
-
-@keyframes button_show {
-    0% {
-        opacity: 0;
-        margin: 0em;
-        padding: 0em;
-        font-size: 0em;
-    }
-    50%{
-        opacity: 0;
-        margin: .5em 1.5rem;
-        padding: .5rem;
-        font-size: 1em;
-    }
-    100% {
-        opacity: 1;
-        margin: .5em 1.5rem;
-        padding: .5rem;
-        font-size: 1em;
-    }
-}
-
-@keyframes maps_in {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-
 }
