@@ -1033,3 +1033,24 @@ input:focus{
     margin-left: auto;
     margin-right: auto;
 }
+
+@keyframes button_show {
+    0% {
+        opacity: 0;
+        margin: 0em;
+        padding: 0em;
+        font-size: 0em;
+    }
+    50%{
+        opacity: 0;
+        margin: .5em 1.5rem;
+        padding: .5rem;
+        font-size: 1em;
+    }
+    100% {
+        opacity: 1;
+        margin: .5em 1.5rem;
+        padding: .5rem;
+        font-size: 1em;
+    }
+}
