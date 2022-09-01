@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/66a42373e4.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
 
     <meta content="maps.iplabs.ink" property="og:title">
     <meta content="A Splatoon map list generator created by Inkling Performance Labs." property="og:description" />
@@ -23,15 +24,15 @@
     
     <title>maps.iplabs.ink</title>
 </head>
-<body>
+<body style="opacity: 0;">
     <div class="start-page-wrapper" id="start-page-wrapper">
-        <div class="start-page-title">
+        <div class="start-page-title sp-textin">
             Welcome to MAPS.IPLABS.INK
         </div>
-        <div class="start-page-subtext">
-            A Splatoon 2 map generator created by <a href="http://iplabs.ink/">Inkling Performance Labs</a> for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
+        <div class="start-page-subtext sp-textin">
+            A Splatoon map generator created by <a href="http://iplabs.ink/">Inkling Performance Labs</a> for the tournament organizers and players in the community <i class="fa-solid fa-heart"></i>
         </div>
-        <div class="start-page-tutorial">
+        <div class="start-page-tutorial sp-textin">
             <b><i class="fa-solid fa-graduation-cap"></i> A very quick tutorial:</b><br>
             <i class="fa-solid fa-arrow-right"></i> Create a map pool for each of the five modes in the game. Add as many or as few maps as you'd like.<br>
             <i class="fa-solid fa-arrow-right"></i> Once your map pool is finished, add the rounds that appear in your tournament. Each round needs a name and the number of games within it.<br>
@@ -39,12 +40,12 @@
             <i class="fa-solid fa-arrow-right"></i> Once your map list is finished, you can export it as a discord message, or JSON file, or share it via URL.<br>
             <br>
             <b><i class="fa-solid fa-lightbulb"></i> More tips:</b><br>
-            <i class="fa-solid fa-arrow-right"></i> You can quickly create a graphic of your map pool to screenshot by clicking the map visual button.<br>
+            <i class="fa-solid fa-arrow-right"></i> You can quickly create a graphic of your map pool to screenshot by clicking the 'Show Map Pool Graphic' button.<br>
             <i class="fa-solid fa-arrow-right"></i> You can share your map pool with someone by sharing the URL provided in the Save or Share Map Pool button.<br>
             <i class="fa-solid fa-arrow-right"></i> Once you've generated a map list, you can view how often a map/mode appears by clicking the stats button<br>
             
         </div>
-        <div class="start-page-button" id="start-page-button">Start <i class="fa-solid fa-play"></i></div>
+        <div class="start-page-button sp-textin" id="start-page-button">Start <i class="fa-solid fa-play"></i></div>
     </div>
     <div class="header">
         <div class="logo-wrapper">
@@ -60,7 +61,9 @@
     <div class="column-container">
         <div class="options-panel">
 
-            <div class="menu-header"><i class="left-bias fa-regular fa-pen-to-square"></i>Edit Current Map Pool</div>
+            <div class="splat-2-warn">Using Splatoon 2 maps: switch to Splatoon 3 maps in the <a onclick="document.getElementById('preferences-button').click()">preferences menu</a>.</div>
+
+            <div class="menu-header">Edit Map Pool</div>
             <button class="map-picker button" id="tw-picker">
                 <div class="title">Turf War Maps</div>
                 <div class="detail" id="tw-picker-detail">0 Maps selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
@@ -81,47 +84,51 @@
                 <div class="title">Clam Blitz Maps</div>
                 <div class="detail" id="cb-picker-detail">0 Maps selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="button" id="map-visual-button">
-                <div class="title">Map Visual <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
-            </button>
 
-            <div class="menu-header"><i class="left-bias fa-regular fa-floppy-disk"></i>Save & Load Map Pool</div>
-            <button class="save-load button" id="save-button" onclick="saveOnClick()">
+            <div class="menu-header">Map Pool Tools</div>
+            <button class="pool-option button" id="save-button" onclick="saveOnClick()">
                 <div class="title">Save or Share Current Map Pool</div>
                 <div class="detail"><i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="save-load button" id="load-button" onclick="loadOnClick()">
+            <button class="pool-option button" id="load-button" onclick="loadOnClick()">
                 <div class="title">Load Existing Map Pool</div>
                 <div class="detail"><i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
+            <button class="pool-option button" id="map-visual-button">
+                <div class="title">Show Map Pool Graphic</div>
+                <div class="detail"><i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
+            </button>
+            <button class="pool-option button" id="export-to-sendouink-button" style="opacity: 50%; cursor: not-allowed;">
+                <div class="title">Use Map Pool in sendou.ink</div>
+                <div class="detail">Coming soon</div>
+            </button>
 
-            <div class="menu-header"><i class="left-bias fa-solid fa-bars-staggered"></i>Edit Round Info</div>
-            <div class="round-editor" id="round-editor">
-            </div>
+            <div class="menu-header">Edit Rounds</div>
+            <div class="round-editor" id="round-editor"></div>
             <div class="add-round-header">Add Round</div>
             <div class="round-adder">
                 <input type="text" id="round-name" maxlength="32" placeholder="Name"></input>
-                <input type="number" min="1" max="15" step="2" id="round-games" placeholder="Games"></input>
-                <wbr>
-                <label for="round-counterpick-check" class="detail">Counterpick
-                    <input id="round-counterpick-check" type="checkbox">
-                </label>
-                <wbr>
-                <button class="button" id="add-round-button">Add <i class="right-bias fa-solid fa-circle-chevron-right"></i></button>
+                <div class="round-adder-split">
+                    <input type="number" min="1" max="15" step="2" id="round-games-input" placeholder="Games"></input>
+                    <label for="round-counterpick-check" class="detail">Counterpick&nbsp;
+                        <input id="round-counterpick-check" type="checkbox">
+                    </label>
+                    <button class="button" id="add-round-button">Add <i class="right-bias fa-solid fa-circle-chevron-right"></i></button>
+                </div>
             </div>
             <div class="error-message" id="round-error-message" style="display: none"></div>
             
-            <div class="menu-header"><i class="left-bias fa-solid fa-gears"></i>Generate</div>
+            <div class="menu-header">Generate</div>
             <div class="error-message" id="generate-error-message" style="display: none;"></div>
-            <button class="generate button" onclick="generateMaps()">
+            <button class="generate button" onclick="prepGeneration(generateMaps)">
                 <div class="title">Generate All</div>
                 <div class="detail">Maps and modes <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="generate button" onclick="generateModes()">
+            <button class="generate button" onclick="prepGeneration(generateModes)">
                 <div class="title">Generate Modes Only</div>
                 <div class="detail">Chooses modes only <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
-            <button class="generate button" onclick="generateEmptyRounds()">
+            <button class="generate button" onclick="prepGeneration(generateEmptyRounds)">
                 <div class="title">Generate Empty Rounds</div>
                 <div class="detail">No maps or modes selected <i class="right-bias fa-solid fa-circle-chevron-right"></i></div>
             </button>
@@ -129,12 +136,13 @@
 
         
         <div class="maps-panel mobile-hidden" id="maps-panel">
-            <div class="maps-instruction" id="maps-instruction">
-                Add maps to the map pool.<br>
-                Add round info.<br>
-                Choose a generate option.    
-            </div> 
-            <div class="generate-container" id="generate-container"></div>
+            <div class="generate-container" id="generate-container">
+                <div class="maps-instruction" id="maps-instruction">
+                    Add maps to the map pool.<br>
+                    Add rounds.<br>
+                    Choose a generate option.    
+                </div> 
+            </div>
             <div class="maps-footer-buttons-container" id="export-buttons-container">
                 <button class="maps-footer button" id="stats-button"><i class="left-bias fa-solid fa-chart-bar"></i>Stats</button>
                 <button class="maps-footer button" id="export-button-discord"><i class="left-bias fa-brands fa-discord"></i>Discord Message</button>
@@ -203,7 +211,7 @@
 
         <div class="modal-content green" id="map-visual-modal" style="max-width: 95vw;">
             <div class="modal-header">
-                <div class="modal-title">Map Visual</div>
+                <div class="modal-title">Map Pool Graphic</div>
                 <button class="button exit" id="map-visual-close"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
             <div class="map-visual-toolbar">
@@ -301,6 +309,13 @@
                 <div class="modal-title">Preferences</div>
                 <button class="button exit" id="preferences-close"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
+            <div class="sorting-menu">Game
+                <select id="game-setting">
+                    <option value="splat3">Splatoon 3</option>
+                    <option value="splat2">Splatoon 2</option>
+                </select>
+            </div>
+            <button id="game-change-reload" class="save-button button" style="display: none; animation: button_show .6s 1; animation-fill-mode: forwards;" onclick="gameChangeOnClick()"><i class="fa-solid fa-arrows-rotate fa-spin left-bias"></i>Reload to change game</button>
             <div class="sorting-menu">Preferred Map Order
                 <select id="preferred-sort-setting">
                     <option value="release">Release order</option>
@@ -326,6 +341,10 @@
         <a onclick="" style="text-decoration: underline; text-underline-offset: .1em; cursor: pointer;" id="preferences-button">Preferences</a>
     </div>
 </body>
+
+<script src="data.js"></script>
 <script src="init.js"></script>
 <script src="generate.js"></script>
+<script>showUi()</script>
+
 </html>

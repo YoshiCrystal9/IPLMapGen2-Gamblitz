@@ -2,6 +2,8 @@
   
     :root{
         font-size: calc(16px + .5vw);
+
+        --is-mobile: 1
     }
 
     .start-page-wrapper{
@@ -29,7 +31,6 @@
         display: flex;
         flex-direction: row;
         box-sizing: border-box;
-        animation: mobile-nav-in .4s forwards;
     }
 
     @keyframes mobile-nav-in {
@@ -85,6 +86,19 @@
         width: -moz-available;
     }
 
+    .map-picker, .pool-option, .generate{
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .map-picker > .detail, .generate > .detail{
+        white-space: nowrap;
+    }
+
+    .pool-option > .detail {
+        text-align: right;
+    }
+
     .mobile-hidden {
         display: none !important;
     }
@@ -102,9 +116,6 @@
         transform: scale(.99);
     }
 
-    .maps-instruction{
-        padding: 2em .2em;
-    }
     .maps-instruction::before{
         display: none;
     }
@@ -118,7 +129,6 @@
 
     .round-container > .game-container {
         flex: 1;
-        animation-name: none;
         opacity: 1;
     }
 
@@ -148,7 +158,13 @@
     }
 
     .menu-header{
+        font-size: 1em;
         margin-top: 3.5em;
+    }
+
+    .splat-2-warn{
+        margin: 1em .5em;
+        margin-bottom: 0;
     }
 
     .button {
@@ -165,9 +181,20 @@
 
     .options-panel, .maps-panel {
         padding: .1em;
+        padding-bottom: 1em;
         border-radius: 0;
         border-left: none;
         border-right: none;
+    }
+
+    .map-picker, .pool-option, .generate {
+        margin: .15em 1rem;
+    }
+
+
+    .map-picker, .generate{
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .map-visual-table{
@@ -182,14 +209,32 @@
         flex-wrap: wrap;
     }
 
+    .add-round-header{
+        margin-bottom: .25em;
+    }
+
     .round-adder{
-        flex-direction: column;
         align-items: flex-start;
+        margin: 0 1rem;
     }
     .round-adder input[type=text]{
         width: -webkit-fill-available;
         width: -moz-available;
+        margin: 0;
         margin-bottom: .25em;
+    }
+
+    .round-adder-split{
+        width: 100%;
+    }
+
+    .round-adder-split input[type=number] {
+        width: -webkit-fill-available;
+        /* width: -moz-available;   Does not render as intended :( */
+    }
+
+    .round-adder-split .button {
+        flex-wrap: nowrap;
     }
 
     .added-round > .title{

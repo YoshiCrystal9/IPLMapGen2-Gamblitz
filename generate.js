@@ -13,25 +13,56 @@ function getTemplateMap() {
     }
 }
 
+var tl = gsap.timeline();
 
-function clearGenerateContainer(){
-    document.getElementById("maps-instruction").style.display = "none";
-    document.getElementById("export-buttons-container").style.display = "flex";
 
-    const mapsPanel = document.getElementById("generate-container");
+function prepGeneration(generation){
+    const mapsInstruct = document.getElementById("maps-instruction");
+    tl = gsap.timeline();
+
+    const generateContainer = document.getElementById("generate-container");
+    const oldWidth = generateContainer.offsetWidth;
+
+    const animScale = uiIsMobile() === true ? 0 : 1;
+
+    if (mapsInstruct != undefined){
+        tl.to(mapsInstruct, {opacity: 0, duration: .2, display: "none", onComplete: function(){
+            mapsInstruct.remove();
+            removeMapContainers();
+            generation();
+            gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: animScale*.5, ease: "power3.inOut", onComplete: function(){
+                generateContainer.style.width = "auto";
+                generateContainer.style.minHeight = "auto";
+            }});
+        }});
+    } else {
+        tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
+            {y: 0, opacity: 1, display: "flex"},
+            {y: -50, opacity: 0, ease: Power2.in, duration: .2, stagger: {from: "start", amount: animScale*.2, ease: Power2.out}, onComplete: function(){
+                removeMapContainers();
+                generation();
+                gsap.fromTo(generateContainer, {width: oldWidth}, {width: generateContainer.offsetWidth, duration: animScale*.5, ease: "power3.inOut", onComplete: function(){
+                    generateContainer.style.width = "auto";
+                }});
+            }});
+    }
+
+    if (uiIsMobile()){
+        const mapListButton = document.getElementById("maplist-tab");
+        mapListButton.click();
+    }
+}
+
+function removeMapContainers(){
+    const mapsContainer = document.getElementById("generate-container");
     
-    for (var i = 0; i < mapsPanel.children.length; i++){
-        const child = mapsPanel.children[i];
+    for (var i = 0; i < mapsContainer.children.length; i++){
+        const child = mapsContainer.children[i];
         if (child.classList.contains("round-container")){
-            mapsPanel.removeChild(child);
+            mapsContainer.removeChild(child);
             i--;
         }
     }
-
-    setTimeout(() => {
-        document.getElementById("maplist-tab").click();
-        scrollToMapList();
-    }, 100);
 }
 
 
@@ -128,6 +159,8 @@ function addMapElements(){
 
         document.getElementById("generate-container").appendChild(roundContainer);
     }
+    
+    animateContainers();
 }
 
 function getMapPoolSelectors(mode){
@@ -160,6 +193,18 @@ function getMapPoolSelectors(mode){
     selector.innerText = "Unknown Map";
     mapPool.push(selector);
     return mapPool;
+}
+
+function getMapPool(mode){
+    const shortHandMode = getShortHandMode(mode);
+    var pool = [];
+    for (var i = 0; i < allMaps.length; i++){
+        const checkBox = document.getElementById(`${shortHandMode}-${allMaps[i]}-map-selector`);
+        if (checkBox.checked){
+            pool.push(allMaps[i]);
+        }
+    }
+    return pool;
 }
 
 const getShortHandMode = function(mode){
@@ -280,13 +325,15 @@ function getRecentMapsCap(){
         lowest = Math.min(lowest, cbMaps);
     }
 
-    lowest = Math.max(0, lowest-3);
+    if (lowest == 1){
+        return 0;
+    }
+    lowest = Math.max(0, Math.ceil(lowest/2));
     return lowest;
 }
 
 
 function generateEmptyRounds(){
-    clearGenerateContainer();
     importRounds();
     addMapElements();
 
@@ -305,7 +352,6 @@ function generateEmptyRounds(){
 }
 
 function generateModes(){
-    clearGenerateContainer();
     importRounds();
     addMapElements();
 
@@ -342,8 +388,6 @@ function generateModes(){
         mapDropMenu.value = "Unknown Map";
         mapDropMenu.dispatchEvent(event);
     }
-
-    scrollToMapList();
 }
 
 function generateMaps(){
@@ -354,19 +398,52 @@ function generateMaps(){
 
     var recentMaps = [];
     const recentCap = getRecentMapsCap();
+
+
+    var modeMapTracker = {
+        "Turf War": {}, "Splat Zones": {}, "Tower Control": {}, "Rainmaker": {}, "Clam Blitz": {}
+    };
+    for (const i in modeMapTracker) {
+        const pool = getMapPool(i);
+        for (var j = 0; j < allMaps.length; j++){
+            if (pool.includes(allMaps[j])){
+                modeMapTracker[i][allMaps[j]] = 0;
+            }
+        }
+    }
     
     for (var i = 0; i < gameContainers.length; i++){        
+        var targetNum = gameContainers.length;
+        for (const j in modeMapTracker){
+            for (const k in modeMapTracker[j]){
+                targetNum = Math.min(targetNum, modeMapTracker[j][k]);
+            }
+        }
+
         const mapDropMenu = gameContainers[i].querySelector("#map-drop-menu");
-        if (mapDropMenu.value == "Unknown Map" && mapDropMenu.parentElement.querySelector("#mode-drop-menu").value == "Unknown Mode"){
+        const mode = mapDropMenu.parentElement.querySelector("#mode-drop-menu").value;
+        if (mapDropMenu.value == "Unknown Map" && mode == "Unknown Mode"){
             continue;
         }
         
-        //choose a random selection on mapDropMenu that isn't in recentMaps
-        var mapIndex = Math.floor(Math.random() * mapDropMenu.length);
-        while (recentMaps.includes(mapDropMenu.options[mapIndex].value) || mapDropMenu.options[mapIndex].value == "Unknown Map"){
-            mapIndex = Math.floor(Math.random() * mapDropMenu.length);
-        }
+        //choose a random selection on mapDropMenu that isn't in recentMaps and hasn't appeared in the mode before
+        var mapIndex;
+        const safetyCapVal = 999;
+        var safetyCap = safetyCapVal;
+        do {
+            mapIndex = Math.floor(Math.random() * (mapDropMenu.length-1));
+            // console.log(mode, mapDropMenu.options[mapIndex].value, modeMapTracker[mode][mapDropMenu.options[mapIndex].value], modeMapTracker[mode]);
+            safetyCap--;
+            if (safetyCap <= 0){
+                safetyCap = safetyCapVal;
+                targetNum++;
+            }
+        } while (recentMaps.includes(mapDropMenu.options[mapIndex].value) 
+            || mapDropMenu.options[mapIndex].value == "Unknown Map"
+            || modeMapTracker[mode][mapDropMenu.options[mapIndex].value] > targetNum);
+        
         mapDropMenu.value = mapDropMenu.options[mapIndex].value;
+        modeMapTracker[mode][mapDropMenu.value] += 1;
 
         const event = new Event("change");
         mapDropMenu.dispatchEvent(event);
@@ -495,6 +572,12 @@ function exportToJSONFile(){
     createToast("Downloading map list as JSON");
 }
 
+function animateContainers(){
+    tl.fromTo(".round-container > .menu-header, .game-container, #export-buttons-container",
+        {y: 35, opacity: 0, display: "flex"},
+        {y: 0, opacity: 1, ease: Power2.out, duration: .35, stagger: {from: "start", amount: .8}});
+}
+
 
 //check url params
 const urlPool = urlParams.get("pool");
@@ -505,5 +588,4 @@ if (urlPool != null){
 const urlRounds = urlParams.get("rounds");
 if (urlRounds != null){
     decodeRounds(urlRounds);
-    scrollToMapList();
 }

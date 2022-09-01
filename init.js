@@ -1,3 +1,29 @@
+//multi game functions (splatoon 3 stuff)
+const gameSetting = document.getElementById("game-setting");
+
+if (localStorage.getItem("game") != null){
+    gameSetting.value = localStorage.getItem("game");
+} else {
+    gameSetting.value = "splat3";
+    localStorage.setItem("game", "splat3");
+}
+
+gameSetting.onchange = function(){
+    localStorage.setItem("game", gameSetting.value);
+    const gameChangeButton = document.getElementById("game-change-reload");
+    gameChangeButton.style.display = "flex";
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("3") != null){
+    gameSetting.value = "splat3";
+} else if (urlParams.get("pool") != null) {
+    gameSetting.value = "splat2";
+}
+
+if (gameSetting.value != "splat2"){
+    document.getElementsByClassName("splat-2-warn")[0].remove();
+}
 
 //connect buttons to open modals
 const stageButtons = document.getElementsByClassName("map-picker button");
@@ -13,6 +39,8 @@ for (var i = 0; i < stageButtons.length; i++){
         modalContainer.style.display = "flex";
         modalContent.style.display = "flex";
         modalContainer.classList.add("green");
+        gsap.fromTo(modalContent, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+        gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
     }
 
     modalClose.onclick = function(){
@@ -34,6 +62,8 @@ mapVisualButton.onclick = function(){
     modalContainer.style.display = "flex";
     modalContainer.classList.add("green");
     mapVisualModal.style.display = "flex";
+    gsap.fromTo(mapVisualModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 
     createMapVisual();
 }
@@ -116,6 +146,10 @@ function createMapVisual(){
         table.style.borderSpacing = "0";
         mapVisualZoomIn.style.display = "none";
         mapVisualZoomOut.style.display = "none";
+    } else {
+        table.style.borderSpacing = ".5em";
+        mapVisualZoomIn.style.display = "flex";
+        mapVisualZoomOut.style.display = "flex";
     }
 }
 
@@ -165,6 +199,8 @@ mapStatsButton.onclick = function(){
     modalContainer.style.display = "flex";
     mapStatsModal.style.display = "flex";
     modalContainer.classList.add("red");
+    gsap.fromTo(mapStatsModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 
     getStats();
 
@@ -200,6 +236,9 @@ exportButtonDiscord.onclick = function(){
     modalContainer.style.display = "flex";
     exportDiscordModal.style.display = "flex";
     modalContainer.classList.add("red");
+
+    gsap.fromTo(exportDiscordModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 exportDiscordClose.onclick = function(){
@@ -228,7 +267,11 @@ exportButtonURL.onclick = function(){
     const text = document.getElementById("url-export-textarea");
 
     const url = window.location.href.split("?")[0];
-    text.value = url + "?pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+    const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
+    text.value = url + spl3Marker + "pool=" + encodeMapPool() + "&rounds=" + encodeRounds();
+
+    gsap.fromTo(exportURLModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 exportURLClose.onclick = function(){
@@ -253,6 +296,9 @@ aboutButton.onclick = function(){
     modalContainer.style.display = "flex";
     aboutModal.style.display = "flex";
     modalContainer.classList.add("green");
+
+    gsap.fromTo(aboutModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 aboutClose.onclick = function(){
@@ -268,6 +314,9 @@ preferencesButton.onclick = function(){
     modalContainer.style.display = "flex";
     preferencesModal.style.display = "flex";
     modalContainer.classList.add("green");
+
+    gsap.fromTo(preferencesModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 preferencesClose.onclick = function(){
@@ -277,8 +326,8 @@ preferencesClose.onclick = function(){
 
 
 //load map options into page
-const allMaps = ["The Reef", "Musselforge Fitness", "Starfish Mainstage", "Humpback Pump Track", "Inkblot Art Academy", "Sturgeon Shipyard", "Moray Towers", "Port Mackerel", "Manta Maria", "Kelp Dome", "Snapper Canal", "Blackbelly Skatepark", "MakoMart", "Walleye Warehouse", "Shellendorf Institute", "Arowana Mall", "Goby Arena", "Piranha Pit", "Camp Triggerfish", "Wahoo World", "New Albacore Hotel", "Ancho-V Games", "Skipper Pavilion"];
-const allMapsAlpha = [...allMaps].sort((a,b) => a.localeCompare(b));
+var allMaps = gameSetting.value == "splat3" ? splat3Maps : splat2Maps;
+var allMapsAlpha = [...allMaps].sort((a,b) => a.localeCompare(b));
 
 for (var i = 0; i < allMaps.length; i++){
     const modes = ["tw","sz","tc","rm","cb"];
@@ -325,18 +374,25 @@ function adjustSelectedCount(mode){
 }
 
 function massSelect(mode, isEnabling){
-    for (var i = 0; i < allMaps.length; i++){
-        const checkBox = document.getElementById(`${mode}-${allMaps[i]}-map-selector`);
-        checkBox.checked = isEnabling;
+    const tl = gsap.timeline();
+
+    const mapsSort = localStorage.getItem("sorting-order") == "alpha" ? allMapsAlpha : allMaps;
+
+    for (var i = 0; i < mapsSort.length; i++){
+        const checkBox = document.getElementById(`${mode}-${mapsSort[i]}-map-selector`);
+        tl.fromTo(checkBox, {scale: 1}, {scale: 1.3, duration: .2, ease: "Power2.in", onComplete: function(){
+            checkBox.checked = isEnabling;
+            gsap.to(checkBox, {scale: 1, duration: .4, ease: "bounce.out"});
+            adjustSelectedCount(mode);
+        }}, i == 0 ? "-=.1" : "-=.17");
     }
-    adjustSelectedCount(mode);
 }
 
 
 //attach round adder stuff
 const addRoundButton = document.getElementById("add-round-button");
 const roundNameInput = document.getElementById("round-name");
-const roundGamesInput = document.getElementById("round-games");
+const roundGamesInput = document.getElementById("round-games-input");
 const roundIsCounterpick = document.getElementById("round-counterpick-check");
 const roundError = document.getElementById("round-error-message");
 const roundEditor = document.getElementById("round-editor");
@@ -355,16 +411,19 @@ addRoundButton.addEventListener("click", function(){
         changeRoundError("Please enter an alphanumeric round name.");
         return;
     }
-
-    changeRoundError();
+    if (parseInt(roundGamesInput.value) >= 100){
+        changeRoundError("That might be a bad idea.");
+    } else {
+        changeRoundError();
+    }
 
     addRound(roundNameInput.value, roundGamesInput.value, roundIsCounterpick.checked);
     
 
     //attempt to increment last character in name
-    const lastChar = roundNameInput.value.slice(-1);
+    const lastChar = roundNameInput.value.split(' ').at(-1);
     if (!isNaN(lastChar)){
-        const newName = roundNameInput.value.slice(0, -1) + (parseInt(lastChar) + 1);
+        const newName = roundNameInput.value.substring(0, roundNameInput.value.lastIndexOf(' ')) + " " + (parseInt(lastChar) + 1);
         roundNameInput.value = newName;
     }
     else {
@@ -403,8 +462,17 @@ function addRound(name, games, isCounterpick){
     upButton.innerHTML = '<i class="fa-solid fa-angle-up"></i>';
     upButton.addEventListener("click", function(){
         const parent = this.parentElement;
-        if(parent.previousElementSibling)
-            parent.parentNode.insertBefore(parent, parent.previousElementSibling);
+        if(parent.previousElementSibling){
+            const prevElement = parent.previousElementSibling;
+            const pt1 = gsap.timeline({onComplete: function(){
+                parent.parentNode.insertBefore(parent, parent.previousElementSibling);
+                const pt2 = gsap.timeline();
+                pt2.fromTo(parent, {bottom: -22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut});
+                pt2.fromTo(prevElement, {bottom: 22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut}, "<");
+            }});
+            pt1.to(parent, {bottom: 22, opacity: 0, duration: .15, ease: Power4.easeIn});
+            pt1.to(prevElement, {bottom: -22, opacity: 0, duration: .15, ease: Power4.easeIn}, "<");
+        }
     });
     addedRound.appendChild(upButton);
 
@@ -413,8 +481,17 @@ function addRound(name, games, isCounterpick){
     downButton.innerHTML = '<i class="fa-solid fa-angle-down"></i>';
     downButton.addEventListener("click", function(){
         const parent = this.parentElement;
-        if(parent.nextElementSibling)
-            parent.parentNode.insertBefore(parent.nextElementSibling, parent);
+        if(parent.nextElementSibling){
+            const nextElement = parent.nextElementSibling;
+            const pt1 = gsap.timeline({onComplete: function(){
+                parent.parentNode.insertBefore(parent.nextElementSibling, parent);
+                const pt2 = gsap.timeline();
+                pt2.fromTo(parent, {bottom: 22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut});
+                pt2.fromTo(nextElement, {bottom: -22, opacity: 0}, {bottom: 0, opacity: 1, duration: .15, ease: Power4.easeOut}, "<");
+            }});
+            pt1.to(parent, {bottom: -22, opacity: 0, duration: .1, ease: Power4.easeIn});
+            pt1.to(nextElement, {bottom: 22, opacity: 0, duration: .1, ease: Power4.easeIn}, "<");
+        }
     });
     addedRound.appendChild(downButton);
 
@@ -422,12 +499,22 @@ function addRound(name, games, isCounterpick){
     removeButton.setAttribute("class", "remove button");
     removeButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
     removeButton.addEventListener("click", function(){
-        removeButton.parentElement.remove();
-        updateGenerateButtonStatus();
+        const roundElement = removeButton.parentElement;
+
+        const tl = gsap.timeline({onComplete: function() {
+            roundElement.remove();
+            updateGenerateButtonStatus();
+        }});
+        tl.to(roundElement, {opacity: 0, duration: .10});
+        tl.to(roundElement, {height: 0, padding: 0, margin: 0, duration: .20, ease: Power3.easeInOut});
     });
     addedRound.appendChild(removeButton);
 
     roundEditor.appendChild(addedRound);
+
+    const tl = gsap.timeline();
+    tl.fromTo(addedRound, {opacity: 0, height: 0}, {opacity: 0, height: "auto", duration: .25, ease:Power2.easeOut});
+    tl.fromTo(addedRound, {opacity: 0, left: 50}, {opacity: 1, left: 0, duration: .25})
 
     updateGenerateButtonStatus();
 }
@@ -446,13 +533,27 @@ function changeRoundError(message){
     if (message == undefined)
         message = "";
 
-    roundError.innerText = message;
-
-    if (message == ""){
-        roundError.style.display = "none";
+    if (message == roundError.innerText){
+        const tl = gsap.timeline();
+        tl.to(roundError, {y: 10, duration: .15, ease: Power2.easeOut});
+        tl.to(roundError, {y: 0, duration: .45, ease:"bounce.out"});
+        return;
     }
-    else{
-        roundError.style.display = "block";
+
+    const tl = gsap.timeline();
+    if (roundError.style.display == "block"){
+        if (message == ""){
+            tl.fromTo(roundError, {opacity: 1}, {opacity: 0, duration: .25});
+            tl.to(roundError, {height: 0, duration: .25, display: "none"});
+        } else {
+            tl.to(roundError, {opacity: 0, duration: .1, ease: Power4.easeOut, onComplete: function(){ roundError.innerText = message; }});
+            tl.to(roundError, {opacity: 1, duration: .1, ease: Power4.easeIn});
+        }
+    } else {
+        if (message == "") return;
+        roundError.innerText = message;
+        tl.fromTo(roundError, {height: 0, display: "block"}, {height: "auto",  duration: .25, ease:Power2.easeOut});
+        tl.fromTo(roundError, {opacity: 0}, {opacity: 1, duration: .25});
     }
 }
 
@@ -503,10 +604,14 @@ function updateGenerateButtonStatus(){
         else if (!mapsOk){
             errorMessage.innerText = "You must select maps.";
         }
+
+        errorMessage.removeAttribute("style");
         errorMessage.style.display = "block";
     }
-    else{
-        errorMessage.style.display = "none";
+    else {
+        const tl = gsap.timeline();
+        tl.fromTo(errorMessage,{opacity: 1}, {opacity: 0, duration: .25});
+        tl.to(errorMessage, {height: 0, margin: 0, padding: 0, duration: .25, display: "none"});
     }
 }
 
@@ -532,7 +637,11 @@ function saveOnClick(){
 
     const saveUrl = document.getElementById("save-url");
     const url = window.location.href.split("?")[0];
-    saveUrl.value = url + "?pool=" + encodeMapPool();
+    const spl3Marker = gameSetting.value == "splat3" ? "?3&" : "?";
+    saveUrl.value = url + spl3Marker + "pool=" + encodeMapPool();
+
+    gsap.fromTo(saveModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 function saveDialogOnClick(){
@@ -550,7 +659,8 @@ function saveDialogOnClick(){
         }
     }
 
-    localStorage.setItem(`maps.iplabs.ink-${saveName}`, JSON.stringify(maps));
+    const loadName = gameSetting.value == "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    localStorage.setItem(`${loadName}${saveName}`, JSON.stringify(maps));
 
     closeModal(saveModal);
 
@@ -572,12 +682,16 @@ function loadOnClick(){
         const noSaves = document.createElement("div");
         noSaves.innerText = "No saves found.";
         loadContainer.appendChild(noSaves);
+        return;
     }
 
+    const checkFor = gameSetting.value == "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    const checkAgainst = gameSetting.value != "splat3" ? "maps.iplabs.ink:s3-" : "maps.iplabs.ink-";
+    var otherGameCount = 0;
 
     for (var i = 0; i < storage.length; i++){
-        if (storage[i].startsWith("maps.iplabs.ink-")){
 
+        if (storage[i].startsWith(checkFor)){
             const loadWrapper = document.createElement("div");
             loadWrapper.setAttribute("class", "load-wrapper");
 
@@ -587,7 +701,7 @@ function loadOnClick(){
 
             const loadName = document.createElement("div");
             loadName.setAttribute("class", "load-name");
-            loadName.innerText = storage[i].slice("maps.iplabs.ink-".length);
+            loadName.innerText = storage[i].slice(checkFor.length);
 
             const loadButton = document.createElement("button");
             loadButton.setAttribute("class", "button load-button");
@@ -629,7 +743,22 @@ function loadOnClick(){
             loadWrapper.appendChild(loadDeleteButton);
             loadContainer.appendChild(loadWrapper);
         }
+        else if (storage[i].startsWith(checkAgainst)){
+            otherGameCount++;
+        }
     }
+
+    if(otherGameCount > 0){
+        const otherGameNotice = document.createElement("div");
+        otherGameNotice.classList.add("load-alt-game-counter");
+        otherGameNotice.innerText = `${otherGameCount} map list${otherGameCount == 1 ? "" : "s"} for ${gameSetting.value == "splat3" ? "Splatoon 2" : "Splatoon 3"}.
+            Change game in the preferences menu.`;
+        
+        loadContainer.appendChild(otherGameNotice);
+    }
+
+    gsap.fromTo(loadModal, {scale: .85}, {scale:1, duration: .25, ease: Power2.easeOut});
+    gsap.fromTo(modalContainer, {opacity: 0}, {opacity: 1, duration: .25, ease: Power2.easeOut});
 }
 
 
@@ -646,18 +775,22 @@ function encodeMapPool(){
 
         for (var j = 0; j < allMaps.length; j++){
             //if map is checked
-            const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked
+            const checked = document.getElementById(modes[i] + "-" + allMaps[j] + "-map-selector").checked;
             thisPool.p += checked ? "1" : "0";
-            hasMaps = checked ? checked : hasMaps;
+            hasMaps = checked ? checked : hasMaps;    
         }
 
         if (!hasMaps){
             continue
         }
 
+        /*
         thisPool.p = thisPool.p.match(/.{4}/g).reduce(function(acc, i) {
             return acc + parseInt(i, 2).toString(16);
         }, '');
+        */
+
+        thisPool.p = parseInt(thisPool.p, 2).toString(16);
 
         pools.push(thisPool);
     }
@@ -721,7 +854,6 @@ function encodeRounds(){
 }
 
 
-//tw:11111111111111111111111;sz:;tc:11111111111111111111111;rm:;cb:;
 function decodeMapPool(pools){ 
     pools = pools.split(";");
 
@@ -732,8 +864,9 @@ function decodeMapPool(pools){
             return acc + ('000' + parseInt(i, 16).toString(2)).substr(-4, 4);
         }, '')
 
-        for (var j = 1; j < decodedHex.length; j++){
-            document.getElementById(thisPool[0] + "-" + allMaps[j-1] + "-map-selector").checked = decodedHex[j] == "1";
+        const offset = decodedHex.length - allMaps.length;
+        for (var j = offset; j < decodedHex.length; j++){
+            document.getElementById(thisPool[0] + "-" + allMaps[j-offset] + "-map-selector").checked = decodedHex[j] == "1";
         }
 
         adjustSelectedCount(thisPool[0]);
@@ -741,7 +874,6 @@ function decodeMapPool(pools){
 }
 
 
-// Round_1:4-14,0-19,1-3;Round_2:2-21,3-8,4-2,0-11,1-22;Round_3:2-17,3-0,4-12,0-10,1-16,2-18,3-1;
 function decodeRounds(rounds){
     var rounds = rounds.split(";");
     for (var i = 0; i < rounds.length; i++){
@@ -792,14 +924,8 @@ function decodeRounds(rounds){
         addRound(round.name, round.maps.length, isUnknown);
     }
 
-    clearGenerateContainer();
-    addMapElements();
+    prepGeneration(addMapElements);
 }
-
-function scrollToMapList(){
-    window.scrollTo(0,0);
-}
-
 
 const settingsTab = document.getElementById("settings-tab");
 const mapListTab = document.getElementById("maplist-tab");
@@ -807,17 +933,30 @@ const optionsPanel = document.getElementsByClassName("options-panel")[0];
 const mapsPanel = document.getElementsByClassName("maps-panel")[0];
 
 settingsTab.onclick = function(){
-    optionsPanel.classList.remove("mobile-hidden");
-    mapsPanel.classList.add("mobile-hidden");
-    settingsTab.classList.add("active");
-    mapListTab.classList.remove("active");
-    
+    if (!settingsTab.classList.contains("active")){
+        settingsTab.classList.add("active");
+        mapListTab.classList.remove("active");
+        const tl = gsap.timeline();
+        tl.to(mapsPanel, {x: 100, opacity: 0, ease: "power3.in", duration: .15, onComplete: function(){
+            mapsPanel.classList.add("mobile-hidden");
+            optionsPanel.classList.remove("mobile-hidden");
+        }});
+        tl.fromTo(optionsPanel, {x: -100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .15});
+        tl.to(mapsPanel, {x: 0, opacity: 1, duration: 0});
+    }
 };
 mapListTab.onclick = function(){
-    optionsPanel.classList.add("mobile-hidden");
-    mapsPanel.classList.remove("mobile-hidden");
-    settingsTab.classList.remove("active");
-    mapListTab.classList.add("active");
+    if (!mapListTab.classList.contains("active")){
+        settingsTab.classList.remove("active");
+        mapListTab.classList.add("active");
+        const tl = gsap.timeline();
+        tl.to(optionsPanel, {x: -100, opacity: 0, ease: "power3.in", duration: .15, onComplete: function(){
+            mapsPanel.classList.remove("mobile-hidden");
+            optionsPanel.classList.add("mobile-hidden");
+        }});
+        tl.fromTo(mapsPanel, {x: 100, opacity: 0}, {x: 0, opacity: 1, ease: "power3.out", duration: .15}); 
+        tl.to(optionsPanel, {x: 0, opacity: 1, duration: 0});
+    }
 };
 
 
@@ -827,45 +966,51 @@ const columnContainer = document.getElementsByClassName("column-container")[0];
 const footer = document.getElementsByClassName("footer")[0];
 const startPage = document.getElementById("start-page-wrapper");
 
-const urlParams = new URLSearchParams(window.location.search);
 const visited = localStorage.getItem('visited');
 
-if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
-    const startPageButton = document.getElementById("start-page-button");
-    startPageButton.setAttribute("onclick", 'startButtonClick()');
+function showUi() {
+    document.body.style.opacity = 1; 
+    if (visited != 1 && !(urlParams.get("pool") != null || urlParams.get("rounds") != null)){
+        const tl = gsap.timeline();
 
-    header.style.display = "none";
-    columnContainer.style.display = "none";
-    footer.style.display = "none";
-}
-else {
-    startPage.style.display = "none";
-    setTimeout(() => {
-        optionsPanel.style.animationDuration = ".4s";
-        mapsPanel.style.animationDuration = ".4s";
-    }, 1000);
+        startPage.style.display = "flex";
+        tl.fromTo(startPage, {opacity: 0}, {opacity: 1, duration: 1});
+        tl.fromTo(".sp-textin", {opacity: 0, y: 120}, {opacity: 1, y: 0, ease: "power3.out", duration: 1, stagger: .25});
+        
+        const startPageButton = document.getElementById("start-page-button");
+        startPageButton.setAttribute("onclick", 'startButtonClick()');
+
+        header.style.display = "none";
+        columnContainer.style.display = "none";
+        footer.style.display = "none";
+    } else {
+        gsap.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        gsap.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        if (uiIsMobile()){
+            gsap.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1, ease: "power3.out"});
+        } else {
+            gsap.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+            gsap.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1, ease: "power3.out"});
+        }
+    }
 }
 
 
 function startButtonClick(){
-    startPage.style.animation = "startPageClose .5s forwards";
+    localStorage.setItem("visited", 1);
 
-    setTimeout(function(){
-        startPage.style.display = "none";
-        header.style.display = "flex";
-        columnContainer.style.display = "flex";
-        footer.style.display = "block";
-
-        localStorage.setItem("visited", 1);
-
-        window.scrollTo(0,0);
-
-    }, 600);
-
-    setTimeout(() => {
-        optionsPanel.style.animationDuration = ".4s";
-        mapsPanel.style.animationDuration = ".4s";
-    }, 1600);
+    const tl = gsap.timeline();
+    tl.fromTo(".sp-textin", {opacity: 1, y: 0}, {opacity: 0, y: -80, ease: "power3.out", duration: .5, stagger: {each: .10, from: "end"}});
+    tl.fromTo(startPage, {opacity: 1}, {opacity: 0, duration: 1.25, display: "none"}, ">");
+    tl.to(columnContainer, {display: "flex", duration: 0}, ">");
+    tl.fromTo(header, {y: -60, opacity: 0}, {display: "flex", y: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    tl.fromTo(footer, {y: 60, opacity: 0}, {display: "block", y: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    if (uiIsMobile()){
+        tl.fromTo([optionsPanel, mapsPanel], {scale: .85, opacity: 0}, {scale: 1, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    } else {
+        tl.fromTo(optionsPanel, {x: -90, opacity: 0}, {x: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+        tl.fromTo(mapsPanel, {x: 90, opacity: 0}, {x: 0, opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+    }
 }
 
 
@@ -992,8 +1137,8 @@ if (localStorage.getItem("consistent-font") == 1){
 function createToast(innerHTML){
     const existingToasts = document.getElementsByClassName("toast");
     for (var i = 0; i < existingToasts.length; i++){
-        const offset = (existingToasts.length - i + 1) * 4;
-        existingToasts[i].style.bottom = offset + "rem";
+        const offset = (existingToasts.length - i + 1) * 92;
+        gsap.to(existingToasts[i], {y: offset, duration: .5, ease: Power2.easeOut});
     }
 
     const toast = document.createElement("div");
@@ -1014,56 +1159,56 @@ function createToast(innerHTML){
     document.body.appendChild(toast);
 
     toastClose.addEventListener("click", function(){
-        document.getElementById(id).remove();
+        gsap.to(toast, {opacity: 0, scale: .9, duration: .2, onComplete: function(){ toast.remove(); }});
     });
 
-    setTimeout(() => {
-        toast.style.animation = "toast-fade 1s 4s";
-    }, 500);
-
-    setTimeout(() => {
-        toast.remove();
-    }, 5000);
+    const tl = gsap.timeline();
+    tl.fromTo(toast, {y: 60, opacity: 0, scale: .9}, {y: 0, opacity: 1, scale: 1, duration: .5, ease: Power2.easeOut});
+    tl.to(toast, {opacity: 0, scale: .9, onComplete: function(){toast.remove();}}, "+=4");
 }
 
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+    if (event.key === "Enter"){
+        const active = document.activeElement;
+        if (active == roundNameInput || active == roundGamesInput){
+            addRoundButton.click();
+        }
+    }
+});
+
 function closeModal(modalContent){
-    modalContainer.classList.remove("green");
-    modalContainer.classList.remove("red");
-
-    var timeout = window.matchMedia("(prefers-reduced-motion)").matches ? 0 : 150;
-    
-    modalContainer.style.animation = "fadeOut .15s 1";
-
-    setTimeout(() => {
-        modalContainer.style.display = "none";
-        modalContainer.style.animation = "fadeIn .25s 1";
-    }, timeout);
+    gsap.to(modalContainer, {opacity: 0, duration: .18, display: "none", ease: Power1.easeIn, onComplete: function(){
+        modalContainer.classList.remove("green");
+        modalContainer.classList.remove("red");
+    }});
 
     if (modalContent != undefined){
-        modalContent.style.animation = "zoomOut .15s 1";
-
-        setTimeout(() => {
-            modalContent.style.display = "none";
-            modalContent.style.animation = "zoom .25s 1";
-        }, timeout);
-
+        gsap.to(modalContent, {scale: .85, duration: .18, display: "none", ease: Power1.easeIn});
     } else {
         const modals = document.getElementsByClassName("modal-content");
 
         for (var i = 0; i < modals.length; i++){
             if (modals[i].style.display == "flex"){
-                const visibleModal = modals[i];
-
-                visibleModal.style.animation = "zoomOut .15s 1";
-
-                setTimeout(() => {
-                    visibleModal.style.display = "none";
-                    visibleModal.style.animation = "zoom .25s 1";
-                }, timeout);
+                gsap.to(modals[i], {scale: .85, duration: .18, display: "none", ease: Power1.easeIn});
             }
         }
     }
 }
+
+function uiIsMobile(){
+    return getComputedStyle(document.documentElement).getPropertyValue('--is-mobile') === ' 1 ';
+}
+
+function gameChangeOnClick(){
+    gsap.to("body", {opacity: 0, duration: .35, onComplete: function(){
+        window.location.href = window.location.href.split('?')[0];
+    }})
+}
+
 
 
 //thank you for checking out the code. Here is your reward.
