@@ -323,6 +323,19 @@ preferencesClose.onclick = function(){
     closeModal(preferencesModal);
 }
 
+const useInSendouButton = document.getElementById("export-to-sendouink-button");
+
+if (gameSetting.value == "splat3"){
+    useInSendouButton.onclick = function(){
+        const url = "https://sendou.ink/maps?pool=";
+        const params = encodeMapPool().replaceAll(":", "%3A").replaceAll(";", "%3B");
+    
+        window.open(url + params, '_blank');
+    }
+} else {
+    useInSendouButton.style.display = "none";
+}
+
 
 
 //load map options into page
