@@ -36,5 +36,7 @@ const splat3Maps = [
     "Inkblot Art Academy",
     "Sturgeon Shipyard",
     "MakoMart",
-    "Wahoo World"
+    "Wahoo World",
+    "Flounder Heights",
+    "Brinewater Springs"
 ];
