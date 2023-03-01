@@ -38,5 +38,7 @@ const splat3Maps = [
     "MakoMart",
     "Wahoo World",
     "Flounder Heights",
-    "Brinewater Springs"
+    "Brinewater Springs",
+    "Manta Maria",
+    "Um'ami Ruins"
 ];

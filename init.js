@@ -877,11 +877,21 @@ function decodeMapPool(pools){
             return acc + ('000' + parseInt(i, 16).toString(2)).substr(-4, 4);
         }, '')
 
-        const offset = decodedHex.length - allMaps.length;
+
+        var offset = decodedHex.length - allMaps.length - 1;
+        var atOne = false;
         for (var j = offset; j < decodedHex.length; j++){
-            document.getElementById(thisPool[0] + "-" + allMaps[j-offset] + "-map-selector").checked = decodedHex[j] == "1";
+            if (atOne){
+               document.getElementById(thisPool[0] + "-" + allMaps[j-offset] + "-map-selector").checked = decodedHex[j] == "1";
+            } else {
+                if (decodedHex[j] == "1"){
+                    atOne = true;
+                }
+                offset++;
+            }
         }
 
+        console.log(decodedHex, offset);
         adjustSelectedCount(thisPool[0]);
     }
 }
