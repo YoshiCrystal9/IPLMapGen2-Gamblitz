@@ -40,20 +40,6 @@ const splat2Maps = [
 ];
 
 const splat3Maps = [
-    "Scorch Gorge",
-    "Eeltail Alley",
-    "Hagglefish Market",
-    "Undertow Spillway",
-    "Mincemeat Metalworks",
-    "Hammerhead Bridge",
-    "Museum d'Alfonsino",
-    "Mahi-Mahi Resort",
-    "Inkblot Art Academy",
-    "Sturgeon Shipyard",
-    "MakoMart",
-    "Wahoo World",
-    "Flounder Heights",
-    "Brinewater Springs",
-    "Manta Maria",
-    "Um'ami Ruins"
+    "None lol, select Splatoon 2 in Preferences to get Gamblitz content",
+    "go to the original page to get the splat 3 maps"
 ];
