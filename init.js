@@ -4,8 +4,8 @@ const gameSetting = document.getElementById("game-setting");
 if (localStorage.getItem("game") != null){
     gameSetting.value = localStorage.getItem("game");
 } else {
-    gameSetting.value = "splat3";
-    localStorage.setItem("game", "splat3");
+    gameSetting.value = "splat2";
+    localStorage.setItem("game", "splat2");
 }
 
 gameSetting.onchange = function(){
@@ -16,7 +16,7 @@ gameSetting.onchange = function(){
 
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get("3") != null){
-    gameSetting.value = "splat3";
+    gameSetting.value = "splat2";
 } else if (urlParams.get("pool") != null) {
     gameSetting.value = "splat2";
 }
