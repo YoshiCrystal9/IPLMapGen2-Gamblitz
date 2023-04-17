@@ -1,5 +1,8 @@
 # IPLMapGen2-Gamblitz, forked from **maps.iplabs.ink**
 
+# Disclaimer
+This fork isn't affiliated with Inkling Performance Labs!
+
 ## What is this fork?
 This is a web based tool (forked from maps.iplabs.ink ) to create map lists for competitive Splatoon 2 events using Project Gamblitz mod. It was created with a focus on making it as easy as possible to create, edit, and share map lists.
 
